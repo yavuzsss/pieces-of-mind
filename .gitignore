@@ -1,0 +1,40 @@
+# .gitignore — Pieces of Mind (Ren'Py projesi)
+# Dışlananlar: derlenmiş dosyalar, kayıtlar, önbellekler, işletim sistemi artıkları.
+
+## Ren'Py'nin değiştirdiği/ürettiği dizinler
+/game/saves/
+/game/cache/
+/tmp/
+
+## Derlenmiş betik dosyaları
+*.rpyc
+*.rpymc
+*.rpyb
+
+## Ren'Py'nin üretebileceği yedek/geçici dosyalar
+*.bak
+*.new
+*.old
+
+## Hata, günlük ve çıktı dosyaları
+/errors.txt
+/files.txt
+/image_cache.txt
+/log.txt
+/save_dump.txt
+/traceback.txt
+
+## Launcher'ın ürettiği dosyalar
+/dialogue.tab
+/dialogue.txt
+/strings.json
+
+## Dağıtım (build) çıktıları
+/*.app/
+/build/
+*.rpa
+
+## İşletim sistemi artıkları
+.DS_Store
+Thumbs.db
+
