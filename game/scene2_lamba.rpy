@@ -302,7 +302,7 @@ label sahne2_kapi:
 
     s "Az önce orada değildi. Ya da hep oradaydı da... ben mi görmüyordum?"
 
-    si "Demir parmaklıklı, ağır bir kapı. Ardındaki karanlık, odanınkinden daha eski."
+    si "Ahşap, demir kuşaklı, sıradan bir kapı. Sıradanlığı rahatsız edici."
 
     f "Kapı. Gitme vakti."
 

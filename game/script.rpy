@@ -65,7 +65,7 @@ label start:
     # Göz alışıyor: oda görünür olur.
     scene bg_sovalye_odasi with sahne_gecis
 
-    si "Oda küçük. Duvarlar taş. Tek pencere: kapkara. Dışarısı yok gibi."
+    si "Oda küçük. Duvarlar taş. Pencere yok."
 
     si "Köşede bir yatak — az önce üstünde değildim. Yerde uyumuşum."
 

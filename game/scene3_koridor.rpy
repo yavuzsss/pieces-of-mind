@@ -51,9 +51,9 @@ label sahne3_esik:
     # Demir kapı yakın plan.
     scene bg_zindan_kapisi with sahne_gecis
 
-    si "Kapının demiri soğuk."
+    si "Kapının kolu soğuk."
 
-    si "İtiyorum. Kapı sessizce açılıyor. Gıcırdamıyor bile."
+    si "Çeviriyorum. Kapı sessizce açılıyor. Gıcırdamıyor bile."
 
     s "Menteşeler yağlı. Biri bu kapıyı kullanıyor."
 
