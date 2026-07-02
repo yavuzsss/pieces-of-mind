@@ -21,6 +21,9 @@ default kilic_var = False
 # Sönmüş'e "ne istiyor" sorusu soruldu mu? (menü tekrarı için)
 default sahne4_soruldu = False
 
+# Sönmüş'ün isim uyarısı duyuldu mu? ("Adını ona söyleme.")
+default isim_uyarisi = False
+
 
 ################################################################################
 ## Yaklaşma — Fısıltı hâlâ sessiz
@@ -443,6 +446,8 @@ label sahne4_hediye:
 
     sk "Adını aldığı gün, kalmak için sebebi kalmaz."
 
+    $ isim_uyarisi = True
+
     f "Yeter. Gidiyoruz."
 
     si "Sönmüş adam kemerinden paslı bir kılıç çözüyor. İki eliyle uzatıyor."
@@ -509,6 +514,5 @@ label sahne4_son:
 
     f "Hayır."
 
-    centered "{color=#cc2222}— devam edecek —{/color}"
-
-    return
+    # Sahne 5: Kule — Lamba Salonu (scene5_kule.rpy)
+    jump sahne5_kule
