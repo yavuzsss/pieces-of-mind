@@ -189,6 +189,7 @@ label roll_dice(stat_name, dc):
     $ dice_result = player_stats.roll(stat_name, dc)
 
     window hide
+    play sound zar
     call screen dice_panel(dice_result)
 
     # Doğal 1: lanet kıpırdanır — panel kapanınca ekran bozulur.

@@ -33,6 +33,8 @@ label start:
     # Yeni koşu: permadeath kimliği (death.rpy).
     $ run_id = yeni_kosu_id()
 
+    play music muzik_karanlik fadein 3.0
+
     scene black
     with Pause(1.0)
 

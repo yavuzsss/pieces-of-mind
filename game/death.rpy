@@ -105,7 +105,11 @@ label olum(sebep="bilinmeyen bir son"):
 
     window hide
 
+    stop music fadeout 1.0
+
     call glitch_burst(0.8, 1.6)
+
+    play sound olum_vurusu
 
     # Ölüm kalıcı veriye işlenir; koşunun kayıtları geçersiz kılınır.
     python:

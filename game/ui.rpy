@@ -63,12 +63,14 @@ style window:
 style namebox:
     background None
 
-## Seçim düğmeleri: koyu blok, hover'da kırmızı blok.
+## Seçim düğmeleri: koyu blok, hover'da kırmızı blok. Milk tarzı sesli.
 style choice_button:
     background "#141414e6"
     hover_background "#cc2222"
     xpadding 40
     ypadding 10
+    hover_sound "audio/ui_hover.wav"
+    activate_sound "audio/ui_sec.wav"
 
 ## Ana menü başlığı: kırmızı, iri.
 style main_menu_title:

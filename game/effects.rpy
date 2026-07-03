@@ -195,6 +195,7 @@ screen glitch_flash(strength=1.0):
 #     call glitch_burst(0.6, 1.5) -> daha uzun, daha şiddetli
 label glitch_burst(duration=0.35, strength=1.0, shake=True):
 
+    play sound glitch_sfx
     show screen glitch_flash(strength)
     if shake:
         with hpunch
