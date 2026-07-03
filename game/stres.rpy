@@ -15,6 +15,11 @@
 
 default stres = 0
 
+# ANA ANAHTAR: stres etkileri ŞİMDİLİK KAPALI (kullanıcı kararı, 2026-07-03).
+# stres değeri sahnelerde birikmeye devam eder (senaryo dokunulmadan durur);
+# görsel etkilerin tümü bu bayrakla susturulur. Geri açmak için: True yap.
+define stres_etkin = False
+
 
 init -1 python:
 
@@ -36,6 +41,8 @@ init -1 python:
         [değişkenler] atlanır. Bozulan karakter sayısı sınırlıdır —
         satır daima çözülebilir kalır.
         """
+        if not stres_etkin:
+            return metin
         seviye = getattr(store, "stres", 0)
         if seviye < 10 or not metin:
             return metin
@@ -80,7 +87,7 @@ init -1 python:
         Etkileşim başına deterministik (kutu metinleri + stresle tohumlanır) —
         ekran yeniden çizildiğinde kutular imlecin altında dans etmez.
         """
-        if getattr(store, "stres", 0) < 15 or len(liste) < 2:
+        if not stres_etkin or getattr(store, "stres", 0) < 15 or len(liste) < 2:
             return liste
         anahtar = "".join((getattr(i, "caption", "") or "") for i in liste)
         tohum = zlib.crc32(anahtar.encode("utf-8")) + store.stres

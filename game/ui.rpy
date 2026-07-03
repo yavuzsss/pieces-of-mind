@@ -103,7 +103,7 @@ screen say(who, what):
 
     window:
         id "window"
-        at textbox_stres_fx(max(0.0, (stres - 4) * 0.03))
+        at textbox_stres_fx(max(0.0, (stres - 4) * 0.03) if stres_etkin else 0.0)
 
         if who is not None:
 
@@ -136,7 +136,7 @@ screen choice(items):
 
     vbox:
         for i in kutular:
-            if stres >= 15:
+            if stres_etkin and stres >= 15:
                 textbutton i.caption action i.action at kutu_titre
             else:
                 textbutton i.caption action i.action
