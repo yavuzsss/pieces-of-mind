@@ -311,6 +311,5 @@ label sahne5_son:
 
     f "Yukarı."
 
-    centered "{color=#cc2222}— devam edecek —{/color}"
-
-    return
+    # Sahne 6: Kulenin Tepesi — Altın Alev (scene6_altin_alev.rpy)
+    jump sahne6_tepe
