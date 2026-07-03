@@ -89,7 +89,8 @@ style main_menu_title:
 ## (ui.rpy dosya sırasında screens.rpy'den sonra yüklendiği için bunlar geçerli
 ## olur). Şablonla tek fark: strese bağlı bozulma etkileri.
 
-## Diyalog kutusu glitch'i: stres >= 4'te devreye girer (0 şiddette etkisiz).
+## Diyalog kutusu glitch'i: stres >= 5'te çok hafif başlar, 15'te tepe yapar
+## (0 şiddette etkisiz).
 transform textbox_stres_fx(guc=0.0):
     mesh True
     shader "pom.glitch"
@@ -102,7 +103,7 @@ screen say(who, what):
 
     window:
         id "window"
-        at textbox_stres_fx(max(0.0, (stres - 3) * 0.05))
+        at textbox_stres_fx(max(0.0, (stres - 4) * 0.03))
 
         if who is not None:
 
@@ -118,7 +119,7 @@ screen say(who, what):
         add SideImage() xalign 0.0 yalign 1.0
 
 
-## Seçim kutuları: stres >= 8'de titrer ve sıraları karışır (stres.rpy).
+## Seçim kutuları: stres = 15'te (son seviye) titrer ve sıraları karışır.
 transform kutu_titre:
     subpixel True
     block:
@@ -135,7 +136,7 @@ screen choice(items):
 
     vbox:
         for i in kutular:
-            if stres >= 8:
+            if stres >= 15:
                 textbutton i.caption action i.action at kutu_titre
             else:
                 textbutton i.caption action i.action

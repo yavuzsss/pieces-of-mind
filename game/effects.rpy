@@ -176,10 +176,11 @@ transform glitched(strength=1.0):
 
 # Sürekli açık CRT katmanı — her şeyin üstünde (zar paneli dahil).
 # Stres yükseldikçe titreme/parazit yoğunlaşır (gizli gösterge — stres.rpy).
+# stres < 5: etkisiz; 5'ten 15'e doğrusal tırmanır (0.0 -> 1.0).
 screen crt_overlay():
     zorder 1000
     if persistent.crt_enabled:
-        add Solid("#ffffff") at crt_fx(min(1.0, stres * 0.1))
+        add Solid("#ffffff") at crt_fx(min(1.0, max(0.0, (stres - 4) / 11.0)))
 
 init python:
     config.overlay_screens.append("crt_overlay")
