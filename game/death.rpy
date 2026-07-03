@@ -126,6 +126,8 @@ label olum(sebep="bilinmeyen bir son"):
 
     # Fısıltı ölümden etkilenmez. Bu replikler oyuncunun kendi iç sesi:
     # beden öldü, lanet (oyuncu) kaldı.
+    # NOT: Kutu (fis) kuralının bilinçli istisnası — dinleyen beden yok;
+    # Fısıltı'nın iç monoloğu düz f olarak akar.
     if persistent.olum_sayisi == 1:
 
         f "..."

@@ -1,11 +1,14 @@
 # scene2_lamba.rpy — Pieces of Mind
 # Sahne 2: Lambaya Yaklaşma.
-# İki dal: dokunma (DEX zarı) / izleme (CHA zarı). Sahnenin sonunda Fısıltı
-# ilk kez "biz" der — niyetinin ilk sezdirilişi.
+# Üç dal: dokunma (DEX zarı) / izleme (CHA zarı) / inkâr (bedelli, geri döner).
+# Sahnenin sonunda Fısıltı ilk kez "biz" der — niyetinin ilk sezdirilişi.
 
 # Lamba bağı: şövalyenin lambayla kurduğu saplantının şiddeti.
 # Lamba lehine her eylem/başarısızlık artırır. İleride sonuçları olacak.
 default lamba_bagi = 0
+
+# İnkâr fısıltısı denendi mi? (menüde bir kez görünür)
+default sahne2_inkar = False
 
 
 label sahne2_lamba:
@@ -16,7 +19,7 @@ label sahne2_lamba:
 
     s "Ne zaman yürümeye başladım?"
 
-    f "Önemi yok. Yaklaş."
+    $ fis("Önemi yok. Yaklaş.")
 
     si "Masa eski. Ahşabı çatlamış, boyası dökülmüş."
 
@@ -30,14 +33,38 @@ label sahne2_lamba:
 
     s "Nabız gibi."
 
+    jump sahne2_secim
+
+
+label sahne2_secim:
+
+    # Üç fısıltı — inkâr bile kurtarıcı değil (düşünceyi lanet ekti).
     menu:
-        f "Ne fısıldayacaksın?"
 
         "«Dokun. Kaldır onu.»":
             jump sahne2_dokun
 
         "«Dokunma. Sadece izle.»":
             jump sahne2_izle
+
+        "«Boş ver lambayı. O sadece bir lamba.»" if not sahne2_inkar:
+
+            $ sahne2_inkar = True
+
+            s "Sadece bir lamba."
+
+            si "Cümleyi ağzımın içinde çeviriyorum. Tadı yanlış."
+
+            s "Sadece bir... hayır. Değil. Neden değil?"
+
+            si "Düşünce çengel gibi. Çektikçe derine giriyor."
+
+            s "Sen ektin bunu, değil mi? Yoksa ben mi?"
+
+            $ guven_degistir(-1)
+            $ stres_degistir(1)
+
+            jump sahne2_secim
 
 
 ################################################################################
@@ -87,7 +114,7 @@ label sahne2_dokun_krit_basari:
 
     s "El yazısı... benimki. Bunu ben kazımışım."
 
-    f "Gördün mü? O sana ait."
+    $ fis("Gördün mü? O sana ait.")
 
     jump sahne2_kapi
 
@@ -131,13 +158,15 @@ label sahne2_dokun_basarisiz:
 
     s "Sanki dünya {i}ona{/i} vidalanmış."
 
+    $ stres_degistir(1)
+
     jump sahne2_kapi
 
 
 label sahne2_dokun_krit_fiyasko:
 
     # Doğal 1 — alev söner. Karanlıkta başka bir şey vardır.
-    # (roll_dice doğal 1'de otomatik glitch atar; devamı buraya düşer.)
+    # (roll_dice doğal 1'de otomatik glitch + stres ekler; devamı buraya düşer.)
 
     si "Parmaklarım cama değiyor ve alev—"
 
@@ -209,11 +238,14 @@ label sahne2_izle_krit_basari:
 
     s "Bir anahtar deliği var. Havada asılı, kapkara bir anahtar deliği."
 
-    f "Bunu görmemeliydin."
+    $ fis("Bunu görmemeliydin.")
 
     s "...ne?"
 
-    f "Henüz. Henüz görmemeliydin."
+    $ fis("Henüz. Henüz görmemeliydin.")
+
+    # Şövalye, Fısıltı'nın bir şey sakladığını ilk kez duyar.
+    $ guven_degistir(-1)
 
     jump sahne2_kapi
 
@@ -254,6 +286,7 @@ label sahne2_izle_basarisiz:
     s "Ve alev... az önce olduğundan bir parmak daha uzun."
 
     $ lamba_bagi += 1
+    $ stres_degistir(1)
 
     jump sahne2_kapi
 
@@ -261,7 +294,7 @@ label sahne2_izle_basarisiz:
 label sahne2_izle_krit_fiyasko:
 
     # Doğal 1 — derin trans: bir anlığına alevin içinden bakar.
-    # (roll_dice doğal 1'de otomatik glitch atar; devamı buraya düşer.)
+    # (roll_dice doğal 1'de otomatik glitch + stres ekler; devamı buraya düşer.)
 
     si "İzliyorum. İzliyorum. İzli—"
 
@@ -304,11 +337,11 @@ label sahne2_kapi:
 
     si "Ahşap, demir kuşaklı, sıradan bir kapı. Sıradanlığı rahatsız edici."
 
-    f "Kapı. Gitme vakti."
+    $ fis("Kapı. Gitme vakti.")
 
     s "Dışarıda ne olduğunu bilmiyorum."
 
-    f "Lambayı al. Onsuz gidemeyiz."
+    $ fis("Lambayı al. Onsuz gidemeyiz.")
 
     s "..."
 
@@ -318,7 +351,11 @@ label sahne2_kapi:
 
     s "Biz... kaç kişiyiz?"
 
-    f "Al onu."
+    # Şövalye çoğulu yakalar; Fısıltı cevap yerine bastırır.
+    $ guven_degistir(-1)
+    $ stres_degistir(1)
+
+    $ fis("Al onu.")
 
     si "Sorumun cevabı gelmiyor. Sadece o iki kelime, kafamın içinde, kendi sesimden daha yüksek."
 

@@ -1,7 +1,7 @@
 # script.rpy — Pieces of Mind
-# Ana hikâye akışı.
-# Sahne 1: Uyanış — siyah ekran, sadece metin. Fısıltı (oyuncu) kırmızı,
-# Şövalye krem tonunda konuşur. İlk INT (Zihin) zarı burada atılır.
+# Karakter tanımları + Sahne 1: Uyanış — siyah ekran, sadece metin.
+# Fısıltı'nın TÜM replikleri fis() kutularıyla oyuncu tarafından seçilir
+# (fisilti.rpy — Milk mekaniği). İlk INT (Zihin) zarı burada atılır.
 
 ################################################################################
 ## Karakterler
@@ -11,6 +11,8 @@
 default knight_name = "???"
 
 # Fısıltı — oyuncunun sesi. Şövalyenin zihnindeki lanet. Kırmızı, italik.
+# Sahne içinde konuşmaz: replikleri fis() kutularından seçilir. Bu tanım
+# ölüm monoloğu (death.rpy) ve geçmiş (history) kayıtları için durur.
 define f = Character("Fısıltı", color="#cc2222", what_color="#cc2222",
                      what_italic=True,
                      ctc="ctc_blink", ctc_position="nestled")
@@ -48,13 +50,13 @@ label start:
 
     s "Kalkmalıyım."
 
-    # Fısıltı ilk kez konuşur — oyuncunun varlığı hissedilir.
+    # Fısıltı ilk kez konuşur — oyuncunun ilk kutusu.
     # Lanet geçmiş ölümleri hatırlar; şövalye hatırlamaz.
     call glitch_burst(0.15, 0.6, shake=False)
     if persistent.olum_sayisi > 0:
-        f "Kalk. Yeniden."
+        $ fis("Kalk. Yeniden.")
     else:
-        f "Kalk."
+        $ fis("Kalk.")
 
     s "...?"
 
@@ -94,7 +96,7 @@ label sahne1_ayna:
     si "Odaklanmalıyım. Kim olduğumu—"
 
     call glitch_burst(0.2, 0.7, shake=False)
-    f "Lamba."
+    $ fis("Lamba.")
 
     si "...masanın üstünde bir gaz lambası var."
 
@@ -117,19 +119,41 @@ label sahne1_ayna:
 
 label sahne1_hatirlama:
 
-    # Oyuncu (Fısıltı) devreye girer — şövalyeye kim olduğunu hatırlatmaya çalışır.
+    # Üç fısıltı — hiçbiri kurtarıcı değil.
     menu:
-        f "Ne fısıldayacaksın?"
 
         "«Hatırla. Ellerine bak. Ellerin bilir.»":
+
             s "Ellerim..."
+
             si "Avuçlarım nasır içinde. Parmaklarım bir şeyi kavramaya alışkın."
+
             si "Bir şeyin... kabzasını."
 
         "«Hatırla. Kan. Şakağındaki kan nereden geldi?»":
+
             s "Kan..."
+
             si "Şakağıma dokunuyorum. Kurumuş, pul pul."
+
             si "Bir darbe. Düşüş. Metalin metale çarptığı bir ses... uzakta."
+
+            $ stres_degistir(1)
+
+        "«Boş ver. Kim olduğun önemli değil.»":
+
+            s "..."
+
+            s "Önemli değil mi?"
+
+            si "Cümle göğsümde bir yere oturuyor. Soğuk bir taş gibi."
+
+            s "Belki haklısın. Belki isimsiz de yürünür."
+
+            s "Ama yine de deneyeceğim. Sana rağmen."
+
+            $ guven_degistir(-1)
+            $ stres_degistir(1)
 
     s "Hatırlamaya çalışıyorum."
 
@@ -164,7 +188,7 @@ label sahne1_hatirlama_krit_basari:
 
     s "Ben bir şövalyeyim. Ya da... öyleydim."
 
-    f "Güzel. Hatırlıyorsun."
+    $ fis("Güzel. Hatırlıyorsun.")
 
     s "Bu ses yine geldi. İçimden ama... içimden değil."
 
@@ -184,7 +208,7 @@ label sahne1_hatirlama_basari:
 
     s "Kesin değil. Ama ellerim kılıç tutmayı unutmamış."
 
-    f "Bu bir başlangıç."
+    $ fis("Bu bir başlangıç.")
 
     jump sahne1_son
 
@@ -202,7 +226,9 @@ label sahne1_hatirlama_basarisiz:
 
     si "Bırakıyorum. Şimdilik."
 
-    f "Zorlamayacağız. Henüz."
+    $ fis("Zorlamayacağız. Henüz.")
+
+    $ stres_degistir(1)
 
     jump sahne1_son
 
@@ -216,7 +242,6 @@ label sahne1_hatirlama_krit_fiyasko:
 
     s "Soğuk. Islak. Parmaklarımı sayıyor."
 
-    call glitch_burst(0.6, 1.5)
     s "GERİ ÇEK. GERİ ÇEK. GERİ—"
 
     si "...duvara yaslanmışım. Nefes nefeseyim."
@@ -238,7 +263,7 @@ label sahne1_son:
 
     si "Sanki bekliyor."
 
-    f "Devam edeceğiz."
+    $ fis("Devam edeceğiz.")
 
     # Sahne 2: Lambaya Yaklaşma (scene2_lamba.rpy)
     jump sahne2_lamba

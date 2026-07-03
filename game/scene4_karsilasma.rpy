@@ -95,6 +95,8 @@ label sahne4_tanisma:
 
     sk "Alevim de peşinden gitti."
 
+    $ stres_degistir(1)
+
     jump sahne4_istek
 
 
@@ -114,15 +116,15 @@ label sahne4_istek:
 
     call glitch_burst(0.3, 0.9, shake=False)
 
-    f "Hayır."
+    $ fis("Hayır.")
 
     s "...döndün."
 
-    f "Geri çekil. Alevler birbirine değmemeli."
+    $ fis("Geri çekil. Alevler birbirine değmemeli.")
 
     s "Neden?"
 
-    f "Değmemeli."
+    $ fis("Değmemeli.")
 
     jump sahne4_secim
 
@@ -130,7 +132,6 @@ label sahne4_istek:
 label sahne4_secim:
 
     menu:
-        f "Ne fısıldayacaksın?"
 
         "«Geri çekil de. Alevi koru.»":
             jump sahne4_geri_cekil
@@ -164,11 +165,14 @@ label sahne4_sor:
 
     sk "Senden geriye kalan yeri."
 
-    f "Saçmalıyor. Aklı, alevinden önce sönmüş."
+    $ fis("Saçmalıyor. Aklı, alevinden önce sönmüş.")
 
     s "İlk defa bu kadar hızlı cevap verdin."
 
-    f "..."
+    $ fis("...")
+
+    # Şövalye savunmayı fark eder.
+    $ guven_degistir(-1)
 
     jump sahne4_secim
 
@@ -304,6 +308,8 @@ label sahne4_bogusma_bedel:
 
     centered "{color=#cc2222}ALEV KÜÇÜLDÜ{/color}"
 
+    $ stres_degistir(1)
+
     si "Sönmüş adam, dökülen parçalarını toplaya toplaya karanlığa emekliyor."
 
     jump sahne4_son
@@ -322,7 +328,8 @@ label sahne4_bogusma_olum:
 
     s "Alevim. Alevim nerede—"
 
-    f "Hayır. Hayır. {b}HAYIR—{/b}"
+    # Fısıltı'nın paniği — oyuncu kendi çığlığını tıklar.
+    $ fis("Hayır. Hayır. HAYIR—")
 
     call olum("sönmüş şövalye seni karanlığa çekti")
 
@@ -356,6 +363,8 @@ label sahne4_geri_krit_fiyasko:
 
         sk "Bir gün sen de vermek isteyeceksin. O zaman hatırla: verecektin."
 
+        $ stres_degistir(2)
+
         jump sahne4_son
 
     else:
@@ -364,7 +373,8 @@ label sahne4_geri_krit_fiyasko:
 
         s "Kafamın içinde bir şey ÇEKİLİYOR—"
 
-        f "BIRAK. O BENİM. {b}O BENİM.{/b}"
+        # Fısıltı'nın maskesinin düştüğü an — oyuncu tıklamak zorunda.
+        $ fis("BIRAK. O BENİM. {b}O BENİM.{/b}")
 
         call glitch_burst(0.7, 1.6)
 
@@ -381,17 +391,17 @@ label sahne4_alev_ver:
 
     s "Yaklaş."
 
-    f "Ne yapıyorsun?"
+    $ fis("Ne yapıyorsun?")
 
     s "Bir nefes. Sadece bir nefes."
 
-    f "Değmemeli diyorum. Dur."
+    $ fis("Değmemeli diyorum. Dur.")
 
     s "Sen sustuğunda ben durmadım. Şimdi de durmuyorum."
 
     call glitch_burst(0.3, 1.0)
 
-    f "{b}DUR.{/b}"
+    $ fis("{b}DUR.{/b}")
 
     si "Durmuyorum."
 
@@ -411,6 +421,9 @@ label sahne4_alev_ver:
     s "Aynı oda. Benim odam."
 
     s "{b}Aynı ses.{/b}"
+
+    # Şövalye, Fısıltı'nın sakladığı gerçeği görür.
+    $ guven_degistir(-2)
 
     si "Alevler ayrılıyor."
 
@@ -448,7 +461,7 @@ label sahne4_hediye:
 
     $ isim_uyarisi = True
 
-    f "Yeter. Gidiyoruz."
+    $ fis("Yeter. Gidiyoruz.")
 
     si "Sönmüş adam kemerinden paslı bir kılıç çözüyor. İki eliyle uzatıyor."
 
@@ -475,27 +488,32 @@ label sahne4_son:
 
     if isyan > 0:
 
-        f "Bana bir daha karşı gelme."
+        $ fis("Bana bir daha karşı gelme.")
 
         s "Gelirsem?"
 
-        f "..."
+        $ fis("...")
 
         si "Cevap yok. Ama kafamın içinde bir yerde, bir şey not alıyor."
 
+        $ stres_degistir(1)
+
     elif alev_kucuk:
 
-        f "Alev küçüldü. Daha dikkatli olmalıyız."
+        $ fis("Alev küçüldü. Daha dikkatli olmalıyız.")
 
         s "Biz. Yine biz."
 
     else:
 
-        f "İyi iş çıkardın."
+        $ fis("İyi iş çıkardın.")
 
         s "İltifat mı bu? Senden?"
 
-        f "Alışma."
+        $ fis("Alışma.")
+
+        # Temiz geçiş — şövalye Fısıltı'nın korumasını hisseder.
+        $ guven_degistir(1)
 
     # Kule merdiveni görünür.
     scene bg_kule_merdiven with sahne_gecis
@@ -508,11 +526,11 @@ label sahne4_son:
 
     s "Kule ne, biliyor musun?"
 
-    f "Evet."
+    $ fis("Evet.")
 
     s "Söyleyecek misin?"
 
-    f "Hayır."
+    $ fis("Hayır.")
 
     # Sahne 5: Kule — Lamba Salonu (scene5_kule.rpy)
     jump sahne5_kule

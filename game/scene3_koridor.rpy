@@ -8,6 +8,9 @@
 # Uçurum geçişinde lamba tek elde miydi? (başarısızlık metnini değiştirir)
 default tek_el = False
 
+# "Geri dön" fısıltısı denendi mi? (menüde bir kez görünür)
+default sahne3_geri_denendi = False
+
 
 ################################################################################
 ## Lambanın Alınışı
@@ -37,7 +40,7 @@ label sahne3_koridor:
 
     s "Çemberin dışında hiçbir şey yok."
 
-    f "Artık kapı var. Sadece kapı."
+    $ fis("Artık kapı var. Sadece kapı.")
 
     jump sahne3_esik
 
@@ -64,7 +67,7 @@ label sahne3_esik:
 
     si "Işığımın çemberi üç adım öteye ulaşıyor. Sonrası siyah."
 
-    f "Yürü."
+    $ fis("Yürü.")
 
     si "Eşikten geçiyorum."
 
@@ -74,7 +77,9 @@ label sahne3_esik:
 
     s "Sadece ışığımın ulaşmadığı yer var."
 
-    f "Geriye bakma. Geri diye bir yer yok."
+    $ stres_degistir(1)
+
+    $ fis("Geriye bakma. Geri diye bir yer yok.")
 
     jump sahne3_yuruyus
 
@@ -98,7 +103,6 @@ label sahne3_yuruyus:
     s "Yankılar gecikmez."
 
     menu:
-        f "Ne fısıldayacaksın?"
 
         "«Dur. Dinle.»":
 
@@ -110,7 +114,7 @@ label sahne3_yuruyus:
 
             s "Giremiyor... değil mi?"
 
-            f "Girmiyor. Şimdilik. Yürü."
+            $ fis("Girmiyor. Şimdilik. Yürü.")
 
         "«Yürü. Sakın arkana bakma.»":
 
@@ -121,6 +125,8 @@ label sahne3_yuruyus:
             s "Bakmıyorum. Bakmayacağım."
 
             si "Ense köküm karıncalanıyor. Bakış gibi. Parmak gibi."
+
+            $ stres_degistir(1)
 
     jump sahne3_ucurum
 
@@ -150,14 +156,40 @@ label sahne3_ucurum:
 
     s "Ama iki elim de lazım olacak. Ve lamba..."
 
+    jump sahne3_ucurum_secim
+
+
+label sahne3_ucurum_secim:
+
+    # Üç fısıltı — "geri dön" bile kurtarıcı değil (geri diye bir yer yok).
     menu:
-        f "Ne fısıldayacaksın?"
 
         "«Lambayı kemerine as. İki elin de serbest olsun.»":
             jump sahne3_gecis_kemer
 
         "«Lambayı bırakma. Alev sönmemeli.»":
             jump sahne3_gecis_tekel
+
+        "«Geri dön. Başka bir yol olmalı.»" if not sahne3_geri_denendi:
+
+            $ sahne3_geri_denendi = True
+
+            si "Dönüyorum. Geldiğim yöne yürüyorum."
+
+            si "Bir dakika. Beş dakika. Işığın çemberi taş yutuyor."
+
+            si "Ve sonra zemin yeniden bitiyor."
+
+            s "Aynı uçurum."
+
+            s "Geriye yürüdüm. İleriye çıktım."
+
+            si "Ve karanlıkta bir yerde, bir şey kıkırdıyor gibi."
+
+            $ guven_degistir(-1)
+            $ stres_degistir(2)
+
+            jump sahne3_ucurum_secim
 
 
 label sahne3_gecis_kemer:
@@ -190,7 +222,7 @@ label sahne3_gecis_tekel:
 
     s "...neden her şeyden önemli?"
 
-    f "Çünkü öyle."
+    $ fis("Çünkü öyle.")
 
     si "Tek elimle duvardaki çatlakları yokluyorum. Çıkıntıya adım atıyorum."
 
@@ -236,13 +268,13 @@ label sahne3_gecis_krit_basari:
 
     if persistent.olum_sayisi > 0:
 
-        f "Sayma onları."
+        $ fis("Sayma onları.")
 
         s "Neden saymamı istemiyorsun?"
 
     else:
 
-        f "Eski dünyadan kalma. Önemsiz. Yürü."
+        $ fis("Eski dünyadan kalma. Önemsiz. Yürü.")
 
     jump sahne3_son
 
@@ -298,6 +330,8 @@ label sahne3_gecis_basarisiz:
 
     centered "{color=#cc2222}KUVVET -1{/color}"
 
+    $ stres_degistir(1)
+
     si "Ve lamba... alev, düşüş sırasında küçülmüş."
 
     si "Koridorun duvarları da yaklaşmış sanki."
@@ -322,7 +356,8 @@ label sahne3_gecis_krit_fiyasko:
 
     s "Alev sönmeden hemen önce, aşağıda beni bekleyen şeyi görüyorum."
 
-    f "Gözlerini kapat."
+    # Oyuncunun tıklamak zorunda olduğu merhamet fısıltısı.
+    $ fis("Gözlerini kapat.")
 
     call olum("karanlık seni yuttu")
 
@@ -350,7 +385,8 @@ label sahne3_son:
 
     si "Ve yaklaşıyor."
 
-    f "..."
+    # Oyuncu susmayı seçer — fısıldayacak bir şey yoktur.
+    $ fis("...")
 
     s "İlk defa... sesin sustu."
 

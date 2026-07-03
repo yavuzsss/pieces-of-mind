@@ -29,6 +29,7 @@ init python:
     renpy.register_shader("pom.crt",
         variables="""
             uniform float u_time;
+            uniform float u_pom_stres;
             uniform vec2 u_model_size;
             attribute vec2 a_tex_coord;
             varying vec2 v_tex_coord;
@@ -39,22 +40,24 @@ init python:
         fragment_300="""
             vec2 uv = v_tex_coord;
 
-            // Vinyet: köşeler kararır.
+            // Vinyet: köşeler kararır; streste hafifçe daralır.
             float d = distance(uv, vec2(0.5));
-            float vig = smoothstep(0.40, 0.90, d) * 0.55;
+            float vig = smoothstep(0.40 - u_pom_stres * 0.08, 0.90, d)
+                        * (0.55 + u_pom_stres * 0.15);
 
             // Tarama çizgileri (~3 piksellik periyot).
             float pix_y = uv.y * u_model_size.y;
             float scan = (0.5 + 0.5 * sin(pix_y * 2.094)) * 0.16;
 
-            // Düşük frekanslı tüp titremesi.
-            float flick = 0.015 * sin(u_time * 47.0)
-                        + 0.015 * sin(u_time * 13.7);
+            // Düşük frekanslı tüp titremesi — stresle şiddetlenir/hızlanır.
+            float flick = (0.015 * sin(u_time * 47.0)
+                         + 0.015 * sin(u_time * 13.7))
+                        * (1.0 + u_pom_stres * 4.0);
 
-            // Film paraziti.
+            // Film paraziti — stresle yoğunlaşır.
             float n = fract(sin(dot(uv + fract(u_time),
                                     vec2(12.9898, 78.233))) * 43758.5453);
-            float noise = n * 0.05;
+            float noise = n * (0.05 + u_pom_stres * 0.12);
 
             float a = clamp(vig + scan + flick + noise, 0.0, 0.85);
             gl_FragColor = vec4(0.0, 0.0, 0.0, a);
@@ -141,9 +144,10 @@ init python:
 # 'pause 0.02 / repeat' döngüsü ekranın sürekli yeniden çizilmesini sağlar;
 # u_time'a bağlı shader'ların akması için gereklidir.
 
-transform crt_fx:
+transform crt_fx(seviye=0.0):
     mesh True
     shader "pom.crt"
+    u_pom_stres seviye
     block:
         pause 0.03
         repeat
@@ -171,10 +175,11 @@ transform glitched(strength=1.0):
 ################################################################################
 
 # Sürekli açık CRT katmanı — her şeyin üstünde (zar paneli dahil).
+# Stres yükseldikçe titreme/parazit yoğunlaşır (gizli gösterge — stres.rpy).
 screen crt_overlay():
     zorder 1000
     if persistent.crt_enabled:
-        add Solid("#ffffff") at crt_fx
+        add Solid("#ffffff") at crt_fx(min(1.0, stres * 0.1))
 
 init python:
     config.overlay_screens.append("crt_overlay")
@@ -194,6 +199,10 @@ screen glitch_flash(strength=1.0):
 #     call glitch_burst           -> varsayılan 0.35s
 #     call glitch_burst(0.6, 1.5) -> daha uzun, daha şiddetli
 label glitch_burst(duration=0.35, strength=1.0, shake=True):
+
+    # Şiddetli bozulmalar iz bırakır (stres.rpy).
+    if strength >= 1.2:
+        $ stres_degistir(1)
 
     play sound glitch_sfx
     show screen glitch_flash(strength)

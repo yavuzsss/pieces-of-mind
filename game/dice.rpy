@@ -193,8 +193,13 @@ label roll_dice(stat_name, dc):
     call screen dice_panel(dice_result)
 
     # Doğal 1: lanet kıpırdanır — panel kapanınca ekran bozulur.
+    # (stres: +1 burada, +1 glitch_burst içinden = toplam +2)
     if dice_result.crit_fail:
+        $ stres_degistir(1)
         call glitch_burst(0.5, 1.3)
+    elif dice_result.crit_success:
+        # Doğal 20 nefes aldırır.
+        $ stres_degistir(-1)
 
     window auto
 

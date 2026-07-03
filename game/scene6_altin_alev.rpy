@@ -3,8 +3,10 @@
 # Koro: isimlerden örülü altın alev; fısıltıların bağlı olduğu üst varlık.
 # Şövalyeyle değil, Fısıltı'yla konuşur — oyuncuya dışarıdan seslenen ilk şey.
 # Mekanizma açılır: fısıltılar isim toplar, Koro'ya teslim eder. Bizimki
-# oyalanıyor — "şefkat" imasıyla suçlanır. Zihin araması: izin (bedel) veya
-# direniş (CHA DC 14, ölüm kapısı). Ultimatom: "ya adı... ya kendini."
+# oyalanıyor — "şefkat" imasıyla suçlanır. Zihin araması: izin (bedel) /
+# direniş (CHA DC 14, ölüm kapısı) / ihanet (Sönmüş'ün izini vermek — bedel).
+# Reddetme noktası: guven <= 2 iken «Direnme» seçilirse şövalye yine direnir.
+# Ultimatom: "ya adı... ya kendini."
 
 # Koro — Altın Alev. Palet dışı renk: altın (kasıtlı; o buradan değil).
 define ko = Character("Koro", color="#d9a441", what_color="#d9a441",
@@ -15,6 +17,9 @@ default zihin_izi = False
 
 # Alevin içinde onu adıyla çağıran ses duyuldu mu? (direniş doğal 20)
 default alevdeki_ses = False
+
+# Sönmüş'ün izi Koro'ya verildi mi? (ihanet dalı)
+default sahne6_ihanet = False
 
 
 ################################################################################
@@ -45,11 +50,11 @@ label sahne6_tepe:
 
         s "Sanki yukarı çıkmak istemiyor. Sanki biliyor."
 
-    f "Az kaldı."
+    $ fis("Az kaldı.")
 
     s "Heves. Hâlâ heves var sesinde."
 
-    f "Az. Kaldı."
+    $ fis("Az. Kaldı.")
 
     jump sahne6_koro
 
@@ -84,7 +89,9 @@ label sahne6_koro:
 
     s "Benimle değil. {b}Seninle{/b} konuşuyor."
 
-    f "..."
+    $ stres_degistir(1)
+
+    $ fis("...")
 
     ko "Suskun. Suskunsun. Yorgun musun, küçüldün mü?"
 
@@ -102,7 +109,7 @@ label sahne6_koro:
 
         ko "Bir kırıntı kokuyor. Bir harf. Tek harf mi getirdin, kardeş?"
 
-        f "Henüz."
+        $ fis("Henüz.")
 
         ko "Henüz. Henüz. {i}Henüz.{/i}"
 
@@ -112,7 +119,7 @@ label sahne6_koro:
 
         ko "Ad kokusu yok. Boş mu geldin, kardeş?"
 
-        f "İş derin. Bu... iyi saklanmış."
+        $ fis("İş derin. Bu... iyi saklanmış.")
 
     jump sahne6_pazarlik
 
@@ -129,15 +136,17 @@ label sahne6_pazarlik:
 
     ko "Beden hâlâ konuşuyor. Fısıltın yavaş, kardeş."
 
-    f "Yavaş değil. Dikkatli."
+    $ fis("Yavaş değil. Dikkatli.")
 
     ko "Dikkat."
 
     ko "Ya da... {i}şefkat?{/i}"
 
-    f "Hayır."
+    $ fis("Hayır.")
 
     si "Cevap çok hızlı geldi."
+
+    $ guven_degistir(-1)
 
     ko "Kaç beden oldu, kardeş? Bu kaçıncı?"
 
@@ -149,17 +158,22 @@ label sahne6_pazarlik:
 
         ko "Biz her şeyi sayarız."
 
-    f "Adı getireceğim. Hep getirdim."
+    # Oyuncu kendi itirafını tıklar.
+    $ fis("Adı getireceğim. Hep getirdim.")
 
     s "\"Hep\"?"
 
     s "Daha önce de mi? Benden önce... başkaları mı vardı?"
 
+    $ guven_degistir(-2)
+
     ko "Sor ona, beden."
 
     ko "Sor fısıltına: seni kaç kez sevdi?"
 
-    f "{b}SUS.{/b}"
+    $ stres_degistir(1)
+
+    $ fis("{b}SUS.{/b}")
 
     call glitch_burst(0.3, 1.0, shake=False)
 
@@ -177,10 +191,13 @@ label sahne6_pazarlik:
 
     s "Kafama. Kafama girmek istiyor."
 
-    f "..."
+    jump sahne6_arama_secim
 
+
+label sahne6_arama_secim:
+
+    # Üç fısıltı — ihanet bile kurtarıcı değil.
     menu:
-        f "Ne fısıldayacaksın?"
 
         "«Diren. Bütün kapıları kapat.»":
             jump sahne6_direnis
@@ -188,12 +205,72 @@ label sahne6_pazarlik:
         "«Direnme. Saklı bir şey yok — bırak, görsün.»":
             jump sahne6_izin
 
+        "«Ona başka bir şey ver. Sönmüş'ün izini ver.»" if not sahne6_ihanet:
+            jump sahne6_ihanet_yolu
+
+
+################################################################################
+## Dal C — İhanet (Sönmüş'ün izi; bedel: suçluluk, arama yine olur)
+################################################################################
+
+label sahne6_ihanet_yolu:
+
+    $ sahne6_ihanet = True
+
+    si "Kafamın içinde bir şey kıpırdıyor."
+
+    si "Bir anı — benim anım — dışarı süzülüyor: kör kuyular, kavruk parmaklar, kuru bir ses."
+
+    s "Ne yapıyorsun? O anı benim."
+
+    if kilic_var:
+
+        s "O bize yardım etti. Kılıcını verdi."
+
+    else:
+
+        s "O bize yolu gösterdi."
+
+    ko "Adsızın izi. Kırıntı. Bayat."
+
+    ko "Yine de... alırız. Meze."
+
+    si "Alevin bir dili kazandan uzanıyor, süzüleni yalıyor, geri dönüyor."
+
+    ko "Ama borç ad, kardeş. İz değil."
+
+    ko "Biz yine de bakarız."
+
+    s "Ona Sönmüş'ü verdin."
+
+    s "Bir gün beni de böyle mi vereceksin?"
+
+    $ guven_degistir(-2)
+    $ stres_degistir(1)
+
+    jump sahne6_arama_secim
+
 
 ################################################################################
 ## Dal A — İzin (bedel karşılığı içgörü)
 ################################################################################
 
 label sahne6_izin:
+
+    if guven <= 2:
+
+        # REDDETME: güven dibe vurduysa şövalye kapılarını yine de kapatır.
+        s "Duydum."
+
+        s "Kapıları açmamı fısıldıyorsun."
+
+        s "Hayır. Kapılarım {b}benim{/b}."
+
+        si "Sürgüler kendiliğinden iniyor. Benim indirdiğim sürgüler."
+
+        $ stres_degistir(1)
+
+        jump sahne6_direnis
 
     s "Bırakıyorum."
 
@@ -206,6 +283,8 @@ label sahne6_izin:
     ko "Oyulmuş."
 
     ko "Biri burayı önceden boşaltmış. Usta işi."
+
+    $ stres_degistir(1)
 
     if knight_name == "E───":
 
@@ -322,11 +401,14 @@ label sahne6_direnis_basari:
 
     ko "Sıkı. İyi saklanmış."
 
-    f "Benimkidir. Sağlamdır."
+    # Fısıltı'nın sahiplenmesi — oyuncu tıklamak zorunda.
+    $ fis("Benimkidir. Sağlamdır.")
 
     s "\"Benimki.\""
 
     si "Kimse fark etmemiş gibi yapıyor. Ben dahil."
+
+    $ guven_degistir(-1)
 
     jump sahne6_ultimatom
 
@@ -347,6 +429,8 @@ label sahne6_direnis_basarisiz:
     $ player_stats.modify("INT", -1)
 
     centered "{color=#cc2222}ZİHİN -1{/color}"
+
+    $ stres_degistir(2)
 
     if knight_name == "E───":
 
@@ -370,7 +454,8 @@ label sahne6_direnis_krit_fiyasko:
 
     s "İçimde saklanacak yer kal—"
 
-    f "HAYIR. {b}ONU BANA BIRAK—{/b}"
+    # Fısıltı'nın son çığlığı — oyuncu tıklamak zorunda.
+    $ fis("HAYIR. {b}ONU BANA BIRAK—{/b}")
 
     call olum("zihnin altın alevde kavruldu")
 
@@ -389,7 +474,7 @@ label sahne6_ultimatom:
 
     ko "...ya kendini."
 
-    f "..."
+    $ fis("...")
 
     ko "Gidin şimdi. İkiniz de. Aşağıda kapı sizi bekliyor."
 
@@ -405,7 +490,7 @@ label sahne6_ultimatom:
 
     s "Ne yapacaksın?"
 
-    f "..."
+    $ fis("...")
 
     s "İlk defa cevabını bilmediğin bir soru sordum."
 

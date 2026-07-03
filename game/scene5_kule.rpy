@@ -3,9 +3,13 @@
 # Merdiven (takipçi anı, kilic_var'a duyarlı), binlerce oyuklu salon
 # (alev_kucuk'e duyarlı), şövalyenin kendi oyuğu ve kazınmış isim levhası.
 # INT zarı DC 13. İsim verilmez; başarıda tek harf açılır (knight_name "E───").
+# Reddetme noktası: guven <= 2 iken «İncele» seçilirse şövalye uygulamaz.
 
-# Kritik fiyasko: kan levhaya değdi, kule şövalyeyi "tattı". İleride sonuç.
+# Kritik fiyasko / kazı: kan levhaya değdi, kule şövalyeyi "tattı".
 default kule_kani = False
+
+# Kazı fısıltısı denendi mi?
+default sahne5_kazi_denendi = False
 
 
 ################################################################################
@@ -42,11 +46,13 @@ label sahne5_kule:
 
         si "Adımlarımı hızlandırıyorum."
 
-    f "O içeri giremez. Kule onu tanımıyor."
+        $ stres_degistir(1)
+
+    $ fis("O içeri giremez. Kule onu tanımıyor.")
 
     s "Ama beni tanıyor, öyle mi?"
 
-    f "..."
+    $ fis("...")
 
     jump sahne5_salon
 
@@ -79,11 +85,13 @@ label sahne5_salon:
 
         s "Sanki katılmak istiyor onlara."
 
-    f "Yürü. Bakma onlara."
+        $ stres_degistir(1)
+
+    $ fis("Yürü. Bakma onlara.")
 
     s "Bunlar... kim?"
 
-    f "Kimse. Artık kimse."
+    $ fis("Kimse. Artık kimse.")
 
     s "Sönmüş de böyle diyordu kendine."
 
@@ -112,14 +120,21 @@ label sahne5_oyuk:
 
     s "Adım. Bu benim adımdı."
 
-    f "Oku."
+    $ stres_degistir(1)
+
+    $ fis("Oku.")
 
     s "Okunmuyor. Biri kazımış."
 
-    f "Dene."
+    $ fis("Dene.")
 
+    jump sahne5_oyuk_secim
+
+
+label sahne5_oyuk_secim:
+
+    # Üç fısıltı — kazı seçeneği en pahalı bedeli taşır.
     menu:
-        f "Ne fısıldayacaksın?"
 
         "«İncele. Çizikleri parmaklarınla oku.»":
             jump sahne5_incele
@@ -127,12 +142,71 @@ label sahne5_oyuk:
         "«Bakma. Uzaklaş buradan.»":
             jump sahne5_bakma
 
+        "«Kazı. Çiziklerin altını tırnaklarınla aç.»" if not sahne5_kazi_denendi:
+            jump sahne5_kazi
+
+
+################################################################################
+## Dal C — Kazı (bedel: kan; kule tadar)
+################################################################################
+
+label sahne5_kazi:
+
+    $ sahne5_kazi_denendi = True
+
+    si "Parmaklarım taşa gömülüyor. Tırnaklarım çiziklerin diplerini arıyor."
+
+    si "Taş sert. Tırnaklarım değil."
+
+    s "Bir şey yok. Altında da bir şey yok. Sadece—"
+
+    si "Sıcak bir sızı. Tırnağımın biri kırılmış, etine kadar."
+
+    si "Ve bir damla kan, çiziklerin içine yürüyor. Taş, kanı içiyor."
+
+    call glitch_burst(0.5, 1.3)
+
+    si "Salondaki bütün lambalar — binlercesi — bir an için yanıyor."
+
+    si "Ve sönüyor. Hep birlikte. Bir iç çekiş gibi."
+
+    s "Kule beni tattı."
+
+    s "Senin yüzünden. Sen kazımamı fısıldadın."
+
+    $ kule_kani = True
+    $ guven_degistir(-1)
+    $ stres_degistir(1)
+
+    $ fis("Gidelim. Hemen.")
+
+    jump sahne5_son
+
 
 ################################################################################
 ## Dal A — İnceleme (INT / ZİHİN zarı)
 ################################################################################
 
 label sahne5_incele:
+
+    if guven <= 2:
+
+        # REDDETME: güven dibe vurduysa şövalye fısıltıyı duyar ama uygulamaz.
+        s "Duydum."
+
+        s "İncele, diyorsun. Parmaklarımla okuyayım."
+
+        si "Ellerim iki yanımda asılı duruyor. Kalkmıyorlar."
+
+        s "Ellerim sana güvenmiyor."
+
+        s "Ben de güvenmiyorum."
+
+        si "Levhadan uzaklaşıyorum."
+
+        $ stres_degistir(1)
+
+        jump sahne5_son
 
     if isim_uyarisi:
 
@@ -170,13 +244,16 @@ label sahne5_incele_krit_basari:
 
     s "Adımı kendimden ben sakladım."
 
-    f "..."
+    $ fis("...")
 
-    f "Akıllıymışsın."
+    $ fis("Akıllıymışsın.")
 
     s "\"Mışsın\"? Geçmiş zaman?"
 
-    f "Yürü."
+    # Fısıltı'nın gafı — önceki döngülerin itirafı.
+    $ guven_degistir(-1)
+
+    $ fis("Yürü.")
 
     si "Levhanın bir köşesi çiziklerden kaçmış. Tek harf sağlam: E."
 
@@ -196,15 +273,18 @@ label sahne5_incele_basari:
 
     $ knight_name = "E───"
 
-    f "E."
+    # Fısıltı harfi tadar — oyuncu tıklamak zorunda.
+    $ fis("E.")
 
     s "Sakın."
 
-    f "Ne?"
+    $ fis("Ne?")
 
     s "Adımı ağzına alma."
 
-    f "..."
+    $ fis("...")
+
+    $ guven_degistir(-1)
 
     jump sahne5_son
 
@@ -218,11 +298,13 @@ label sahne5_incele_basarisiz:
 
     si "Şakaklarım zonkluyor. Gözlerimin arkasında bir yerde."
 
-    f "Yeter. Zaman kaybı."
+    $ fis("Yeter. Zaman kaybı.")
 
     s "Neden bu kadar acelecisin?"
 
-    f "Neden bu kadar yavaşsın?"
+    $ fis("Neden bu kadar yavaşsın?")
+
+    $ stres_degistir(1)
 
     jump sahne5_son
 
@@ -230,7 +312,7 @@ label sahne5_incele_basarisiz:
 label sahne5_incele_krit_fiyasko:
 
     # Doğal 1 — kan levhaya değer; kule tadar.
-    # (roll_dice doğal 1'de otomatik glitch atar; devamı buraya düşer.)
+    # (roll_dice doğal 1'de otomatik glitch + stres ekler; devamı buraya düşer.)
 
     si "Levhanın keskin bir kıyısı parmağımı ısırıyor."
 
@@ -246,11 +328,11 @@ label sahne5_incele_krit_fiyasko:
 
     s "Kule beni tattı."
 
-    f "Gitmemiz gerek. Hemen."
+    $ fis("Gitmemiz gerek. Hemen.")
 
     s "Sesin... titriyor mu senin?"
 
-    f "{b}Hemen.{/b}"
+    $ fis("{b}Hemen.{/b}")
 
     $ kule_kani = True
 
@@ -258,36 +340,50 @@ label sahne5_incele_krit_fiyasko:
 
 
 ################################################################################
-## Dal B — Bakmamak (isyan: Fısıltı okumak istiyor, oyuncu uzaklaşıyor)
+## Dal B — Bakmamak (lanet, oyuncunun seçimine rağmen kıpırdanır)
 ################################################################################
 
 label sahne5_bakma:
 
+    # Hasat görevinden uzaklaşan seçim — laneti doğasına karşı kullanmak.
     $ isyan += 1
 
-    s "Hayır."
+    si "Dönüyorum. Uzaklaşıyorum."
 
-    f "Ne?"
+    s "Haklısın. Bilmek istemiyorum. Henüz."
 
-    s "Bilmek istemiyorum. Henüz değil."
-
-    f "Dön. Oku. {b}OKU.{/b}"
-
-    call glitch_burst(0.3, 1.0)
+    si "Üç adım. Dört."
 
     si "Ayaklarım duruyor."
 
     si "Ben durdurmadım."
 
-    s "Ayaklarım. {b}Benim{/b} ayaklarım."
+    s "Sen mi yaptın?"
+
+    # Oyuncu "bakma" diye fısıldadı — ama lanetin derin katmanı levhaya dönük.
+    menu:
+
+        "«Hayır.»":
+
+            s "O zaman kim?"
+
+            si "Cevap gelmiyor. Ayak bileklerimde görünmez eller."
+
+        "«...»":
+
+            s "Susman hoşuma gitmedi."
+
+            $ guven_degistir(-1)
+
+    call glitch_burst(0.3, 1.0)
 
     si "Bir nefes. İki. Ayaklarım yeniden benim."
 
     si "Yürüyorum."
 
-    f "..."
+    si "Ama kafamın içinde bir yerde, bir şey hâlâ levhaya dönük."
 
-    si "Sessizlik. Ama küskün bir sessizlik değil. Hesap yapan bir sessizlik."
+    $ stres_degistir(1)
 
     jump sahne5_son
 
@@ -306,11 +402,11 @@ label sahne5_son:
 
     s "Altın. Güneş gibi. Oyukların hiçbirine benzemiyor."
 
-    f "Yukarı."
+    $ fis("Yukarı.")
 
     s "İlk defa hevesli görünüyorsun."
 
-    f "Yukarı."
+    $ fis("Yukarı.")
 
     # Sahne 6: Kulenin Tepesi — Altın Alev (scene6_altin_alev.rpy)
     jump sahne6_tepe

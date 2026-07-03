@@ -63,7 +63,12 @@ style window:
 style namebox:
     background None
 
-## Seçim düğmeleri: koyu blok, hover'da kırmızı blok. Milk tarzı sesli.
+## Seçim kutuları EKRANIN ÜSTÜNDE (Milk tarzı): Fısıltı'nın replikleri
+## buradan seçilir (fisilti.rpy). Koyu blok, hover'da kırmızı blok, sesli.
+style choice_vbox:
+    ypos 60
+    yanchor 0.0
+
 style choice_button:
     background "#141414e6"
     hover_background "#cc2222"
@@ -75,6 +80,65 @@ style choice_button:
 ## Ana menü başlığı: kırmızı, iri.
 style main_menu_title:
     color "#cc2222"
+
+
+################################################################################
+## Ekran Geçersiz Kılmaları (stres etkileri)
+################################################################################
+## screens.rpy'ye dokunulmaz: say ve choice ekranları burada yeniden tanımlanır
+## (ui.rpy dosya sırasında screens.rpy'den sonra yüklendiği için bunlar geçerli
+## olur). Şablonla tek fark: strese bağlı bozulma etkileri.
+
+## Diyalog kutusu glitch'i: stres >= 4'te devreye girer (0 şiddette etkisiz).
+transform textbox_stres_fx(guc=0.0):
+    mesh True
+    shader "pom.glitch"
+    u_pom_strength guc
+    block:
+        pause 0.05
+        repeat
+
+screen say(who, what):
+
+    window:
+        id "window"
+        at textbox_stres_fx(max(0.0, (stres - 3) * 0.05))
+
+        if who is not None:
+
+            window:
+                id "namebox"
+                style "namebox"
+                text who id "who"
+
+        text what id "what"
+
+    ## Yan görsel (side image) — şablon davranışı korunur.
+    if not renpy.variant("small"):
+        add SideImage() xalign 0.0 yalign 1.0
+
+
+## Seçim kutuları: stres >= 8'de titrer ve sıraları karışır (stres.rpy).
+transform kutu_titre:
+    subpixel True
+    block:
+        linear 0.28 xoffset 3 yoffset -1
+        linear 0.34 xoffset -2 yoffset 1
+        linear 0.31 xoffset 1 yoffset 0
+        linear 0.27 xoffset -3 yoffset -1
+        repeat
+
+screen choice(items):
+    style_prefix "choice"
+
+    $ kutular = stres_karistir(list(items))
+
+    vbox:
+        for i in kutular:
+            if stres >= 8:
+                textbutton i.caption action i.action at kutu_titre
+            else:
+                textbutton i.caption action i.action
 
 
 ################################################################################
