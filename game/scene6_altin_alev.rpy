@@ -494,6 +494,5 @@ label sahne6_ultimatom:
 
     s "İlk defa cevabını bilmediğin bir soru sordum."
 
-    centered "{color=#cc2222}— devam edecek —{/color}"
-
-    return
+    # Sahne 7: İniş ve Yarım (scene7_inis.rpy)
+    jump sahne7_inis
