@@ -3,7 +3,6 @@
 # Merdiven (takipçi anı, kilic_var'a duyarlı), binlerce oyuklu salon
 # (alev_kucuk'e duyarlı), şövalyenin kendi oyuğu ve kazınmış isim levhası.
 # INT zarı DC 13. İsim verilmez; başarıda tek harf açılır (knight_name "E───").
-# Görsel yok: sahne karanlıkta geçer (kule görselleri beklemede).
 
 # Kritik fiyasko: kan levhaya değdi, kule şövalyeyi "tattı". İleride sonuç.
 default kule_kani = False
@@ -57,6 +56,8 @@ label sahne5_kule:
 ################################################################################
 
 label sahne5_salon:
+
+    scene bg_lamba_salonu with sahne_gecis
 
     si "Merdiven bir salona açılıyor."
 

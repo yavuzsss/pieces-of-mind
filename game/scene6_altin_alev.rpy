@@ -5,7 +5,6 @@
 # Mekanizma açılır: fısıltılar isim toplar, Koro'ya teslim eder. Bizimki
 # oyalanıyor — "şefkat" imasıyla suçlanır. Zihin araması: izin (bedel) veya
 # direniş (CHA DC 14, ölüm kapısı). Ultimatom: "ya adı... ya kendini."
-# Görsel yok: sahne karanlıkta geçer (kule tepesi görseli beklemede).
 
 # Koro — Altın Alev. Palet dışı renk: altın (kasıtlı; o buradan değil).
 define ko = Character("Koro", color="#d9a441", what_color="#d9a441",
@@ -23,6 +22,8 @@ default alevdeki_ses = False
 ################################################################################
 
 label sahne6_tepe:
+
+    scene bg_kule_merdiven with sahne_gecis
 
     si "Spiral daralıyor. Basamaklar küçülüyor."
 
@@ -58,6 +59,8 @@ label sahne6_tepe:
 ################################################################################
 
 label sahne6_koro:
+
+    scene bg_altin_alev with sahne_gecis
 
     si "Son basamak."
 

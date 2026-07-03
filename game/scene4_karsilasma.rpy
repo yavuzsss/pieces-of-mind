@@ -497,8 +497,8 @@ label sahne4_son:
 
         f "Alışma."
 
-    # Merdiven/kule görseli henüz yok — karanlığa dönülür.
-    scene black with sahne_gecis
+    # Kule merdiveni görünür.
+    scene bg_kule_merdiven with sahne_gecis
 
     si "Koridor bir eşiğe açılıyor: geniş, taş bir merdiven. Yukarı."
 
