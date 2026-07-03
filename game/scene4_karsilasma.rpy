@@ -39,6 +39,10 @@ label sahne4_karsilasma:
 
     s "Yalnızlık böyle bir şeymiş demek."
 
+    s "Sevmedim. Sesin geri gelsin istedim."
+
+    s "Bunu daha da sevmedim."
+
     # Karşılaşma odası: yuvarlak, taş, lekeli zemin.
     scene bg_zindan_arena with sahne_gecis
 

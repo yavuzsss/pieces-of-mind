@@ -40,6 +40,8 @@ label sahne5_kule:
 
         si "Ses kesiliyor. Gelmiyor."
 
+        s "İyi. Blöfümü görmedi."
+
     else:
 
         si "Elim kalçamı yokluyor. Orada olmayan bir kılıcı arıyor."

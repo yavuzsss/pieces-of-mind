@@ -292,6 +292,8 @@ label sahne3_gecis_basari:
 
     s "Geçtim."
 
+    s "Kimse alkışlamıyor. Alışıyorum."
+
     if tek_el:
 
         si "Lamba hâlâ elimde. Alev, teşekkür eder gibi bir parmak yükseliyor."

@@ -84,6 +84,10 @@ label sahne1_ayna:
 
     s "Yorgun. Sakallı. Şakağında kurumuş kan."
 
+    s "Demek buyum. Daha kötüsü olabilirdi."
+
+    s "Nasıl olabilirdi bilmiyorum. Ama olabilirdi."
+
     s "Bu yüzü tanıyorum. Tanımam gerekiyor."
 
     s "Ama... ismi yok. Yüzün ismi yok."
