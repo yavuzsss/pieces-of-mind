@@ -80,6 +80,9 @@ label start:
 
 label sahne1_ayna:
 
+    # Ayna yakın planı — oyunun ilk yüzü.
+    scene bg_ayna_yakin with sahne_gecis
+
     s "Aynadaki adam bana bakıyor."
 
     s "Yorgun. Sakallı. Şakağında kurumuş kan."
@@ -101,6 +104,9 @@ label sahne1_ayna:
 
     call glitch_burst(0.2, 0.7, shake=False)
     $ fis("Lamba.")
+
+    # Dikkat aynadan kopar — oda geri gelir.
+    scene bg_sovalye_odasi with sahne_gecis
 
     si "...masanın üstünde bir gaz lambası var."
 

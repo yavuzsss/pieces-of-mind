@@ -580,6 +580,8 @@ label sahne8_cekis:
 
     si "Kolumu çekiyorum. Karanlık bırakmak istemiyor; bırakıyor."
 
+    scene bg_ayna_yakin with sahne_gecis
+
     si "Ayna yeniden ayna. Delik yok. Gece yok."
 
     si "Ve aynada yine bir adam var. Yorgun. Sakallı. Şakağında kurumuş kan."
@@ -681,6 +683,8 @@ label sahne8_isim:
 ################################################################################
 
 label sahne8_son:
+
+    scene bg_sovalye_odasi with sahne_gecis
 
     si "Lamba masada. Alev..."
 

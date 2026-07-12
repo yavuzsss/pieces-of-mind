@@ -741,6 +741,9 @@ label final_gasp_epilog:
 
     si "Oda. Taş duvarlar. Bir yatak. Bir ayna."
 
+    # Aynı yüz — ama görüntü artık hafifçe "yanlış" (kalıcı ince glitch).
+    scene bg_ayna_yakin at glitched(0.25) with sahne_gecis
+
     gasp_kalinti "Aynadaki adam bana bakıyor."
 
     gasp_kalinti "Yorgun. Sakallı. Şakağında kurumuş kan."
@@ -776,6 +779,8 @@ label final_gasp_epilog:
     gasp_kalinti "{b}DURUR.{/b}"
 
     si "Odada kısa bir sessizlik. İki ses de aynı şeyi duydu."
+
+    scene bg_sovalye_odasi with sahne_gecis
 
     gasp_kalinti "Lambayı alıyorum. Yol uzun."
 
