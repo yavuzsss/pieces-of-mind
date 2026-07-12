@@ -396,7 +396,10 @@ label sahne9_esik:
 
             # Sessizlik: oyuncu bekler. Bağ güçlüyse şövalye KENDİ uyanır
             # ve çalınamayanı verir; değilse uyuyan elden isim alınır.
-            if gercek_sezgi and guven >= 5:
+            # Eşik 4: guven artışı yalnız 2 yerde var (sahne4/sahne8) ve
+            # zorunlu düşüşler mevcut ("biz" gafı, isim öğrenme, direniş) —
+            # kusursuz oyun ~4'te biter; 5 pratikte ulaşılmazdı (test 2026-07-12).
+            if gercek_sezgi and guven >= 4:
 
                 jump final_armagan
 

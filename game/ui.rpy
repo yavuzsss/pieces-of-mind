@@ -156,3 +156,68 @@ image ctc_blink:
 
 ## Daktilo efekti (text_cps) options.rpy'deki "Preference defaults"
 ## bölümünde 45 olarak ayarlıdır.
+
+
+################################################################################
+## Ana Menü — Final Galerisi
+################################################################################
+
+## screens.rpy'deki main_menu burada YENİDEN TANIMLANIR (teknik kural:
+## şablon dosyalarına dokunulmaz, değişiklikler ui.rpy üzerinden).
+## Görülen sonlar sağ altta listelenir; hiç final görülmediyse kutu
+## hiç görünmez — ilk açılış temiz kalır, galeri keşifle belirir.
+
+screen main_menu():
+
+    tag menu
+
+    add gui.main_menu_background
+
+    frame:
+        style "main_menu_frame"
+
+    use navigation
+
+    if gui.show_name:
+
+        vbox:
+            style "main_menu_vbox"
+
+            text "[config.name!t]":
+                style "main_menu_title"
+
+            text "[config.version]":
+                style "main_menu_version"
+
+    # --- Final galerisi ---
+    python:
+        finaller_gorulen = [
+            ("TESLİM",  persistent.final_teslim,  "#cc2222"),
+            ("ARMAĞAN", persistent.final_armagan, "#f5e9d0"),
+            ("SÖNÜŞ",   persistent.final_sonus,   "#cc2222"),
+            ("GASP",    persistent.final_gasp,    "#cc2222"),
+        ]
+        herhangi_final = any(g for _, g, _ in finaller_gorulen)
+
+    if herhangi_final:
+
+        vbox:
+            align (0.98, 0.96)
+            spacing 6
+
+            text "sonlar":
+                xalign 1.0
+                size 20
+                color "#8a8378"
+
+            for ad, gorulen, renk in finaller_gorulen:
+                if gorulen:
+                    text ad:
+                        xalign 1.0
+                        size 24
+                        color renk
+                else:
+                    text "———":
+                        xalign 1.0
+                        size 24
+                        color "#4a463e"
