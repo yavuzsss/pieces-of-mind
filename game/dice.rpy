@@ -3,7 +3,8 @@
 # döndürülmüş Solid'lerle çizilir. Palet: kırmızı / krem / siyah.
 #
 # Kullanım (script içinden):
-#     call roll_dice("INT", 12)
+#     call roll_dice("ZEKA", 10)
+#     call roll_dice("GUC", 10, savas=True)   # savaş: panelde HASAR gösterilir
 #     $ sonuc = _return          # RollResult nesnesi
 
 
@@ -11,15 +12,19 @@ init -5 python:
 
     # UI'da gösterilecek Türkçe stat adları.
     STAT_TR = {
-        "STR": "KUVVET",
-        "DEX": "ÇEVİKLİK",
-        "INT": "ZİHİN",
-        "CHA": "ETKİ",
+        "GUC": "GÜÇ",
+        "ZEKA": "ZEKÂ",
+        "SANS": "ŞANS",
     }
 
 
 # Son atılan zarın sonucu (roll_dice etiketi doldurur).
 default dice_result = None
+
+# ZORLUK SABİTLEME: tüm zar DC'leri 10'a sabit (kullanıcı kararı, 2026-07-11).
+# Senaryodaki call roll_dice(..., DC) değerleri tasarım niyeti olarak yerinde
+# durur ama fiilen kullanılmaz. Değişken zorluklara dönmek için: None yap.
+define zar_dc_sabit = 10
 
 
 ################################################################################
@@ -168,6 +173,13 @@ screen dice_panel(result):
                     size 40
                     bold True
                     color verdict_color
+                # Savaş zarı: DC'nin üstündeki her puan = hasar.
+                if result.savas and result.success:
+                    text "HASAR  [result.hasar]":
+                        xalign 0.5
+                        size 26
+                        bold True
+                        color "#cc2222"
                 text "> devam":
                     xalign 0.5
                     size 18
@@ -182,11 +194,14 @@ screen dice_panel(result):
 ## Zar Atma Etiketi
 ################################################################################
 
-label roll_dice(stat_name, dc):
+label roll_dice(stat_name, dc, savas=False):
 
     # Zar burada atılır (ekran argümanı içinde DEĞİL — ekran ön-izlemeleri
     # yan etkili ifadeleri birden çok kez çalıştırabilir).
-    $ dice_result = player_stats.roll(stat_name, dc)
+    # zar_dc_sabit doluysa senaryodan gelen dc yerine o kullanılır.
+    # savas=True: panelde HASAR satırı gösterilir (marj = hasar).
+    $ dice_result = player_stats.roll(stat_name, zar_dc_sabit if zar_dc_sabit is not None else dc)
+    $ dice_result.savas = savas
 
     window hide
     play sound zar

@@ -3,7 +3,7 @@
 # Fısıltısı gitmiş, alevi ölmek üzere olan eski bir taşıyıcı. Şövalyenin
 # olası geleceği. Lore: fısıltılar "yer" bekler; isim fısıltıya verilmemeli.
 # Yeni mekanikler: isyan (Fısıltı'ya karşı gelme), kılıç (ilk eşya),
-# alev_kucuk (kalıcı kayıp). CHA zarı dramatik ilk kullanımını yapar.
+# alev_kucuk (kalıcı kayıp). ŞANS zarı dramatik ilk kullanımını yapar.
 
 # Sönmüş Şövalye — soluk, kuru ses.
 define sk = Character("Sönmüş", color="#8a8378", what_color="#8a8378",
@@ -182,7 +182,7 @@ label sahne4_sor:
 
 
 ################################################################################
-## Dal A — Geri Çekil (CHA / ETKİ zarı)
+## Dal A — Geri Çekil (ŞANS zarı)
 ################################################################################
 
 label sahne4_geri_cekil:
@@ -193,8 +193,8 @@ label sahne4_geri_cekil:
 
     s "Alevimden uzak dur."
 
-    # --- CHA zarı — DC 13 ---
-    call roll_dice("CHA", 13)
+    # --- ŞANS zarı — DC 13 --- (söz dinletmek onun elinde değil: talih)
+    call roll_dice("SANS", 13)
     $ sonuc = _return
 
     if sonuc.crit_success:
@@ -257,15 +257,15 @@ label sahne4_geri_basari:
 
 label sahne4_geri_basarisiz:
 
-    # Başarısızlık — üstüne atlar; zorunlu STR boğuşması.
+    # Başarısızlık — üstüne atlar; zorunlu GÜÇ boğuşması.
     si "Kör kuyular kısılıyor."
 
     sk "Hayır. HAYIR. Beklemek bitti."
 
     si "Üstüme atılıyor. Kavruk parmaklar lambanın sapını buluyor."
 
-    # --- Zorunlu STR zarı — DC 12 ---
-    call roll_dice("STR", 12)
+    # --- Zorunlu GÜÇ zarı — DC 12 ---
+    call roll_dice("GUC", 12)
     $ sonuc2 = _return
 
     if sonuc2.crit_fail:
@@ -340,7 +340,7 @@ label sahne4_bogusma_olum:
 
 label sahne4_geri_krit_fiyasko:
 
-    # CHA doğal 1 — lambaya değil, kafaya saldırır: içindekini ister.
+    # ŞANS doğal 1 — lambaya değil, kafaya saldırır: içindekini ister.
     si "Kör kuyular... genişliyor."
 
     sk "Ses."
@@ -351,8 +351,8 @@ label sahne4_geri_krit_fiyasko:
 
     si "Lambaya değil. {b}Kafama{/b} atılıyor."
 
-    # --- Zorunlu STR zarı — DC 15 ---
-    call roll_dice("STR", 15)
+    # --- Zorunlu GÜÇ zarı — DC 15 ---
+    call roll_dice("GUC", 15)
     $ sonuc2 = _return
 
     if sonuc2.success:
@@ -487,6 +487,11 @@ label sahne4_hediye:
 label sahne4_son:
 
     scene bg_zindan_koridoru with sahne_gecis
+
+    si "Sönmüş gitti. Ben buradayım. Bu da bir şey."
+
+    # Önemli karşılaşma atlatıldı — yükselme (upgrade.rpy).
+    call yukselme
 
     si "Yürümeye devam ediyorum."
 

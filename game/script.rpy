@@ -1,7 +1,7 @@
 # script.rpy — Pieces of Mind
 # Karakter tanımları + Sahne 1: Uyanış — siyah ekran, sadece metin.
 # Fısıltı'nın TÜM replikleri fis() kutularıyla oyuncu tarafından seçilir
-# (fisilti.rpy — Milk mekaniği). İlk INT (Zihin) zarı burada atılır.
+# (fisilti.rpy — Milk mekaniği). İlk ZEKÂ zarı burada atılır.
 
 ################################################################################
 ## Karakterler
@@ -163,8 +163,8 @@ label sahne1_hatirlama:
 
     si "Zihnimin karanlık bir dehlizine uzanıyorum. Parmak uçlarımda bir şey var, kıpırdıyor..."
 
-    # --- İLK ZAR: INT (Zihin) — DC 12 --- (görsel panel: dice.rpy)
-    call roll_dice("INT", 12)
+    # --- İLK ZAR: ZEKÂ — DC 12 --- (görsel panel: dice.rpy)
+    call roll_dice("ZEKA", 12)
     $ sonuc = _return
 
     if sonuc.crit_success:

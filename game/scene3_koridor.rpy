@@ -2,8 +2,8 @@
 # Sahne 3: Kapı ve Koridor.
 # Lambanın alınışı (lamba_bagi'ye duyarlı), geride kalan odanın yok oluşu,
 # ışık çemberinin dışındaki takipçi, ve ilk ölümcül engel: uçurum geçişi.
-# İlk STR zarı. İlk olası ölüm: yalnızca doğal 1 öldürür (call olum);
-# normal başarısızlık kalıcı bedel ödetir (KUVVET -1).
+# İlk GÜÇ zarı. İlk olası ölüm: yalnızca doğal 1 öldürür (call olum);
+# normal başarısızlık bedel ödetir (CAN -4). Sonunda ilk yükselme.
 
 # Uçurum geçişinde lamba tek elde miydi? (başarısızlık metnini değiştirir)
 default tek_el = False
@@ -204,8 +204,8 @@ label sahne3_gecis_kemer:
 
     si "Sırtımı duvara veriyorum. Çıkıntıya adım atıyorum."
 
-    # --- STR zarı — DC 12 ---
-    call roll_dice("STR", 12)
+    # --- GÜÇ zarı — DC 12 ---
+    call roll_dice("GUC", 12)
     $ sonuc = _return
 
     jump sahne3_gecis_sonuc
@@ -226,8 +226,8 @@ label sahne3_gecis_tekel:
 
     si "Tek elimle duvardaki çatlakları yokluyorum. Çıkıntıya adım atıyorum."
 
-    # --- STR zarı — DC 15 (tek el: daha zor) ---
-    call roll_dice("STR", 15)
+    # --- GÜÇ zarı — DC 15 (tek el: daha zor) ---
+    call roll_dice("GUC", 15)
     $ sonuc = _return
 
     jump sahne3_gecis_sonuc
@@ -303,7 +303,7 @@ label sahne3_gecis_basari:
 
 label sahne3_gecis_basarisiz:
 
-    # Başarısızlık — kurtulur ama bedel kalıcı: KUVVET -1.
+    # Başarısızlık — kurtulur ama bedel bedende: CAN -4.
     si "Üçüncü adımda taş, topuğumun altında ufalanıyor."
 
     s "Düşüyorum—"
@@ -328,9 +328,7 @@ label sahne3_gecis_basarisiz:
 
     s "Bu omuz bir daha eskisi gibi olmayacak."
 
-    $ player_stats.modify("STR", -1)
-
-    centered "{color=#cc2222}KUVVET -1{/color}"
+    call can_hasar(4, "uçurum, payını aldı")
 
     $ stres_degistir(1)
 
@@ -371,6 +369,13 @@ label sahne3_gecis_krit_fiyasko:
 label sahne3_son:
 
     scene bg_zindan_koridoru with sahne_gecis
+
+    si "Uçurum geride. Kalbim hâlâ kaburgalarımı yokluyor."
+
+    si "Ve bir şey... bir şey öğrendim. Bedenim öğrendi."
+
+    # Önemli olay atlatıldı — yükselme (upgrade.rpy).
+    call yukselme
 
     si "Koridor devam ediyor. Ben de."
 

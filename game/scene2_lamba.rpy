@@ -1,6 +1,6 @@
 # scene2_lamba.rpy — Pieces of Mind
 # Sahne 2: Lambaya Yaklaşma.
-# Üç dal: dokunma (DEX zarı) / izleme (CHA zarı) / inkâr (bedelli, geri döner).
+# Üç dal: dokunma (ŞANS zarı) / izleme (ZEKÂ zarı) / inkâr (bedelli, geri döner).
 # Sahnenin sonunda Fısıltı ilk kez "biz" der — niyetinin ilk sezdirilişi.
 
 # Lamba bağı: şövalyenin lambayla kurduğu saplantının şiddeti.
@@ -68,7 +68,7 @@ label sahne2_secim:
 
 
 ################################################################################
-## Dal A — Dokunma (DEX / ÇEVİKLİK zarı)
+## Dal A — Dokunma (ŞANS zarı — lamba onu kabul edecek mi?)
 ################################################################################
 
 label sahne2_dokun:
@@ -81,8 +81,8 @@ label sahne2_dokun:
 
     si "Parmaklarım kırmızı cama yaklaşıyor..."
 
-    # --- DEX zarı — DC 12 ---
-    call roll_dice("DEX", 12)
+    # --- ŞANS zarı — DC 12 ---
+    call roll_dice("SANS", 12)
     $ sonuc = _return
 
     if sonuc.crit_success:
@@ -194,7 +194,7 @@ label sahne2_dokun_krit_fiyasko:
 
 
 ################################################################################
-## Dal B — İzleme (CHA / ETKİ zarı)
+## Dal B — İzleme (ZEKÂ zarı — bakışını alevden koparabilmek)
 ################################################################################
 
 label sahne2_izle:
@@ -209,8 +209,8 @@ label sahne2_izle:
 
     s "...alev de bana bakıyor?"
 
-    # --- CHA zarı — DC 12 --- (irade: bakışını alevden koparabilmek)
-    call roll_dice("CHA", 12)
+    # --- ZEKÂ zarı — DC 12 --- (irade: bakışını alevden koparabilmek)
+    call roll_dice("ZEKA", 12)
     $ sonuc = _return
 
     if sonuc.crit_success:

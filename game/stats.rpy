@@ -1,6 +1,15 @@
 # stats.rpy — Pieces of Mind
-# Stat sistemi (STR, DEX, INT, CHA) ve D20 zar mekanizması.
-# Kural: D20 + stat bonusu vs. DC. Doğal 20 = kritik başarı, doğal 1 = kritik başarısızlık.
+# Stat sistemi (GÜÇ, ZEKÂ, ŞANS + CAN) ve D20 zar mekanizması.
+# Kural: D20 + stat puanı vs. DC. Doğal 20 = kritik başarı, doğal 1 = kritik
+# başarısızlık. Statlar 0'dan başlar ve yükselmelerle büyür (upgrade.rpy);
+# bonus = stat puanının kendisi (D&D formülü YOK — kullanıcı kararı 2026-07-11).
+#
+# CAN: 20 ile başlar. Bedeller ve düşman vuruşları can götürür (can_hasar
+# etiketi); can 0'a inerse permadeath (death.rpy). Yükselmede CAN +2
+# (tavan da +2 büyür).
+#
+# HASAR (savaş): başarılı GÜÇ zarında DC'nin üstündeki her puan düşmana
+# hasardır. Ör: DC 10'a karşı toplam 15 → 5 hasar. (RollResult.hasar)
 
 init -10 python:
 
@@ -8,13 +17,14 @@ init -10 python:
         """Tek bir zar atışının sonucunu taşır (UI'da göstermek için)."""
 
         def __init__(self, stat_name, die, bonus, dc):
-            self.stat_name = stat_name      # Hangi statla atıldı ("STR" vb.)
+            self.stat_name = stat_name      # Hangi statla atıldı ("GUC" vb.)
             self.die = die                  # Zarın kendisi (1-20)
-            self.bonus = bonus              # Stat bonusu
+            self.bonus = bonus              # Stat puanı (doğrudan eklenir)
             self.total = die + bonus        # Toplam sonuç
             self.dc = dc                    # Zorluk derecesi
             self.crit_success = (die == 20) # Doğal 20
             self.crit_fail = (die == 1)     # Doğal 1
+            self.savas = False              # roll_dice(savas=True) doldurur
             # Kritikler bonustan bağımsız olarak sonucu belirler.
             if self.crit_success:
                 self.success = True
@@ -22,6 +32,8 @@ init -10 python:
                 self.success = False
             else:
                 self.success = self.total >= dc
+            # Savaş hasarı: DC'nin üstündeki her puan.
+            self.hasar = max(0, self.total - dc) if self.success else 0
 
         def __str__(self):
             return "{} check: d20({}) + {} = {} vs DC {} -> {}".format(
@@ -32,34 +44,47 @@ init -10 python:
 
 
     class PlayerStats(object):
-        """Yorgun Şövalye'nin zihinsel/fiziksel statları ve zar mekanizması."""
+        """Yorgun Şövalye'nin statları, canı ve zar mekanizması."""
 
-        STAT_NAMES = ("STR", "DEX", "INT", "CHA")
+        STAT_NAMES = ("GUC", "ZEKA", "SANS")
 
-        def __init__(self, str_=10, dex=10, int_=10, cha=10):
+        def __init__(self, guc=0, zeka=0, sans=0, can=20):
             self.stats = {
-                "STR": str_,
-                "DEX": dex,
-                "INT": int_,
-                "CHA": cha,
+                "GUC": guc,
+                "ZEKA": zeka,
+                "SANS": sans,
             }
+            self.can = can
+            self.can_max = can
 
         def get(self, stat_name):
             return self.stats[stat_name.upper()]
 
         def set(self, stat_name, value):
-            self.stats[stat_name.upper()] = max(1, min(20, value))
+            self.stats[stat_name.upper()] = max(0, min(20, value))
 
         def modify(self, stat_name, delta):
-            """Stat'ı artır/azalt (1-20 aralığına sıkıştırılır)."""
+            """Stat'ı artır/azalt (0-20 aralığına sıkıştırılır)."""
             self.set(stat_name, self.get(stat_name) + delta)
 
         def bonus(self, stat_name):
-            """D&D usulü bonus: (stat - 10) // 2"""
-            return (self.get(stat_name) - 10) // 2
+            """Bonus = stat puanının kendisi."""
+            return self.get(stat_name)
+
+        def can_degistir(self, delta):
+            """Canı değiştirir (0..can_max). Ölüm kontrolü can_hasar etiketinde."""
+            self.can = max(0, min(self.can_max, self.can + delta))
+
+        def yukselt(self, secim):
+            """Yükselme: GUC/ZEKA/SANS +1 ya da CAN +2 (tavanla birlikte)."""
+            if secim == "CAN":
+                self.can_max += 2
+                self.can += 2
+            else:
+                self.modify(secim, +1)
 
         def roll(self, stat_name, dc):
-            """D20 at, stat bonusunu ekle, DC ile karşılaştır.
+            """D20 at, stat puanını ekle, DC ile karşılaştır.
 
             Sonuç bir RollResult nesnesi olarak döner; ayrıca
             'last_roll' store değişkenine yazılır ki ekranlarda
@@ -84,21 +109,33 @@ default player_stats = PlayerStats()
 default last_roll = None
 
 
+################################################################################
+## Can Hasarı — ölüme bağlı
+################################################################################
+
+# Kullanım: call can_hasar(3, "yarım olanın pençeleri")
+# Can 0'a inerse sebep, ölüm ekranına taşınır (permadeath).
+label can_hasar(miktar, sebep="canın tükendi"):
+
+    $ player_stats.can_degistir(-miktar)
+
+    centered "{color=#cc2222}CAN -[miktar]{/color}\n{color=#b8ac93}kalan: [player_stats.can]{/color}"
+
+    if player_stats.can <= 0:
+        call olum(sebep)
+
+    return
+
+
 # --- Kullanım örneği (script.rpy içinden) ---------------------------------
 #
-#   if player_stats.check("STR", 15):
-#       "Kapı gıcırdayarak açılıyor."
-#   else:
-#       "Kapı kımıldamıyor bile."
+#   call roll_dice("GUC", 10)              # görsel panel (dice.rpy)
+#   $ sonuc = _return
+#   if sonuc.success:
+#       $ dusman_can -= sonuc.hasar        # savaşta: marj = hasar
 #
-# Detaylı sonuç gerekiyorsa:
+# Can ve yükselme:
 #
-#   $ sonuc = player_stats.roll("CHA", 12)
-#   "[sonuc]"          # ör: CHA check: d20(14) + 0 = 14 vs DC 12 -> Success
-#   if sonuc.crit_fail:
-#       jump kotu_son
-#
-# Stat değiştirme:
-#
-#   $ player_stats.modify("INT", +1)
+#   call can_hasar(3, "uçurumun dişleri")  # can biterse ölüm
+#   call yukselme                          # stat seçim paneli (upgrade.rpy)
 # ---------------------------------------------------------------------------

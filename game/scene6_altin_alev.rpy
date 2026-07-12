@@ -4,7 +4,7 @@
 # Şövalyeyle değil, Fısıltı'yla konuşur — oyuncuya dışarıdan seslenen ilk şey.
 # Mekanizma açılır: fısıltılar isim toplar, Koro'ya teslim eder. Bizimki
 # oyalanıyor — "şefkat" imasıyla suçlanır. Zihin araması: izin (bedel) /
-# direniş (CHA DC 14, ölüm kapısı) / ihanet (Sönmüş'ün izini vermek — bedel).
+# direniş (ZEKÂ DC 14, ölüm kapısı) / ihanet (Sönmüş'ün izini vermek — bedel).
 # Reddetme noktası: guven <= 2 iken «Direnme» seçilirse şövalye yine direnir.
 # Ultimatom: "ya adı... ya kendini."
 
@@ -335,7 +335,7 @@ label sahne6_izin:
 
 
 ################################################################################
-## Dal B — Direniş (CHA / ETKİ zarı, DC 14)
+## Dal B — Direniş (ZEKÂ zarı, DC 14)
 ################################################################################
 
 label sahne6_direnis:
@@ -346,8 +346,8 @@ label sahne6_direnis:
 
     si "Ve hepsini kapatıyorum."
 
-    # --- CHA zarı — DC 14 (şimdiye kadarki en zor) ---
-    call roll_dice("CHA", 14)
+    # --- ZEKÂ zarı — DC 14 (zihnin kapılarını tutmak) ---
+    call roll_dice("ZEKA", 14)
     $ sonuc = _return
 
     if sonuc.crit_success:
@@ -415,7 +415,7 @@ label sahne6_direnis_basari:
 
 label sahne6_direnis_basarisiz:
 
-    # Başarısızlık — bir kapı çöker; zihin kavrulur: ZİHİN -1.
+    # Başarısızlık — bir kapı çöker; zihin kavrulur: CAN -4.
     si "Kapılardan biri içeri çöküyor."
 
     si "Altın parmak raflarımda. Karıştırıyor. Okuduğunu yakıyor."
@@ -426,9 +426,7 @@ label sahne6_direnis_basarisiz:
 
     s "Sadece eksikliğin kendisi kalmış."
 
-    $ player_stats.modify("INT", -1)
-
-    centered "{color=#cc2222}ZİHİN -1{/color}"
+    call can_hasar(4, "altın parmak, kavurduğunu götürdü")
 
     $ stres_degistir(2)
 
@@ -485,6 +483,11 @@ label sahne6_ultimatom:
     ko "Vakti var. Bir alev boyu."
 
     si "Merdivene dönüyoruz. Altın ışık sırtımızda küçülüyor."
+
+    si "Koro zihnime dokundu ve ben hâlâ benim. Bir şey söktüyse bile... bir şey de bıraktı."
+
+    # Koro'yla yüzleşme atlatıldı — yükselme (upgrade.rpy).
+    call yukselme
 
     s "Ya adı... ya kendini."
 

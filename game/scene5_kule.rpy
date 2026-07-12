@@ -2,7 +2,7 @@
 # Sahne 5: Kule — Lamba Salonu.
 # Merdiven (takipçi anı, kilic_var'a duyarlı), binlerce oyuklu salon
 # (alev_kucuk'e duyarlı), şövalyenin kendi oyuğu ve kazınmış isim levhası.
-# INT zarı DC 13. İsim verilmez; başarıda tek harf açılır (knight_name "E───").
+# ZEKÂ zarı DC 13. İsim verilmez; başarıda tek harf açılır (knight_name "E───").
 # Reddetme noktası: guven <= 2 iken «İncele» seçilirse şövalye uygulamaz.
 
 # Kritik fiyasko / kazı: kan levhaya değdi, kule şövalyeyi "tattı".
@@ -186,7 +186,7 @@ label sahne5_kazi:
 
 
 ################################################################################
-## Dal A — İnceleme (INT / ZİHİN zarı)
+## Dal A — İnceleme (ZEKÂ zarı)
 ################################################################################
 
 label sahne5_incele:
@@ -219,8 +219,8 @@ label sahne5_incele:
 
     si "Parmaklarımı levhaya koyuyorum. Çizikler soğuk."
 
-    # --- INT zarı — DC 13 ---
-    call roll_dice("INT", 13)
+    # --- ZEKÂ zarı — DC 13 ---
+    call roll_dice("ZEKA", 13)
     $ sonuc = _return
 
     if sonuc.crit_success:

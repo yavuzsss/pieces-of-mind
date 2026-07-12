@@ -3,7 +3,8 @@
 # Kuleden iniş (ultimatomun ağırlığı), lamba salonundan ikinci geçiş
 # (Sönmüş'ün lambası — ihanet ödemesi zarsız), ve kapıda Yarım:
 # taşıyıcısının adını kendine almış, kovulmuş bir fısıltı (Gasp aynası).
-# Kılıç ödemesi: STR zarı, kılıçla DC 11 / kılıçsız DC 15. Doğal 1 ölüm.
+# Kılıç ödemesi: GÜÇ savaşı (marj = hasar, Yarım'ın canı 10), kılıçla DC 11 /
+# kılıçsız DC 15 (tasarım niyeti; DC şu an sabit 10). Doğal 1 ölüm; ıska CAN -3.
 # Çalınan isim asla duyulmaz/gösterilmez (isim kuralı biçime uygulanır).
 # Sonu: kapı başladıkları odaya çıkar + "Uyuma." kancası (Sahne 8 kurulumu).
 
@@ -13,6 +14,13 @@ define yr = Character("Yarım", color="#a05a5a", what_color="#a05a5a",
 
 # Yarım'a "nasıl aldın" sorusu soruldu mu? (menü tekrarı için)
 default sahne7_soruldu = False
+
+# Dövüş durumu: Yarım'ın canı ve tur sayacı (savaş döngüsü).
+default yarim_can = 10
+default dovus_tur = 0
+
+# Yarım öldü mü? (yalnızca doğal 20 öldürür — diğer yollarda sağ ve bekliyor)
+default yarim_oldu = False
 
 
 ################################################################################
@@ -386,7 +394,7 @@ label sahne7_isik:
 
 
 ################################################################################
-## Dövüş — STR zarı (kılıç ödemesi)
+## Dövüş — GÜÇ savaşı (marj = hasar; Yarım'ın canı 10)
 ################################################################################
 
 label sahne7_dovus:
@@ -403,9 +411,6 @@ label sahne7_dovus:
 
         si "Üstüme geliyor."
 
-        # --- STR zarı — DC 11 (kılıç işi kolaylaştırır) ---
-        call roll_dice("STR", 11)
-
     else:
 
         si "Elim boş. Yumruklarımı sıkıyorum."
@@ -416,19 +421,79 @@ label sahne7_dovus:
 
         si "Üstüme geliyor."
 
-        # --- STR zarı — DC 15 (çıplak elle: çok zor) ---
-        call roll_dice("STR", 15)
+    $ yarim_can = 10
+    $ dovus_tur = 0
 
+    jump sahne7_dovus_tur
+
+
+label sahne7_dovus_tur:
+
+    $ dovus_tur += 1
+
+    if dovus_tur > 1:
+
+        if dovus_tur % 2 == 0:
+
+            si "Yarım toparlanıyor. Yeniden geliyor — daha alçak, daha hızlı."
+
+        else:
+
+            si "Dönüyor. Gülümseme gitti; geriye sadece açlık kaldı."
+
+    # --- GÜÇ zarı (savaş: DC üstündeki her puan = hasar) ---
+    # Tasarım niyeti: kılıçla DC 11 / çıplak elle DC 15 (şu an DC sabit 10).
+    if kilic_var:
+        call roll_dice("GUC", 11, savas=True)
+    else:
+        call roll_dice("GUC", 15, savas=True)
     $ sonuc = _return
 
     if sonuc.crit_success:
+
         jump sahne7_dovus_krit_basari
+
     elif sonuc.crit_fail:
+
         jump sahne7_dovus_krit_fiyasko
+
     elif sonuc.success:
-        jump sahne7_dovus_basari
+
+        $ yarim_can -= sonuc.hasar
+
+        if yarim_can <= 0:
+            jump sahne7_dovus_basari
+
+        if sonuc.hasar == 0:
+
+            si "Hamlem değiyor — ama sıyırıyor. Derisinden kâğıt gibi bir parça, o kadar."
+
+        elif kilic_var:
+
+            si "Kör kılıç etine gömülüyor. İçinden kan yerine toz dökülüyor."
+
+        else:
+
+            si "Yumruğum göğsüne oturuyor. İçinde bir şey çatırdıyor. Boş bir şey."
+
+        si "Yarım sendeliyor. Ama düşmüyor."
+
+        yr "Daha. DAHA."
+
+        jump sahne7_dovus_tur
+
     else:
-        jump sahne7_dovus_bedel
+
+        # Iska — Yarım'ın pençeleri bedelini alır: CAN -3.
+        si "Hamlem boşa gidiyor. Ve pençe gibi parmaklar açığımı buluyor."
+
+        si "Et yırtılıyor. Sıcak bir çizgi, omzumdan dirseğime."
+
+        call can_hasar(3, "yarım olanın pençeleri")
+
+        $ stres_degistir(1)
+
+        jump sahne7_dovus_tur
 
 
 label sahne7_dovus_krit_basari:
@@ -456,6 +521,8 @@ label sahne7_dovus_krit_basari:
 
     si "Yerde artık bir adam yatıyor. Sadece bir adam. Yüzü... rahat."
 
+    $ yarim_oldu = True
+
     s "Sonunda uyuyabildi."
 
     jump sahne7_kapi_acilis
@@ -463,8 +530,8 @@ label sahne7_dovus_krit_basari:
 
 label sahne7_dovus_basari:
 
-    # Başarı — geri sürülür; ama Yarım döngünün dışında: hatırlıyor.
-    si "İkinci hamlesinde açığını buluyorum. Sert. Kısa. Yeterli."
+    # Yarım'ın canı bitti — geri sürülür; ama döngünün dışında: hatırlıyor.
+    si "Son vuruş. İçindeki boşluk, dışındaki bedeni artık taşıyamıyor."
 
     si "Yarım geriliyor, iki büklüm, karanlığa doğru."
 
@@ -483,32 +550,6 @@ label sahne7_dovus_basari:
     $ fis("Hiçbir şey. Yürü.")
 
     $ stres_degistir(1)
-
-    jump sahne7_kapi_acilis
-
-
-label sahne7_dovus_bedel:
-
-    # Başarısızlık — kurtulur ama bedel kalıcı: ÇEVİKLİK -1.
-    si "İlk hamlesini görüyorum. İkincisini görmüyorum."
-
-    si "Pençe gibi parmaklar kolumu buluyor. Et yırtılıyor."
-
-    si "Lambayı savuruyorum — ışık yüzünü yalıyor, geriliyor, tıslıyor."
-
-    si "Ve karanlığa çekiliyor. Şimdilik."
-
-    si "Kolum... kolum eskisi gibi dinlemiyor beni."
-
-    $ player_stats.modify("DEX", -1)
-
-    centered "{color=#cc2222}ÇEVİKLİK -1{/color}"
-
-    $ stres_degistir(1)
-
-    s "Derin değil. Ama doğru yerden."
-
-    s "Bilerek yırttı. Bir daha kılıç tutuşum aynı olmayacak."
 
     jump sahne7_kapi_acilis
 
@@ -539,6 +580,11 @@ label sahne7_dovus_krit_fiyasko:
 ################################################################################
 
 label sahne7_kapi_acilis:
+
+    si "Kapının önü boş. Ayaktayım. İkisi de mucize."
+
+    # Yarım'la yüzleşme atlatıldı (dövüş ya da ışık) — yükselme (upgrade.rpy).
+    call yukselme
 
     si "Kapıya dönüyorum. Demir kuşaklar, ağır ahşap."
 
@@ -601,6 +647,5 @@ label sahne7_son:
 
     $ fis("Sakın uyuma.")
 
-    centered "{color=#cc2222}— devam edecek —{/color}"
-
-    return
+    # Sahne 8: Uyku ve Ayna (scene8_ayna.rpy)
+    jump sahne8_oda
