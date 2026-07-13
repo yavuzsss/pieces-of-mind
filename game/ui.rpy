@@ -159,37 +159,153 @@ image ctc_blink:
 
 
 ################################################################################
-## Ana Menü — Final Galerisi
+## Ana Menü — Lamba, Ayna, Fısıltı
 ################################################################################
 
 ## screens.rpy'deki main_menu burada YENİDEN TANIMLANIR (teknik kural:
 ## şablon dosyalarına dokunulmaz, değişiklikler ui.rpy üzerinden).
-## Görülen sonlar sağ altta listelenir; hiç final görülmediyse kutu
-## hiç görünmez — ilk açılış temiz kalır, galeri keşifle belirir.
+## Sahne: karanlık oda, yerde nabız gibi atan kırmızı lamba, sağda içinde
+## bir şeyin beklediği ayna (bg_ana_menu). Başlık ara ara glitch'ler;
+## altında "uyuma." motifi soluk soluk belirir. Başlat düğmesi bir fısıltı
+## kutusudur: «kalk.» — ölüm görmüş oyuncuya «kalk. yeniden.» der.
+
+## Lambanın ışıması: yavaş nefes + ara sıra düzensiz titreme.
+transform lamba_nabiz:
+    subpixel True
+    alpha 0.6
+    block:
+        ease 2.6 alpha 0.45
+        ease 2.1 alpha 0.75
+        choice:
+            pass
+        choice:
+            linear 0.06 alpha 0.25
+            linear 0.05 alpha 0.7
+        choice:
+            linear 0.05 alpha 0.9
+            linear 0.07 alpha 0.5
+        repeat
+
+## Başlığın kırmızı hayaleti: çoğu zaman görünmez, ara ara yana kayar.
+transform baslik_hayalet:
+    alpha 0.0
+    block:
+        pause 4.3
+        choice:
+            block:
+                alpha 0.55
+                xoffset -7
+                pause 0.06
+                xoffset 8
+                pause 0.05
+                alpha 0.0
+                xoffset 0
+        choice:
+            block:
+                alpha 0.4
+                xoffset 5
+                yoffset 2
+                pause 0.08
+                alpha 0.0
+                xoffset 0
+                yoffset 0
+        choice:
+            pass
+        pause 2.9
+        repeat
+
+## "uyuma." — motif, uzun aralıklarla nefes alır.
+transform uyuma_soluk:
+    alpha 0.0
+    block:
+        pause 7.0
+        linear 2.6 alpha 0.3
+        pause 1.2
+        linear 3.4 alpha 0.0
+        pause 9.0
+        repeat
+
+## Menü düğmesi: üzerine gelince kısa bir sarsıntı.
+transform nav_sarsinti:
+    on hover:
+        xoffset -3
+        pause 0.05
+        xoffset 3
+        pause 0.05
+        xoffset 0
+    on idle:
+        xoffset 0
+
+style ana_nav_button:
+    xpadding 6
+    ypadding 2
+    hover_sound "audio/ui_hover.wav"
+    activate_sound "audio/ui_sec.wav"
+
+style ana_nav_button_text:
+    font "fonts/VT323-Regular.ttf"
+    size 42
+    idle_color "#8a8378"
+    hover_color "#cc2222"
 
 screen main_menu():
 
     tag menu
 
-    add gui.main_menu_background
+    add "bg_ana_menu"
 
-    frame:
-        style "main_menu_frame"
+    ## Lambanın üstünde atan ışıma (lamba görselde 1200, 765 civarında).
+    add "fx_glow_kirmizi" pos (944, 500) at lamba_nabiz
 
-    use navigation
+    ## Başlık + kırmızı hayaleti.
+    fixed:
+        pos (100, 96)
+        xmaximum 1000
+        ymaximum 260
 
-    if gui.show_name:
+        text "PIECES OF MIND" at baslik_hayalet:
+            font "fonts/VT323-Regular.ttf"
+            size 124
+            color "#cc2222"
 
-        vbox:
-            style "main_menu_vbox"
+        text "PIECES OF MIND":
+            font "fonts/VT323-Regular.ttf"
+            size 124
+            color "#f5e9d0"
 
-            text "[config.name!t]":
-                style "main_menu_title"
+    text "uyuma." at uyuma_soluk:
+        pos (108, 238)
+        size 30
+        color "#cc2222"
 
-            text "[config.version]":
-                style "main_menu_version"
+    ## Fısıltı-menüsü: başlat bir fısıltı kutusudur, gerisi çıplak kelimeler.
+    vbox:
+        pos (105, 420)
+        spacing 20
 
-    # --- Final galerisi ---
+        if persistent.olum_sayisi > 0:
+            textbutton "«kalk. yeniden.»" action Start() style "ana_nav_button" at nav_sarsinti
+        else:
+            textbutton "«kalk.»" action Start() style "ana_nav_button" at nav_sarsinti
+
+        textbutton "yükle" action ShowMenu("load") style "ana_nav_button" at nav_sarsinti
+        textbutton "ayarlar" action ShowMenu("preferences") style "ana_nav_button" at nav_sarsinti
+        textbutton "çık" action Quit(confirm=False) style "ana_nav_button" at nav_sarsinti
+
+    ## Ölüm sayacı — lanet hatırlar.
+    if persistent.olum_sayisi > 0:
+        text "ölüm: [persistent.olum_sayisi]":
+            pos (32, 1032)
+            size 24
+            color "#4a463e"
+
+    ## Sürüm — köşede, silik.
+    text "[config.version]":
+        align (0.995, 0.995)
+        size 16
+        color "#2e2a26"
+
+    # --- Final galerisi (görülmeden görünmez) ---
     python:
         finaller_gorulen = [
             ("TESLİM",  persistent.final_teslim,  "#cc2222"),
@@ -202,7 +318,7 @@ screen main_menu():
     if herhangi_final:
 
         vbox:
-            align (0.98, 0.96)
+            align (0.98, 0.94)
             spacing 6
 
             text "sonlar":
@@ -221,3 +337,111 @@ screen main_menu():
                         xalign 1.0
                         size 24
                         color "#4a463e"
+
+
+################################################################################
+## Hızlı Menü — Milk minimali
+################################################################################
+
+## Şablonun 8 düğmeli çubuğu yerine sağ altta dört silik kelime.
+## (Geri sarma tekerlekle zaten çalışır; skip/auto kasıtlı olarak yok —
+## bu oyunda acele edilmez.)
+
+screen quick_menu():
+
+    zorder 100
+
+    if quick_menu:
+
+        hbox:
+            align (0.992, 0.988)
+            spacing 34
+
+            textbutton "geçmiş" action ShowMenu("history") style "hizli_button"
+            textbutton "kaydet" action ShowMenu("save") style "hizli_button"
+            textbutton "yükle" action ShowMenu("load") style "hizli_button"
+            textbutton "ayarlar" action ShowMenu("preferences") style "hizli_button"
+
+style hizli_button:
+    hover_sound "audio/ui_hover.wav"
+    activate_sound "audio/ui_sec.wav"
+
+style hizli_button_text:
+    font "fonts/VT323-Regular.ttf"
+    size 24
+    idle_color "#4a463e"
+    hover_color "#cc2222"
+
+
+################################################################################
+## Oyun Menüsü (Esc) — navigasyon, çerçeve, onay
+################################################################################
+
+## Kenar navigasyonu Türkçe ve silik; kırmızı yalnızca dokununca.
+screen navigation():
+
+    vbox:
+        style_prefix "ana_nav"
+        xpos gui.navigation_xpos
+        yalign 0.5
+        spacing 18
+
+        if main_menu:
+            textbutton "«kalk.»" action Start() at nav_sarsinti
+        else:
+            textbutton "geçmiş" action ShowMenu("history") at nav_sarsinti
+            textbutton "kaydet" action ShowMenu("save") at nav_sarsinti
+
+        textbutton "yükle" action ShowMenu("load") at nav_sarsinti
+        textbutton "ayarlar" action ShowMenu("preferences") at nav_sarsinti
+
+        if not main_menu:
+            textbutton "ana menü" action MainMenu() at nav_sarsinti
+
+        textbutton "çık" action Quit(confirm=not main_menu) at nav_sarsinti
+
+## Oyun menüsü zemini: siyah + tepede kırmızı çizgi (textbox diliyle aynı).
+style game_menu_outer_frame:
+    background Fixed(
+        Solid("#0a0a0af5"),
+        Transform(Solid("#cc2222"), ysize=3),
+    )
+
+style game_menu_label_text:
+    font "fonts/VT323-Regular.ttf"
+    size 64
+    color "#cc2222"
+
+## Onay ekranı: gri şablon kutusu yerine kırmızı çizgili karanlık kutu.
+screen confirm(message, yes_action, no_action):
+
+    modal True
+    zorder 200
+
+    add "#0a0a0ae0"
+
+    frame:
+        align (0.5, 0.5)
+        xpadding 70
+        ypadding 50
+        background Fixed(
+            Solid("#141414f5"),
+            Transform(Solid("#cc2222"), ysize=3),
+        )
+
+        vbox:
+            spacing 44
+            xmaximum 900
+
+            text _(message):
+                xalign 0.5
+                text_align 0.5
+                size 40
+                color "#f5e9d0"
+
+            hbox:
+                xalign 0.5
+                spacing 160
+
+                textbutton _("Yes") action yes_action style "ana_nav_button" at nav_sarsinti
+                textbutton _("No") action no_action style "ana_nav_button" at nav_sarsinti
