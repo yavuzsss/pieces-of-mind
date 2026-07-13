@@ -273,7 +273,7 @@ screen main_menu():
             size 124
             color "#f5e9d0"
 
-    text "uyuma." at uyuma_soluk:
+    text _("uyuma.") at uyuma_soluk:
         pos (108, 238)
         size 30
         color "#cc2222"
@@ -284,17 +284,25 @@ screen main_menu():
         spacing 20
 
         if persistent.olum_sayisi > 0:
-            textbutton "«kalk. yeniden.»" action Start() style "ana_nav_button" at nav_sarsinti
+            textbutton _("«kalk. yeniden.»") action Start() style "ana_nav_button" at nav_sarsinti
         else:
-            textbutton "«kalk.»" action Start() style "ana_nav_button" at nav_sarsinti
+            textbutton _("«kalk.»") action Start() style "ana_nav_button" at nav_sarsinti
 
-        textbutton "yükle" action ShowMenu("load") style "ana_nav_button" at nav_sarsinti
-        textbutton "ayarlar" action ShowMenu("preferences") style "ana_nav_button" at nav_sarsinti
-        textbutton "çık" action Quit(confirm=False) style "ana_nav_button" at nav_sarsinti
+        textbutton _("yükle") action ShowMenu("load") style "ana_nav_button" at nav_sarsinti
+        textbutton _("ayarlar") action ShowMenu("preferences") style "ana_nav_button" at nav_sarsinti
+        textbutton _("çık") action Quit(confirm=False) style "ana_nav_button" at nav_sarsinti
+
+    ## Dil seçimi — hedef dilin adıyla, silik.
+    if _preferences.language == "english":
+        textbutton "türkçe" action Language("turkish") style "hizli_button":
+            pos (108, 720)
+    else:
+        textbutton "english" action Language("english") style "hizli_button":
+            pos (108, 720)
 
     ## Ölüm sayacı — lanet hatırlar.
     if persistent.olum_sayisi > 0:
-        text "ölüm: [persistent.olum_sayisi]":
+        text _("ölüm: [persistent.olum_sayisi]"):
             pos (32, 1032)
             size 24
             color "#4a463e"
@@ -308,12 +316,12 @@ screen main_menu():
     # --- Final galerisi (görülmeden görünmez) ---
     python:
         finaller_gorulen = [
-            ("TESLİM",  persistent.final_teslim,  "#cc2222"),
-            ("ARMAĞAN", persistent.final_armagan, "#f5e9d0"),
-            ("SÖNÜŞ",   persistent.final_sonus,   "#cc2222"),
-            ("GASP",    persistent.final_gasp,    "#cc2222"),
+            (__("TESLİM"),  persistent.final_teslim,  "#cc2222"),
+            (__("ARMAĞAN"), persistent.final_armagan, "#f5e9d0"),
+            (__("SÖNÜŞ"),   persistent.final_sonus,   "#cc2222"),
+            (__("GASP"),    persistent.final_gasp,    "#cc2222"),
         ]
-        herhangi_final = any(g for _, g, _ in finaller_gorulen)
+        herhangi_final = any(g for _ad, g, _renk in finaller_gorulen)
 
     if herhangi_final:
 
@@ -321,7 +329,7 @@ screen main_menu():
             align (0.98, 0.94)
             spacing 6
 
-            text "sonlar":
+            text _("sonlar"):
                 xalign 1.0
                 size 20
                 color "#8a8378"
@@ -357,10 +365,10 @@ screen quick_menu():
             align (0.992, 0.988)
             spacing 34
 
-            textbutton "geçmiş" action ShowMenu("history") style "hizli_button"
-            textbutton "kaydet" action ShowMenu("save") style "hizli_button"
-            textbutton "yükle" action ShowMenu("load") style "hizli_button"
-            textbutton "ayarlar" action ShowMenu("preferences") style "hizli_button"
+            textbutton _("geçmiş") action ShowMenu("history") style "hizli_button"
+            textbutton _("kaydet") action ShowMenu("save") style "hizli_button"
+            textbutton _("yükle") action ShowMenu("load") style "hizli_button"
+            textbutton _("ayarlar") action ShowMenu("preferences") style "hizli_button"
 
 style hizli_button:
     hover_sound "audio/ui_hover.wav"
@@ -387,18 +395,24 @@ screen navigation():
         spacing 18
 
         if main_menu:
-            textbutton "«kalk.»" action Start() at nav_sarsinti
+            textbutton _("«kalk.»") action Start() at nav_sarsinti
         else:
-            textbutton "geçmiş" action ShowMenu("history") at nav_sarsinti
-            textbutton "kaydet" action ShowMenu("save") at nav_sarsinti
+            textbutton _("geçmiş") action ShowMenu("history") at nav_sarsinti
+            textbutton _("kaydet") action ShowMenu("save") at nav_sarsinti
 
-        textbutton "yükle" action ShowMenu("load") at nav_sarsinti
-        textbutton "ayarlar" action ShowMenu("preferences") at nav_sarsinti
+        textbutton _("yükle") action ShowMenu("load") at nav_sarsinti
+        textbutton _("ayarlar") action ShowMenu("preferences") at nav_sarsinti
 
         if not main_menu:
-            textbutton "ana menü" action MainMenu() at nav_sarsinti
+            textbutton _("ana menü") action MainMenu() at nav_sarsinti
 
-        textbutton "çık" action Quit(confirm=not main_menu) at nav_sarsinti
+        textbutton _("çık") action Quit(confirm=not main_menu) at nav_sarsinti
+
+        ## Dil geçişi (Esc menüsünden de erişilebilir).
+        if _preferences.language == "english":
+            textbutton "türkçe" action Language("turkish") at nav_sarsinti
+        else:
+            textbutton "english" action Language("english") at nav_sarsinti
 
 ## Oyun menüsü zemini: siyah + tepede kırmızı çizgi (textbox diliyle aynı).
 style game_menu_outer_frame:

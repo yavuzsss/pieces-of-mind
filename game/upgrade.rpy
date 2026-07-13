@@ -37,12 +37,12 @@ screen yukselme_panel():
         vbox:
             xalign 0.5
             spacing 10
-            text "— YÜKSELİŞ —":
+            text _("— YÜKSELİŞ —"):
                 xalign 0.5
                 size 34
                 bold True
                 color "#cc2222"
-            text "Bir şey büyüyor içinde. Ne olduğunu sen seç.":
+            text _("Bir şey büyüyor içinde. Ne olduğunu sen seç."):
                 xalign 0.5
                 size 22
                 color "#b8ac93"
@@ -51,28 +51,28 @@ screen yukselme_panel():
             xalign 0.5
             spacing 18
 
-            textbutton "GÜÇ  +1      (şu an [guc_v])":
+            textbutton _("GÜÇ  +1      (şu an [guc_v])"):
                 xalign 0.5
                 action Return("GUC")
                 text_size 26
                 text_color "#f5e9d0"
                 text_hover_color "#cc2222"
 
-            textbutton "ZEKÂ  +1      (şu an [zeka_v])":
+            textbutton _("ZEKÂ  +1      (şu an [zeka_v])"):
                 xalign 0.5
                 action Return("ZEKA")
                 text_size 26
                 text_color "#f5e9d0"
                 text_hover_color "#cc2222"
 
-            textbutton "ŞANS  +1      (şu an [sans_v])":
+            textbutton _("ŞANS  +1      (şu an [sans_v])"):
                 xalign 0.5
                 action Return("SANS")
                 text_size 26
                 text_color "#f5e9d0"
                 text_hover_color "#cc2222"
 
-            textbutton "CAN  +2      (şu an [can_v]/[can_m])":
+            textbutton _("CAN  +2      (şu an [can_v]/[can_m])"):
                 xalign 0.5
                 action Return("CAN")
                 text_size 26

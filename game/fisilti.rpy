@@ -20,12 +20,17 @@ default guven = 5
 init -1 python:
 
     def fis(*metinler):
-        """Fısıltı repliği: üstteki kutu(lar)dan seçilir. İndeks döner."""
-        secenekler = [("«%s»" % m, i) for i, m in enumerate(metinler)]
+        """Fısıltı repliği: üstteki kutu(lar)dan seçilir. İndeks döner.
+
+        Metinler __() ile çevrilir (dil desteği): kaynak dizgiler Türkçe,
+        karşılıkları tl/english/fisilti_strings.rpy içinde yaşar.
+        """
+        cevrili = [__(m) for m in metinler]
+        secenekler = [("«%s»" % m, i) for i, m in enumerate(cevrili)]
         secim = renpy.display_menu(secenekler)
         # Seçilen fısıltıyı geçmişe (history) Fısıltı satırı olarak işle.
         try:
-            f.add_history("adv", "Fısıltı", metinler[secim])
+            f.add_history("adv", __("Fısıltı"), cevrili[secim])
         except Exception:
             pass
         return secim

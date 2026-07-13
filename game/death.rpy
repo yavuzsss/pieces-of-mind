@@ -58,7 +58,7 @@ screen olum_ekrani(sebep, sayi):
         align (0.5, 0.45)
         spacing 40
 
-        text "ÖLDÜN":
+        text _("ÖLDÜN"):
             xalign 0.5
             size 170
             color "#cc2222"
@@ -69,17 +69,17 @@ screen olum_ekrani(sebep, sayi):
             spacing 12
             at olum_belirme_gec
 
-            text "[sebep]":
+            text "[sebep!t]":
                 xalign 0.5
                 size 34
                 color "#8a8378"
 
-            text "ölüm: [sayi]":
+            text _("ölüm: [sayi]"):
                 xalign 0.5
                 size 28
                 color "#b8ac93"
 
-            text "> devam":
+            text _("> devam"):
                 xalign 0.5
                 size 22
                 color "#8a8378"

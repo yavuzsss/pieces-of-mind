@@ -84,16 +84,16 @@ screen dice_panel(result):
     default spin_num = 1
 
     python:
-        stat_label = STAT_TR.get(result.stat_name, result.stat_name)
+        stat_label = __(STAT_TR.get(result.stat_name, result.stat_name))
         bonus_str = "%+d" % result.bonus
         if result.crit_success:
-            verdict, verdict_color = "KRİTİK BAŞARI", "#f5e9d0"
+            verdict, verdict_color = __("KRİTİK BAŞARI"), "#f5e9d0"
         elif result.crit_fail:
-            verdict, verdict_color = "KRİTİK BAŞARISIZLIK", "#cc2222"
+            verdict, verdict_color = __("KRİTİK BAŞARISIZLIK"), "#cc2222"
         elif result.success:
-            verdict, verdict_color = "BAŞARI", "#f5e9d0"
+            verdict, verdict_color = __("BAŞARI"), "#f5e9d0"
         else:
-            verdict, verdict_color = "BAŞARISIZLIK", "#cc2222"
+            verdict, verdict_color = __("BAŞARISIZLIK"), "#cc2222"
 
     # Arka planı karart.
     add Solid("#0a0a0af2")
@@ -122,12 +122,12 @@ screen dice_panel(result):
         vbox:
             xalign 0.5
             spacing 8
-            text "— [stat_label] ZARI —":
+            text _("— [stat_label] ZARI —"):
                 xalign 0.5
                 size 34
                 bold True
                 color "#cc2222"
-            text "ZORLUK  [result.dc]":
+            text _("ZORLUK  [result.dc]"):
                 xalign 0.5
                 size 22
                 color "#b8ac93"
@@ -175,12 +175,12 @@ screen dice_panel(result):
                     color verdict_color
                 # Savaş zarı: DC'nin üstündeki her puan = hasar.
                 if result.savas and result.success:
-                    text "HASAR  [result.hasar]":
+                    text _("HASAR  [result.hasar]"):
                         xalign 0.5
                         size 26
                         bold True
                         color "#cc2222"
-                text "> devam":
+                text _("> devam"):
                     xalign 0.5
                     size 18
                     color "#b8ac93"
