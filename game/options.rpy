@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "pom2"
+define build.name = "PiecesOfMind"
 
 
 ## Sounds and music ############################################################
@@ -184,6 +184,14 @@ init python:
     build.classify('**/.**', None)
     build.classify('**/#**', None)
     build.classify('**/thumbs.db', None)
+
+    ## Oyuncu verileri ve geliştirme artıkları pakete girmesin.
+    build.classify('game/saves/**', None)
+    build.classify('game/cache/**', None)
+    build.classify('tools/**', None)
+    build.classify('traceback.txt', None)
+    build.classify('errors.txt', None)
+    build.classify('log.txt', None)
 
     ## To archive files, classify them as 'archive'.
 
