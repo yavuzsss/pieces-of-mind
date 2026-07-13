@@ -46,6 +46,8 @@ label final_teslim:
 
     # «UYAN. Adı ver. Bitsin.» — oyuncunun tokadı ve hükmü.
 
+    play music muzik_teslim fadeout 3.0 fadein 5.0
+
     si "Kafamın içinde sesin: keskin, kesin."
 
     si "Ve avucum kapanıyor. Uyanıyorum — dizlerimin üstünde, onların önünde."
@@ -230,6 +232,8 @@ label final_armagan:
 
     # «...» — sessizlik. Ama bağ güçlü: şövalye kendi uyanır.
     # Çalmayı bekleyen oyuncu, hediyeyle utandırılır.
+
+    play music muzik_armagan fadeout 3.0 fadein 5.0
 
     si "Ellerim açılıyor. Altın ışık avucuma eğiliyor."
 
@@ -457,6 +461,9 @@ label final_armagan_epilog:
 
     s "Yürüyelim."
 
+    # Dışarıdaki sessizliğin içinden sıcak tema geri döner.
+    play music muzik_armagan fadein 4.0
+
     with Pause(1.5)
 
     $ persistent.final_armagan = True
@@ -473,6 +480,8 @@ label final_armagan_epilog:
 label final_sonus:
 
     # «UYAN. Adı değil — beni alacak.» — kalıntının fedası.
+
+    play music muzik_sonus fadeout 3.0 fadein 5.0
 
     si "Kafamın içinde sesin — ve avucum kapanıyor. Uyanıyorum."
 
@@ -681,7 +690,8 @@ label final_gasp:
 
     $ knight_name = "???"
 
-    stop music fadeout 3.0
+    # Takasla birlikte müzik de "yanlış" olana döner.
+    play music muzik_gasp fadeout 1.5 fadein 4.0
 
     jump final_gasp_takas
 
