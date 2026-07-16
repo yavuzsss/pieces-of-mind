@@ -497,5 +497,14 @@ label sahne6_ultimatom:
 
     s "İlk defa cevabını bilmediğin bir soru sordum."
 
+    s "Ve uydurmadın."
+
+    si "Bilmiyorum, diyen bir sessizlik bu. Emir veren sessizliklerinden değil."
+
+    s "Böylesi daha iyi. Böylesine katlanabilirim."
+
+    # Fısıltı'nın dürüst sessizliği — zorunlu düşüşlerin karşı ağırlığı.
+    $ guven_degistir(1)
+
     # Sahne 7: İniş ve Yarım (scene7_inis.rpy)
     jump sahne7_inis

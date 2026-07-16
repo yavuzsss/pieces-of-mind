@@ -811,3 +811,22 @@ translate english strings:
     # game/scene6_altin_alev.rpy:208
     old "«Ona başka bir şey ver. Sönmüş'ün izini ver.»"
     new "«Give it something else. Give it the Snuffed's trace.»"
+
+# game/scene6_altin_alev.rpy:500
+translate english sahne6_ultimatom_a93f1a70:
+
+    # s "Ve uydurmadın."
+    s "And you didn't make one up."
+
+# game/scene6_altin_alev.rpy:502
+translate english sahne6_ultimatom_eab38f99:
+
+    # si "Bilmiyorum, diyen bir sessizlik bu. Emir veren sessizliklerinden değil."
+    si "This is a silence that says: I don't know. Not one of your commanding silences."
+
+# game/scene6_altin_alev.rpy:504
+translate english sahne6_ultimatom_a9b703dc:
+
+    # s "Böylesi daha iyi. Böylesine katlanabilirim."
+    s "This kind is better. This kind I can bear."
+

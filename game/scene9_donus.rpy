@@ -9,7 +9,7 @@
 # (UYUMA kuralının final ödemesi). Fısıltı'nın (oyuncunun) üç kutusu:
 #   «UYAN. Adı ver...»   -> final_teslim
 #   «UYAN. Beni alacak.» -> final_sonus
-#   «...» (sessiz kalıp bekle) -> guven >= 5 ve gercek_sezgi ise şövalye
+#   «...» (sessiz kalıp bekle) -> guven >= 4 ve gercek_sezgi ise şövalye
 #        KENDİ uyanır ve adını hediye eder -> final_armagan;
 #        değilse uyuyan elden isim alınır -> final_gasp.
 # (Çalmayı deneyen oyuncu, bağ güçlüyse hediyeyle utandırılır —
@@ -349,6 +349,28 @@ label sahne9_tepe:
 
     s "İçimdeki. Karar senin. Hep senindi zaten."
 
+    # Son ton kancası: oyuncu «...» kumarını oynamadan önce bağın durumunu
+    # şövalyenin sesinden okuyabilmeli (gösterge yok — İlke 8).
+    if guven >= 4:
+
+        s "Ve korkmuyorum. Garip, değil mi?"
+
+        si "Kendi sesimi duyuyorum. Teslimiyet yok içinde. Rahatlık var. Birine yaslanan bir adamın sesi."
+
+    elif guven <= 2:
+
+        s "Kim olduğunu hiç bilmedim. Ne istediğini de."
+
+        s "Ama başka kimsem yok. Gerisini de sen bitir."
+
+        si "Kendi sesimi duyuyorum. Güven yok içinde. Sadece yorgunluk. Kumar oynayan bir adamın sesi."
+
+    else:
+
+        s "Sana güveniyor muyum? Bilmiyorum."
+
+        s "Ama seni tanıyorum artık. Belki o daha önemlidir."
+
     si "Ve tam o anda uğultu... yumuşuyor."
 
     si "Bir beşik sallanıyor sanki. Bilerek yapıyorlar."
@@ -396,9 +418,10 @@ label sahne9_esik:
 
             # Sessizlik: oyuncu bekler. Bağ güçlüyse şövalye KENDİ uyanır
             # ve çalınamayanı verir; değilse uyuyan elden isim alınır.
-            # Eşik 4: guven artışı yalnız 2 yerde var (sahne4/sahne8) ve
-            # zorunlu düşüşler mevcut ("biz" gafı, isim öğrenme, direniş) —
-            # kusursuz oyun ~4'te biter; 5 pratikte ulaşılmazdı (test 2026-07-12).
+            # Eşik 4 (2026-07-16 ekonomisi): kazanım anları — sahne4 temiz
+            # geçiş, sahne6 dürüst sessizlik (zorunlu +1), sahne7 «Hayır.» /
+            # ışık yolu, sahne8 «Sakla» — koruyucu oyuncuyu 5-6'ya taşır;
+            # zorunlu düşüşler savruk oyunu 2'nin altına iter.
             if gercek_sezgi and guven >= 4:
 
                 jump final_armagan

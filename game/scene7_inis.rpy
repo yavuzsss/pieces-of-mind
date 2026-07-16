@@ -258,6 +258,13 @@ label sahne7_teklif:
 
             yr "Yalan söylüyor. Hepimiz yalan söyleriz. İşimiz bu."
 
+            s "Olabilir."
+
+            s "Ama benimki senin önünde \"hayır\" dedi. Sen diyemedin."
+
+            # Teklif yüzüne yapıldı; reddin tanığı şövalye.
+            $ guven_degistir(1)
+
         "«...»":
 
             s "Cevap vermiyorsun."
@@ -389,6 +396,16 @@ label sahne7_isik:
     $ fis("Harcadın.")
 
     s "Kurtardım. Farklı şeyler."
+
+    s "Hem sen fısıldadın. Işığı tut, dedin. Kendi hazineni bana harcadın."
+
+    si "Cevap yok. Kafamın içinde, kendi sözüne kızan bir sessizlik."
+
+    s "Beni alevden pahalı tuttun demek. Bunu bir yere yazıyorum, içimdeki."
+
+    # Fısıltı en değer verdiğini (ışığı) bedene harcadı — şövalye gördü.
+    # Bedel zaten ödendi: alev küçüldü (İlke 3 — kazanım bedava değil).
+    $ guven_degistir(1)
 
     jump sahne7_kapi_acilis
 
@@ -646,6 +663,31 @@ label sahne7_son:
     s "...ne?"
 
     $ fis("Sakın uyuma.")
+
+    # Ton guven'e göre — gösterge yok, ilişki sesle sezdirilir (tek gösterge bu).
+    if guven >= 5:
+
+        s "Sebep söylemeyeceksin. Biliyorum."
+
+        s "Ama sesin... benim için korkan bir ses bu. İlk defa duyuyorum."
+
+        s "Peki, içimdeki. Uyumam."
+
+    elif guven <= 2:
+
+        s "Yine emir. Yine sebepsiz."
+
+        s "Ne sakladığını bilmiyorum. Ama bir şey sakladığını biliyorum."
+
+        s "Uyumayacağım. Senin için değil. Sırf ne saklıyorsun diye."
+
+        $ stres_degistir(1)
+
+    else:
+
+        s "Sebep yok, değil mi? Senden hiç sebep gelmez."
+
+        s "Peki. Şimdilik peki."
 
     # Sahne 8: Uyku ve Ayna (scene8_ayna.rpy)
     jump sahne8_oda

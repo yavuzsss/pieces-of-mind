@@ -647,3 +647,46 @@ translate english strings:
     # game/scene9_donus.rpy:392
     old "«UYAN. Adı değil — beni alacak.»"
     new "«WAKE UP. Not the name — it will take me.»"
+
+# game/scene9_donus.rpy:356
+translate english sahne9_tepe_479c1abb:
+
+    # s "Ve korkmuyorum. Garip, değil mi?"
+    s "And I'm not afraid. Strange, isn't it?"
+
+# game/scene9_donus.rpy:358
+translate english sahne9_tepe_cc39af59:
+
+    # si "Kendi sesimi duyuyorum. Teslimiyet yok içinde. Rahatlık var. Birine yaslanan bir adamın sesi."
+    si "I hear my own voice. There's no surrender in it. There's ease. The voice of a man leaning on someone."
+
+# game/scene9_donus.rpy:362
+translate english sahne9_tepe_e477dd78:
+
+    # s "Kim olduğunu hiç bilmedim. Ne istediğini de."
+    s "I never knew who you were. Or what you wanted."
+
+# game/scene9_donus.rpy:364
+translate english sahne9_tepe_d1a48c4f:
+
+    # s "Ama başka kimsem yok. Gerisini de sen bitir."
+    s "But I have no one else. So finish the rest yourself."
+
+# game/scene9_donus.rpy:366
+translate english sahne9_tepe_1f6c5a17:
+
+    # si "Kendi sesimi duyuyorum. Güven yok içinde. Sadece yorgunluk. Kumar oynayan bir adamın sesi."
+    si "I hear my own voice. There's no trust in it. Only exhaustion. The voice of a man placing a bet."
+
+# game/scene9_donus.rpy:370
+translate english sahne9_tepe_fc542cdb:
+
+    # s "Sana güveniyor muyum? Bilmiyorum."
+    s "Do I trust you? I don't know."
+
+# game/scene9_donus.rpy:372
+translate english sahne9_tepe_7024be28:
+
+    # s "Ama seni tanıyorum artık. Belki o daha önemlidir."
+    s "But I know you now. Maybe that matters more."
+

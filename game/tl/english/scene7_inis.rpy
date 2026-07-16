@@ -1063,3 +1063,82 @@ translate english strings:
     # game/scene7_inis.rpy:310
     old "«Sor: adı nasıl aldın?»"
     new "«Ask him: how did you take the name?»"
+
+# game/scene7_inis.rpy:261
+translate english sahne7_teklif_321df846:
+
+    # s "Olabilir."
+    s "Maybe."
+
+# game/scene7_inis.rpy:263
+translate english sahne7_teklif_1f027a04:
+
+    # s "Ama benimki senin önünde \"hayır\" dedi. Sen diyemedin."
+    s "But mine said \"no\" to your face. Yours never did."
+
+# game/scene7_inis.rpy:400
+translate english sahne7_isik_55fff1c0:
+
+    # s "Hem sen fısıldadın. Işığı tut, dedin. Kendi hazineni bana harcadın."
+    s "Besides, you were the one whispering. Hold up the light, you said. You spent your own treasure on me."
+
+# game/scene7_inis.rpy:402
+translate english sahne7_isik_219ff99f:
+
+    # si "Cevap yok. Kafamın içinde, kendi sözüne kızan bir sessizlik."
+    si "No answer. Inside my head, a silence angry at its own words."
+
+# game/scene7_inis.rpy:404
+translate english sahne7_isik_0509f0f8:
+
+    # s "Beni alevden pahalı tuttun demek. Bunu bir yere yazıyorum, içimdeki."
+    s "So you priced me above the flame. I'm writing that down somewhere, you inside."
+
+# game/scene7_inis.rpy:670
+translate english sahne7_son_adca9ad0:
+
+    # s "Sebep söylemeyeceksin. Biliyorum."
+    s "You won't give a reason. I know."
+
+# game/scene7_inis.rpy:672
+translate english sahne7_son_15f1e47a:
+
+    # s "Ama sesin... benim için korkan bir ses bu. İlk defa duyuyorum."
+    s "But your voice... this is a voice afraid for me. I'm hearing it for the first time."
+
+# game/scene7_inis.rpy:674
+translate english sahne7_son_f5df690a:
+
+    # s "Peki, içimdeki. Uyumam."
+    s "All right, you inside. I won't sleep."
+
+# game/scene7_inis.rpy:678
+translate english sahne7_son_f8b9199e:
+
+    # s "Yine emir. Yine sebepsiz."
+    s "Another order. Again, no reason."
+
+# game/scene7_inis.rpy:680
+translate english sahne7_son_bf317d44:
+
+    # s "Ne sakladığını bilmiyorum. Ama bir şey sakladığını biliyorum."
+    s "I don't know what you're hiding. But I know you're hiding something."
+
+# game/scene7_inis.rpy:682
+translate english sahne7_son_7e89c45a:
+
+    # s "Uyumayacağım. Senin için değil. Sırf ne saklıyorsun diye."
+    s "I won't sleep. Not for you. Just to see what you're hiding."
+
+# game/scene7_inis.rpy:688
+translate english sahne7_son_6296519c:
+
+    # s "Sebep yok, değil mi? Senden hiç sebep gelmez."
+    s "No reason, is there? Reasons never come from you."
+
+# game/scene7_inis.rpy:690
+translate english sahne7_son_47ae881f:
+
+    # s "Peki. Şimdilik peki."
+    s "Fine. For now, fine."
+
