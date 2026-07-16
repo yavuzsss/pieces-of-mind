@@ -71,3 +71,10 @@ translate english olum_kosu_bitti_31b26365:
 
     # f "Yeni bir beden bul."
     f "Find a new body."
+
+# game/death.rpy:148
+translate english olum_339ebd51:
+
+    # f "Yolu biliyorum artık. İkinci sefer uzun sürmez."
+    f "I know the way now. The second time won't take long."
+

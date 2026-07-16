@@ -79,6 +79,13 @@ screen olum_ekrani(sebep, sayi):
                 size 28
                 color "#b8ac93"
 
+            # İlk ölümde bir defalık: «geç» artık açık (tekrar.rpy).
+            if sayi == 1:
+                text _("yaşadıkların hatırlanır — «geç» sağ altta belirdi"):
+                    xalign 0.5
+                    size 22
+                    color "#4a463e"
+
             text _("> devam"):
                 xalign 0.5
                 size 22
@@ -137,6 +144,8 @@ label olum(sebep="bilinmeyen bir son"):
         f "Hayır. Böyle bitmiyor. Beden biter. Ben bitmem."
 
         f "Karanlıkta bekleyeceğim. Bir sonraki uyanışı."
+
+        f "Yolu biliyorum artık. İkinci sefer uzun sürmez."
 
     else:
 

@@ -35,6 +35,9 @@ label start:
     # Yeni koşu: permadeath kimliği (death.rpy).
     $ run_id = yeni_kosu_id()
 
+    # Ölüm görmüş oyuncu görülmüş metni geçebilir (tekrar.rpy).
+    $ gec_uygula()
+
     play music muzik_karanlik fadein 3.0
 
     scene black

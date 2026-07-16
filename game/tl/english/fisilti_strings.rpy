@@ -451,6 +451,12 @@ translate english strings:
     old "kaydet"
     new "save"
 
+    old "geç"
+    new "skip"
+
+    old "yaşadıkların hatırlanır — «geç» sağ altta belirdi"
+    new "what you lived is remembered — «skip» has appeared, bottom right"
+
     old "ana menü"
     new "main menu"
 

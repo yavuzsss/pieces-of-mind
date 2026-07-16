@@ -352,8 +352,9 @@ screen main_menu():
 ################################################################################
 
 ## Şablonun 8 düğmeli çubuğu yerine sağ altta dört silik kelime.
-## (Geri sarma tekerlekle zaten çalışır; skip/auto kasıtlı olarak yok —
-## bu oyunda acele edilmez.)
+## (Geri sarma tekerlekle zaten çalışır; auto kasıtlı olarak yok —
+## bu oyunda acele edilmez. «geç» yalnızca ölüm görmüş oyuncuda belirir:
+## Fısıltı hatırlar, görülmüş metin geçilebilir — tekrar.rpy.)
 
 screen quick_menu():
 
@@ -364,6 +365,9 @@ screen quick_menu():
         hbox:
             align (0.992, 0.988)
             spacing 34
+
+            if persistent.olum_sayisi > 0:
+                textbutton _("geç") action Skip() style "hizli_button"
 
             textbutton _("geçmiş") action ShowMenu("history") style "hizli_button"
             textbutton _("kaydet") action ShowMenu("save") style "hizli_button"
