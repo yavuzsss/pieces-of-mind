@@ -38,14 +38,6 @@ screen kredi_akisi(sicak=False):
             color "#f5e9d0"
             at kredi_belir(2.4)
 
-        null height 14
-
-        text _("Görseller: İsmail Alp Özüpek") style "kredi_text":
-            xalign 0.5
-            size 34
-            color "#f5e9d0"
-            at kredi_belir(4.0)
-
 screen kredi_son(kelime, renk):
     add Solid("#0a0a0a")
 
@@ -64,7 +56,7 @@ label krediler(sicak=False):
 
     show screen kredi_akisi(sicak)
     with None
-    $ renpy.pause(9.0)
+    $ renpy.pause(7.4)
 
     hide screen kredi_akisi
     with Dissolve(1.5)
