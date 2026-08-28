@@ -25,9 +25,6 @@ Karanlık bir kulede geçen, dokuz sahnelik kapalı bir döngü. Şövalyenin ad
 |---|---|
 | ![Ayna ve fısıltı](docs/ss-ayna-fisilti.png) | ![Zar paneli](docs/ss-zar.png) |
 
-| Şövalyenin odası | |
-|---|---|
-| ![Oda](docs/ss-oda.png) | Fısıltı'nın her repliği ekranın üstünde bir kutudur — tek seçenek olsa bile oyuncu ona tıklamak zorundadır. Söz, oyuncunun sözüdür. |
 
 ## Sistemler
 
