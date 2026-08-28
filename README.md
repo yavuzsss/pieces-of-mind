@@ -8,3 +8,13 @@ Hafızasını kaybetmiş bir şövalye, tanımadığı bir odada uyanır. Kafas�
 
 ![Yorgun Şövalye'nin Odası](game/images/bg_sovalye_odasi.png)
 
+
+---
+
+## Lisans
+
+Bu depo **kaynağı görünür**, açık kaynak değildir. Kod, senaryo, görsel ve ses
+varlıklarının tümü telif hakkıyla korunmaktadır; okumaya izin verilir, kullanmaya
+verilmez. Ayrıntılar için [LICENSE](LICENSE) dosyasına bakın.
+
+© 2026 Yavuz Selim Şeremetli
