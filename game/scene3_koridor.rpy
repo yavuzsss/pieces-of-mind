@@ -204,8 +204,8 @@ label sahne3_gecis_kemer:
 
     si "Sırtımı duvara veriyorum. Çıkıntıya adım atıyorum."
 
-    # --- GÜÇ zarı — DC 12 ---
-    call roll_dice("GUC", 12)
+    # --- GÜÇ zarı — DC 12 (işaretli takas: dc_serbest) ---
+    call roll_dice("GUC", 12, dc_serbest=True)
     $ sonuc = _return
 
     jump sahne3_gecis_sonuc
@@ -226,8 +226,8 @@ label sahne3_gecis_tekel:
 
     si "Tek elimle duvardaki çatlakları yokluyorum. Çıkıntıya adım atıyorum."
 
-    # --- GÜÇ zarı — DC 15 (tek el: daha zor) ---
-    call roll_dice("GUC", 15)
+    # --- GÜÇ zarı — DC 15 (tek el: daha zor; işaretli takas) ---
+    call roll_dice("GUC", 15, dc_serbest=True)
     $ sonuc = _return
 
     jump sahne3_gecis_sonuc

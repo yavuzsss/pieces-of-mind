@@ -458,12 +458,16 @@ label sahne7_dovus_tur:
 
             si "Dönüyor. Gülümseme gitti; geriye sadece açlık kaldı."
 
-    # --- GÜÇ zarı (savaş: DC üstündeki her puan = hasar) ---
-    # Tasarım niyeti: kılıçla DC 11 / çıplak elle DC 15 (şu an DC sabit 10).
+    # --- GÜÇ zarı (savaş: hasar tabanının üstündeki her puan = hasar) ---
+    # İşaretli takas (dc_serbest): kılıçla DC 11 / çıplak elle DC 15.
+    # Çıplak elin hasar tabanı 10'da bırakılır — yoksa hem zor hem düşük
+    # hasarlı olur, bu takas değil ölüm sarmalı olurdu.
+    #   Kılıç      : ~%60 isabet, ~4-5 hasar — istikrarlı.
+    #   Çıplak el  : ~%40 isabet, ~7-8 hasar — nadir ve belirleyici.
     if kilic_var:
-        call roll_dice("GUC", 11, savas=True)
+        call roll_dice("GUC", 11, savas=True, dc_serbest=True)
     else:
-        call roll_dice("GUC", 15, savas=True)
+        call roll_dice("GUC", 15, savas=True, dc_serbest=True, hasar_dc=10)
     $ sonuc = _return
 
     if sonuc.crit_success:

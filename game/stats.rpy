@@ -16,7 +16,7 @@ init -10 python:
     class RollResult(object):
         """Tek bir zar atışının sonucunu taşır (UI'da göstermek için)."""
 
-        def __init__(self, stat_name, die, bonus, dc):
+        def __init__(self, stat_name, die, bonus, dc, hasar_dc=None):
             self.stat_name = stat_name      # Hangi statla atıldı ("GUC" vb.)
             self.die = die                  # Zarın kendisi (1-20)
             self.bonus = bonus              # Stat puanı (doğrudan eklenir)
@@ -32,8 +32,12 @@ init -10 python:
                 self.success = False
             else:
                 self.success = self.total >= dc
-            # Savaş hasarı: DC'nin üstündeki her puan.
-            self.hasar = max(0, self.total - dc) if self.success else 0
+            # Savaş hasarı: hasar tabanının üstündeki her puan.
+            # hasar_dc, isabet DC'sinden AYRILABİLİR: yüksek DC'li bir seçenek
+            # (ör. kılıçsız dövüş) yoksa hem zor hem düşük hasarlı olurdu —
+            # bu bir takas değil, ölüm sarmalı olur.
+            _hdc = dc if hasar_dc is None else hasar_dc
+            self.hasar = max(0, self.total - _hdc) if self.success else 0
 
         def __str__(self):
             return "{} check: d20({}) + {} = {} vs DC {} -> {}".format(
@@ -83,7 +87,7 @@ init -10 python:
             else:
                 self.modify(secim, +1)
 
-        def roll(self, stat_name, dc):
+        def roll(self, stat_name, dc, hasar_dc=None):
             """D20 at, stat puanını ekle, DC ile karşılaştır.
 
             Sonuç bir RollResult nesnesi olarak döner; ayrıca
@@ -93,7 +97,8 @@ init -10 python:
             # renpy.random: durumu kayıt/rollback ile birlikte saklanır —
             # geri sarıp yeniden atmak aynı sonucu verir (save-scum engeli).
             die = renpy.random.randint(1, 20)
-            result = RollResult(stat_name.upper(), die, self.bonus(stat_name), dc)
+            result = RollResult(stat_name.upper(), die, self.bonus(stat_name), dc,
+                                hasar_dc=hasar_dc)
             store.last_roll = result
             return result
 

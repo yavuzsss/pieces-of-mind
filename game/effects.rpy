@@ -180,7 +180,7 @@ transform glitched(strength=1.0):
 screen crt_overlay():
     zorder 1000
     if persistent.crt_enabled:
-        add Solid("#ffffff") at crt_fx(min(1.0, max(0.0, (stres - 4) / 11.0)) if stres_etkin else 0.0)
+        add Solid("#ffffff") at crt_fx(stres_crt_gucu())
 
 init python:
     config.overlay_screens.append("crt_overlay")

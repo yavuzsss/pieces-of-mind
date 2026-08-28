@@ -194,13 +194,21 @@ screen dice_panel(result):
 ## Zar Atma Etiketi
 ################################################################################
 
-label roll_dice(stat_name, dc, savas=False):
+label roll_dice(stat_name, dc, savas=False, dc_serbest=False, hasar_dc=None):
 
     # Zar burada atılır (ekran argümanı içinde DEĞİL — ekran ön-izlemeleri
     # yan etkili ifadeleri birden çok kez çalıştırabilir).
     # zar_dc_sabit doluysa senaryodan gelen dc yerine o kullanılır.
     # savas=True: panelde HASAR satırı gösterilir (marj = hasar).
-    $ dice_result = player_stats.roll(stat_name, zar_dc_sabit if zar_dc_sabit is not None else dc)
+    #
+    # dc_serbest=True: bu çağrı için sabiti devre dışı bırakır. YALNIZCA
+    # oyunun oyuncuya METİNLE takas olarak sunduğu anlarda kullanılır
+    # (tek elle uçurum geçişi, kılıçsız dövüş) — orada panelin "ZORLUK 10"
+    # yazması metnin verdiği sözü yalanlıyordu. Diğer her yerde taban 10.
+    # hasar_dc: savaş hasarının tabanı (bkz. stats.rpy RollResult).
+    $ _rd_dc = dc if (dc_serbest or zar_dc_sabit is None) else zar_dc_sabit
+    $ _rd_hdc = hasar_dc if (dc_serbest and hasar_dc is not None) else None
+    $ dice_result = player_stats.roll(stat_name, _rd_dc, hasar_dc=_rd_hdc)
     $ dice_result.savas = savas
 
     window hide
