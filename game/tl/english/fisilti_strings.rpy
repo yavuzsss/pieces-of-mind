@@ -477,3 +477,14 @@ translate english strings:
 
     old "GASP"
     new "THE TAKING"
+
+    # --- krediler.rpy (kredi ekranı) ---
+
+    old "Yavuz Selim Şeremetli tarafından yapılmıştır."
+    new "Game by: Yavuz Selim Şeremetli"
+
+    old "Görseller: İsmail Alp Özüpek"
+    new "Art by: İsmail Alp Özüpek"
+
+    old "yürüyelim."
+    new "let's walk."

@@ -221,6 +221,8 @@ label final_teslim_epilog:
 
     centered "{color=#cc2222}— TESLİM —{/color}\n \n{color=#b8ac93}isim yandı. sıra bekleyen isimler var.{/color}"
 
+    call krediler
+
     return
 
 
@@ -470,6 +472,8 @@ label final_armagan_epilog:
 
     centered "{color=#f5e9d0}— ARMAĞAN —{/color}\n \n{color=#b8ac93}çalınamayan şey, verilendir.{/color}"
 
+    call krediler(sicak=True)
+
     return
 
 
@@ -656,6 +660,8 @@ label final_sonus_epilog:
 
     centered "{color=#cc2222}— SÖNÜŞ —{/color}\n \n{color=#b8ac93}fısıltısız kafa geniştir. ve bomboş.{/color}"
 
+    call krediler
+
     return
 
 
@@ -807,5 +813,7 @@ label final_gasp_epilog:
     $ persistent.final_gasp = True
 
     centered "{color=#cc2222}— GASP —{/color}\n \n{color=#b8ac93}beden zaten senindi. hep senindi.{/color}"
+
+    call krediler
 
     return
