@@ -132,6 +132,19 @@ translate turkish strings:
     old "Test"
     new "dene"
 
+    # ── Erişilebilirlik (ui.rpy'deki preferences ekranı) ─────────────────
+    old "Accessibility"
+    new "erişilebilirlik"
+
+    old "Scanlines"
+    new "tarama çizgileri"
+
+    old "Flashes and Shake"
+    new "parazit ve sarsıntı"
+
+    old "Flashes and shake off: the sound and the pause stay, only the screen keeps still."
+    new "Parazit ve sarsıntı kapalıyken ses de bekleme de yerinde kalır; yalnız ekran sakinleşir."
+
     # ── Gezinti / diğer ──────────────────────────────────────────────────
     old "Start"
     new "başla"

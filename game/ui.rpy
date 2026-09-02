@@ -136,7 +136,7 @@ screen choice(items):
 
     vbox:
         for i in kutular:
-            if stres_seviye() >= 3:
+            if stres_seviye() >= 3 and persistent.glitch_enabled:
                 textbutton i.caption action i.action at kutu_titre
             else:
                 textbutton i.caption action i.action
@@ -429,6 +429,109 @@ style game_menu_label_text:
     font "fonts/VT323-Regular.ttf"
     size 64
     color "#cc2222"
+
+################################################################################
+## Ayarlar Ekranı — erişilebilirlik
+################################################################################
+## screens.rpy'ye dokunulmaz: preferences ekranı burada yeniden tanımlanır.
+## Şablonla tek fark, en sona eklenen "erişilebilirlik" sütunu.
+##
+## NEDEN: oyun 30 yerde glitch_burst çağırıyor; her biri kırmızı/krem parazit
+## bantlarını çakıp ekranı sarsıyor. Fotosensitif bir oyuncunun oyundan
+## çıkmaktan başka çaresi yoktu. İki anahtar (effects.rpy):
+##   crt_enabled    — sürekli tarama çizgisi katmanı
+##   glitch_enabled — anlık parazit + sarsıntı + kutu bozulmaları
+## Kapatmak anlatıdan hiçbir şey eksiltmez: ses de bekleme de yerinde kalır.
+
+screen preferences():
+
+    tag menu
+
+    use game_menu(_("Preferences"), scroll="viewport"):
+
+        vbox:
+
+            hbox:
+                box_wrap True
+
+                if renpy.variant("pc") or renpy.variant("web"):
+
+                    vbox:
+                        style_prefix "radio"
+                        label _("Display")
+                        textbutton _("Window") action Preference("display", "window")
+                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
+
+                vbox:
+                    style_prefix "check"
+                    label _("Skip")
+                    textbutton _("Unseen Text") action Preference("skip", "toggle")
+                    textbutton _("After Choices") action Preference("after choices", "toggle")
+                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+
+                vbox:
+                    style_prefix "check"
+                    label _("Accessibility")
+                    textbutton _("Scanlines") action ToggleField(persistent, "crt_enabled")
+                    textbutton _("Flashes and Shake") action ToggleField(persistent, "glitch_enabled")
+
+            null height 12
+
+            text _("Flashes and shake off: the sound and the pause stay, only the screen keeps still."):
+                size 30
+                color "#8a8378"
+                xsize 1000
+
+            null height (4 * gui.pref_spacing)
+
+            hbox:
+                style_prefix "slider"
+                box_wrap True
+
+                vbox:
+
+                    label _("Text Speed")
+
+                    bar value Preference("text speed")
+
+                    label _("Auto-Forward Time")
+
+                    bar value Preference("auto-forward time")
+
+                vbox:
+
+                    if config.has_music:
+                        label _("Music Volume")
+
+                        hbox:
+                            bar value Preference("music volume")
+
+                    if config.has_sound:
+
+                        label _("Sound Volume")
+
+                        hbox:
+                            bar value Preference("sound volume")
+
+                            if config.sample_sound:
+                                textbutton _("Test") action Play("sound", config.sample_sound)
+
+                    if config.has_voice:
+                        label _("Voice Volume")
+
+                        hbox:
+                            bar value Preference("voice volume")
+
+                            if config.sample_voice:
+                                textbutton _("Test") action Play("voice", config.sample_voice)
+
+                    if config.has_music or config.has_sound or config.has_voice:
+                        null height gui.pref_spacing
+
+                        textbutton _("Mute All"):
+                            action Preference("all mute", "toggle")
+                            style "mute_all_button"
+
 
 ## Onay ekranı: gri şablon kutusu yerine kırmızı çizgili karanlık kutu.
 screen confirm(message, yes_action, no_action):

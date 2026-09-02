@@ -1,4 +1,4 @@
-# dice.rpy — Pieces of Mind
+﻿# dice.rpy — Pieces of Mind
 # BG3 tarzı görsel zar paneli. Görsel varlık gerektirmez; elmas (d20) şekli
 # döndürülmüş Solid'lerle çizilir. Palet: kırmızı / krem / siyah.
 #
@@ -17,6 +17,17 @@ init -5 python:
         "SANS": "ŞANS",
     }
 
+
+# PERMADEATH KİLİDİ — zar atıldıktan sonra geri sarma kapanır.
+#
+# Neden: ölüm kalıcı (death.rpy) ama zar kalıcı değildi. Oyuncu doğal 1'i
+# panelde görüp tekerlekle geri sarıp yeniden atabiliyordu; permadeath fiilen
+# isteğe bağlıydı ve İlke 3'ün ("hiçbir seçenek kurtarıcı değil") altı boştu.
+# Kayıttan yüklemek de kaçış değil: player_stats.roll renpy.random kullanır,
+# durumu kayıtla birlikte saklanır — aynı yerden yüklenen zar aynı gelir.
+#
+# zar_dc_sabit ile aynı kalıp: kapatmak tek satır (False).
+define zar_geri_sarma_kapali = True
 
 # Son atılan zarın sonucu (roll_dice etiketi doldurur).
 default dice_result = None
@@ -210,6 +221,11 @@ label roll_dice(stat_name, dc, savas=False, dc_serbest=False, hasar_dc=None):
     $ _rd_hdc = hasar_dc if (dc_serbest and hasar_dc is not None) else None
     $ dice_result = player_stats.roll(stat_name, _rd_dc, hasar_dc=_rd_hdc)
     $ dice_result.savas = savas
+
+    # Zar atıldı: buradan öncesine dönüş yok. Panel açılmadan ÖNCE kilitlenir —
+    # yoksa oyuncu sonucu görüp geri sarabilirdi.
+    if zar_geri_sarma_kapali:
+        $ renpy.block_rollback()
 
     window hide
     play sound zar

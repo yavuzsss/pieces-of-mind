@@ -30,6 +30,13 @@ define config.version = "1.0"
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
+Hafızasını kaybetmiş bir şövalye karanlık bir odada uyanır. Oyuncu o değildir — oyuncu, onun zihnindeki sestir.
+
+Yavuz Selim Şeremetli tarafından yapılmıştır.
+
+Ren'Py ile geliştirildi.
+
+Yazı tipi: VT323 — The VT323 Project Authors. SIL Open Font License 1.1 ile kullanılmıştır; lisansın tam metni game/fonts/OFL.txt dosyasındadır.
 """)
 
 
@@ -48,7 +55,8 @@ define build.name = "PiecesOfMind"
 
 define config.has_sound = True
 define config.has_music = True
-define config.has_voice = True
+# Oyunda seslendirme yok — kaydırıcı ayarlarda görünmesin.
+define config.has_voice = False
 
 
 ## To allow the user to play a test sound on the sound or voice channel,
@@ -189,9 +197,25 @@ init python:
     build.classify('game/saves/**', None)
     build.classify('game/cache/**', None)
     build.classify('tools/**', None)
+    build.classify('docs/**', None)      # README ekran goruntuleri
     build.classify('traceback.txt', None)
     build.classify('errors.txt', None)
     build.classify('log.txt', None)
+
+    ## Kaynak kod pakete GİRMEZ. Ren'Py derlenmiş .rpyc dosyalarıyla çalışır;
+    ## .rpy'ler dahil edilirse oyuncu dört finali de not defterinde okuyabilir.
+    ## (Depoda kaynak açık duruyor — bu yalnızca dağıtım paketi içindir.)
+    build.classify('game/**.rpy', None)
+
+    ## Varlıklar tek bir .rpa arşivine girer: klasör dökülmez, kazara
+    ## spoiler veren dosya adları (bg_altin_alev, muzik_gasp...) görünmez.
+    build.classify('game/**.png', 'archive')
+    build.classify('game/**.jpg', 'archive')
+    build.classify('game/**.webp', 'archive')
+    build.classify('game/**.wav', 'archive')
+    build.classify('game/**.ogg', 'archive')
+    build.classify('game/**.opus', 'archive')
+    build.classify('game/**.ttf', 'archive')
 
     ## To archive files, classify them as 'archive'.
 

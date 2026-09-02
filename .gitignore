@@ -32,6 +32,7 @@
 ## Dağıtım (build) çıktıları
 /*.app/
 /build/
+/*-dists/
 *.rpa
 
 ## İşletim sistemi artıkları

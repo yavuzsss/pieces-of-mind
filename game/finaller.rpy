@@ -1,4 +1,4 @@
-# finaller.rpy — Pieces of Mind
+﻿# finaller.rpy — Pieces of Mind
 #
 #   TESLİM  — isim Koro'ya verilir; şövalye söner; kalıntı alevdeki adına
 #             "kavuşur" (koroya karışır). Epilog: yeni beden, "Kalk." —
@@ -758,7 +758,11 @@ label final_gasp_epilog:
     si "Oda. Taş duvarlar. Bir yatak. Bir ayna."
 
     # Aynı yüz — ama görüntü artık hafifçe "yanlış" (kalıcı ince glitch).
-    scene bg_ayna_yakin at glitched(0.25) with sahne_gecis
+    # Erişilebilirlik: bozulma kapalıyken aynı yüz, sakin çizilir.
+    if persistent.glitch_enabled:
+        scene bg_ayna_yakin at glitched(0.25) with sahne_gecis
+    else:
+        scene bg_ayna_yakin with sahne_gecis
 
     gasp_kalinti "Aynadaki adam bana bakıyor."
 

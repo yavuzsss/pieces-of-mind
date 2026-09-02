@@ -6,6 +6,10 @@
 #   muzik_armagan — tek sıcak parça: majör pedal + yumuşak nefes, hafif detune
 #   muzik_sonus   — boşluk: çok alçak pedal + 8-13 sn arayla yalnız bir nota
 #   muzik_gasp    — yanlışlık: vuruşlu detune çift drone + küçük ikili + triton
+#
+# DİKKAT: bu betik WAV yazar, oyun ise .ogg çalar (audio.rpy). Yeni parça
+# üretince ardından tools/ses_ogg_cevir.py çalıştır — WAV'ları Vorbis'e
+# çevirip siler.
 
 import wave
 import numpy as np

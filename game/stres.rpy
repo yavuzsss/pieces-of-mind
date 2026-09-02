@@ -62,7 +62,13 @@ init -1 python:
         return min(lv, stres_etki_tavani)
 
     def stres_textbox_gucu():
-        """Diyalog kutusu glitch şiddeti. 0.0 = efekt HİÇ uygulanmaz."""
+        """Diyalog kutusu glitch şiddeti. 0.0 = efekt HİÇ uygulanmaz.
+
+        Erişilebilirlik anahtarı (persistent.glitch_enabled, effects.rpy)
+        kapalıysa stres ne olursa olsun 0 döner — tek kontrol noktası.
+        """
+        if not persistent.glitch_enabled:
+            return 0.0
         if stres_seviye() < 1:
             return 0.0
         s = getattr(store, "stres", 0)
@@ -139,6 +145,8 @@ init -1 python:
         Etkileşim başına deterministik (kutu metinleri + stresle tohumlanır) —
         ekran yeniden çizildiğinde kutular imlecin altında dans etmez.
         """
+        if not persistent.glitch_enabled:
+            return liste
         if stres_seviye() < 3 or len(liste) < 2:
             return liste
         anahtar = "".join((getattr(i, "caption", "") or "") for i in liste)

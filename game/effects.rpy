@@ -2,8 +2,9 @@
 # CRT ve glitch efektleri. Görsel varlık gerektirmez; hepsi GLSL shader.
 #
 # Kullanım:
-#   - CRT katmanı otomatik olarak her zaman açıktır (persistent.crt_enabled).
-#   - Anlık glitch patlaması:   call glitch_burst(0.4)
+#   - CRT katmanı varsayılan olarak açıktır (persistent.crt_enabled);
+#     erişilebilirlik için ayarlar menüsünden kapatılabilir.
+#   - Anlık glitch patlaması:   call glitch_burst(0.4)   (persistent.glitch_enabled)
 #   - Bir görseli glitch'lemek: show lamba at glitched(1.0)   (ileride)
 
 
@@ -11,8 +12,17 @@
 ## Ayarlar
 ################################################################################
 
-# CRT katmanı açık/kapalı (ayarlar menüsüne düğme eklenebilir).
+# ERİŞİLEBİLİRLİK — iki ayrı görsel anahtar (ayarlar menüsünden açılır/kapanır).
+#
+#   crt_enabled    : sürekli CRT katmanı — tarama çizgisi, vinyet, tüp titremesi.
+#   glitch_enabled : ANLIK parazit patlamaları + ekran sarsıntısı (glitch_burst),
+#                    diyalog kutusu bozulması, seçim kutusu titremesi.
+#
+# Fotosensitif oyuncu için kritik olan ikincisidir: oyun 30 yerde glitch_burst
+# çağırıyor ve her biri hpunch ile ekranı sarsıyor. Kapalıyken SES VE SÜRE
+# KORUNUR — sahnenin ritmi bozulmaz, yalnız ekran sakin kalır.
 default persistent.crt_enabled = True
+default persistent.glitch_enabled = True
 
 # Arka plan geçişleri için standart yavaş çözülme.
 define sahne_gecis = Dissolve(1.2)
@@ -206,10 +216,16 @@ label glitch_burst(duration=0.35, strength=1.0, shake=True):
         $ stres_degistir(1)
 
     play sound glitch_sfx
-    show screen glitch_flash(strength)
-    if shake:
-        with hpunch
-    $ renpy.pause(duration, hard=True)
-    hide screen glitch_flash
+
+    # Erişilebilirlik: görsel patlama kapalıyken cızırtı ve bekleme aynen
+    # kalır. Anlatının duraklaması efektin kendisi kadar önemli.
+    if persistent.glitch_enabled:
+        show screen glitch_flash(strength)
+        if shake:
+            with hpunch
+        $ renpy.pause(duration, hard=True)
+        hide screen glitch_flash
+    else:
+        $ renpy.pause(duration, hard=True)
 
     return
