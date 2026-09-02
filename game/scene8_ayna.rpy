@@ -1,4 +1,4 @@
-# scene8_ayna.rpy — Pieces of Mind
+﻿# scene8_ayna.rpy — Pieces of Mind
 # Sahne 8: Uyku ve Ayna.
 # Odaya dönüş sonrası: uykuyla savaş (UYUMA kuralı: Koro zihinleri uykuda
 # arar), aynadaki anahtar deliğinin ödenmesi (3 bedel, zarsız: alev/kan/anı),
@@ -636,6 +636,8 @@ label sahne8_isim:
 
             $ guven_degistir(-1)
 
+            $ aclik_gorundu = True
+
         "«...»":
 
             s "Sessizsin."
@@ -645,6 +647,9 @@ label sahne8_isim:
             si "Kafamın içindeki boşluk, bir ağız gibi. Kibarca kapalı. Ama ağız."
 
             $ stres_degistir(1)
+
+            # Sessizlik de açlığı gösterir — şövalye onu adlandırdı.
+            $ aclik_gorundu = True
 
         "«Sakla. Kimseye söyleme. Bana bile.»":
 

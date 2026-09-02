@@ -15,6 +15,11 @@ define ko = Character("Koro", color="#d9a441", what_color="#d9a441",
 # Koro'nun araması zihinde iz bıraktı mı? (izin dalı, harf yoksa)
 default zihin_izi = False
 
+# Fısıltı'nın AÇLIĞI şövalyenin gözü önünde çıplak kaldı mı?
+# Gerçeğe varışın kanıtlarından biri (bkz. scene9_donus.rpy: gercege_kanit).
+# Kaynaklar: Sahne 6 «O benim.», Sahne 8 «Söyle.» ve «...».
+default aclik_gorundu = False
+
 # Alevin içinde onu adıyla çağıran ses duyuldu mu? (direniş doğal 20)
 default alevdeki_ses = False
 
@@ -413,6 +418,8 @@ label sahne6_izin:
             si "İçimde bir kapı kapandı. Ben kapatmadım."
 
             $ guven_degistir(-1)
+
+            $ aclik_gorundu = True
 
             ko "Duydunuz mu? Ses sahip çıkıyor."
 

@@ -690,3 +690,65 @@ translate english sahne9_tepe_7024be28:
     # s "Ama seni tanıyorum artık. Belki o daha önemlidir."
     s "But I know you now. Maybe that matters more."
 
+# TODO: Translation updated at 2026-09-02 19:25
+
+# game/scene9_donus.rpy:350
+translate english sahne9_sezgi_3298c242_1:
+
+    # s "'Kalk. Yeniden.' İlk kelimelerin buydu."
+    s "'Get up. Again.' Those were your first words."
+
+# game/scene9_donus.rpy:352
+translate english sahne9_sezgi_424a1df6_1:
+
+    # s "'Yeniden'i hep duydum. Hiç sormadım."
+    s "I always heard the 'again.' I never asked about it."
+
+# game/scene9_donus.rpy:354
+translate english sahne9_sezgi_9804b9a5:
+
+    # si "Şimdi soracak gibi oluyorum. Soru ağzımda duruyor."
+    si "Now I almost ask. The question sits in my mouth."
+
+# game/scene9_donus.rpy:356
+translate english sahne9_sezgi_c570eb9e:
+
+    # si "Şekli var. İçi yok."
+    si "It has a shape. It has no inside."
+
+# game/scene9_donus.rpy:358
+translate english sahne9_sezgi_e1554201:
+
+    # s "..."
+    s "..."
+
+# game/scene9_donus.rpy:360
+translate english sahne9_sezgi_62d54d31:
+
+    # s "Gitti."
+    s "Gone."
+
+# game/scene9_donus.rpy:364
+translate english sahne9_sezgi_6f1e2d51:
+
+    # si "Sen de tutmadın onu. Ya da tuttun ve bırakmadın."
+    si "You didn't catch it either. Or you caught it and didn't let go."
+
+# game/scene9_donus.rpy:366
+translate english sahne9_sezgi_0a3fd552:
+
+    # s "İkimiz de yorgunuz, içimdeki."
+    s "We're both tired, you inside me."
+
+# game/scene9_donus.rpy:368
+translate english sahne9_sezgi_77547352:
+
+    # s "Yukarı çıkalım. Orada belki hatırlarım."
+    s "Let's go up. Maybe I'll remember there."
+
+# game/scene9_donus.rpy:370
+translate english sahne9_sezgi_d2124e9a:
+
+    # si "Hatırlamayacağımı ikimiz de biliyoruz."
+    si "We both know I won't."
+

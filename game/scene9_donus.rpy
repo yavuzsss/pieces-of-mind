@@ -1,4 +1,4 @@
-# scene9_donus.rpy — Pieces of Mind
+﻿# scene9_donus.rpy — Pieces of Mind
 # Sahne 9: Dönüş ve Ayrım.
 # Kuleye geri tırmanış (alev sayacı: "bir alev boyu" tükeniyor), merdivende
 # gerçeğin SEZDİRİLMESİ (Fısıltı'nın kimliği — asla açık söylenmez, İlke 8;
@@ -17,6 +17,41 @@
 
 # Şövalye gerçeğin kıyısına vardı (Armağan'ın ön koşulu).
 default gercek_sezgi = False
+
+# Merdivende "Neden hiç teslim etmedin beni?" sorusuna oyuncunun cevabı.
+# "" / "bilmiyorum" / "sustu" / "istemedim"
+default sahne9_cevap = ""
+
+
+init -1 python:
+
+    def gercege_kanit():
+        """Şövalyenin, Fısıltı'nın kimliğine dair TANIK OLDUĞU kanıt sayısı.
+
+        `gercek_sezgi` eskiden koşulsuz True'ydu: şövalye her koşuda
+        gerçeğin kıyısına bedava varıyordu ve Armağan kapısı pratikte
+        yalnızca guven'e bakıyordu. Artık varış kazanılıyor.
+
+        alevdeki_ses ayrı tutulur — o kanıt değil, gerçeğin kendisidir
+        (doğrudan yolu açar, bu sayıya girmez).
+
+        Eşik ayarının TEK noktası: gercek_sezgi_esigi.
+        """
+        k = 0
+        if sakli_neden:
+            k += 1      # adını "Duymasın" diye sakladığını gördü
+        if aclik_gorundu:
+            k += 1      # fısıltının açlığı gözünün önünde çıplak kaldı
+        if isyan >= 2:
+            k += 1      # onu bir kez değil, defalarca sınadı
+        if sahne9_cevap == "istemedim":
+            k += 1      # "istemedim" — fısıltının onun hakkında bir iradesi var
+        if persistent.olum_sayisi > 0:
+            k += 1      # "Yeniden" kelimesi artık bir şey ifade ediyor
+        return k
+
+# Kaç kanıt gerçeğe vardırır. zar_dc_sabit / stres_bolen ile aynı kalıp.
+define gercek_sezgi_esigi = 2
 
 
 ################################################################################
@@ -212,11 +247,15 @@ label sahne9_merdiven:
 
         "«Bilmiyorum.»":
 
+            $ sahne9_cevap = "bilmiyorum"
+
             s "Bilmiyorsun."
 
             s "İlk dürüst cevabın bu olabilir. Korkutucu olan da bu."
 
         "«...»":
+
+            $ sahne9_cevap = "sustu"
 
             s "Sustun. Yine."
 
@@ -225,6 +264,8 @@ label sahne9_merdiven:
             $ stres_degistir(1)
 
         "«İstemedim.»":
+
+            $ sahne9_cevap = "istemedim"
 
             s "İstemedin."
 
@@ -271,9 +312,13 @@ label sahne9_sezgi:
 
         s "İkimiz de aynayız, içimdeki. Arkasına bir şey saklanmış iki ayna."
 
-    else:
+        $ gercek_sezgi = True
+
+    elif gercege_kanit() >= gercek_sezgi_esigi:
 
         # Kırıntı yolu: gaflar ve oyalanma zinciri.
+        # Artık bedava değil — şövalye bu zinciri ancak yeterince şey
+        # gördüyse kurabilir (bkz. gercege_kanit).
         s "'Kalk. Yeniden.' İlk kelimelerin buydu."
 
         s "'Yeniden'i hep duydum. Hiç sormadım."
@@ -295,7 +340,36 @@ label sahne9_sezgi:
 
         call glitch_burst(0.4, 1.0, shake=False)
 
-    if sakli_neden:
+        $ gercek_sezgi = True
+
+    else:
+
+        # YETERSİZ KANIT: zincir kurulmuyor. Şövalye eşiğe varıp geri döner.
+        # Kayıp burada oynanır — oyuncu az önce söylenmeyeni bilir, şövalye
+        # bilmez. Bayrak açılmaz; «...» yukarıda Gasp'a düşer (İlke 8).
+        s "'Kalk. Yeniden.' İlk kelimelerin buydu."
+
+        s "'Yeniden'i hep duydum. Hiç sormadım."
+
+        si "Şimdi soracak gibi oluyorum. Soru ağzımda duruyor."
+
+        si "Şekli var. İçi yok."
+
+        s "..."
+
+        s "Gitti."
+
+        $ fis("...")
+
+        si "Sen de tutmadın onu. Ya da tuttun ve bırakmadın."
+
+        s "İkimiz de yorgunuz, içimdeki."
+
+        s "Yukarı çıkalım. Orada belki hatırlarım."
+
+        si "Hatırlamayacağımı ikimiz de biliyoruz."
+
+    if gercek_sezgi and sakli_neden:
 
         s "Adımı 'Duymasın' diye saklamışım. Kendimden bile."
 
@@ -303,13 +377,12 @@ label sahne9_sezgi:
 
         s "Neden sakladığımı... çünkü duyduğunda bir şey olacaktı. Sende. Belki ikimizde."
 
-    else:
+    elif gercek_sezgi:
 
         s "Adımı aynanın ardına ben koymuşum. Bir sebepten."
 
         s "Sebep sendin galiba, içimdeki. Ya da sana benzeyen bir şeydi."
 
-    $ gercek_sezgi = True
     $ stres_degistir(2)
 
     si "Merdiven bitiyor. Yukarıda altın ışık."
@@ -418,10 +491,23 @@ label sahne9_esik:
 
             # Sessizlik: oyuncu bekler. Bağ güçlüyse şövalye KENDİ uyanır
             # ve çalınamayanı verir; değilse uyuyan elden isim alınır.
-            # Eşik 4 (2026-07-16 ekonomisi): kazanım anları — sahne4 temiz
-            # geçiş, sahne6 dürüst sessizlik (zorunlu +1), sahne7 «Hayır.» /
-            # ışık yolu, sahne8 «Sakla» — koruyucu oyuncuyu 5-6'ya taşır;
-            # zorunlu düşüşler savruk oyunu 2'nin altına iter.
+            #
+            # İKİ KAPI, İKİ FARKLI ŞEY ÖLÇER (2026-09-02):
+            #   gercek_sezgi -> şövalye NE BİLİYOR (gercege_kanit, eşik 2)
+            #   guven >= 4   -> aramızdaki BAĞ ne durumda (2026-07-16 ekonomisi:
+            #                   sahne4 temiz geçiş, sahne6 dürüst sessizlik
+            #                   [zorunlu +1], sahne7 «Hayır.»/ışık, sahne8
+            #                   «Sakla», sahne6 «Bakma.»)
+            #
+            # gercek_sezgi eskiden koşulsuz True'ydu — kapı fiilen tek
+            # kanattı. Artık iki ayrı şey isteniyor ve bunlar BİRBİRİYLE
+            # ÇEKİŞİYOR: Sahne 8'de «Sakla.» guven +1 verir ama açlığı
+            # göstermez (kanıt yok); «Söyle.»/«...» kanıt verir ama biri
+            # guven götürür. Koruyucu oyuncu bağı kazanırken gerçeği
+            # kaçırabilir. Armağan ikisini birden isteyen tek finaldir.
+            #
+            # Ulaşılabilirlik (kaba): gercek_sezgi ilk koşuda ~%53, ölüm
+            # görmüş koşuda ~%89. Ayar noktası: gercek_sezgi_esigi.
             if gercek_sezgi and guven >= 4:
 
                 jump final_armagan
