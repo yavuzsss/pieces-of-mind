@@ -830,3 +830,205 @@ translate english sahne6_ultimatom_a9b703dc:
     # s "Böylesi daha iyi. Böylesine katlanabilirim."
     s "This kind is better. This kind I can bear."
 
+# TODO: Translation updated at 2026-09-02 19:11
+
+# game/scene6_altin_alev.rpy:335
+translate english sahne6_izin_1402ed93:
+
+    # si "Ve ipliklerden biri ötekiler gibi durmuyor."
+    si "And one of the threads doesn't hang like the others."
+
+# game/scene6_altin_alev.rpy:337
+translate english sahne6_izin_02b546d5:
+
+    # si "Ötekiler yukarı yanıyor. Bu sarkıyor."
+    si "The others burn upward. This one droops."
+
+# game/scene6_altin_alev.rpy:339
+translate english sahne6_izin_c014688f:
+
+    # s "Bana doğru sarkıyor."
+    s "It droops toward me."
+
+# game/scene6_altin_alev.rpy:341
+translate english sahne6_izin_92ebe826:
+
+    # ko "..."
+    ko "..."
+
+# game/scene6_altin_alev.rpy:348
+translate english sahne6_izin_0d2101c6:
+
+    # s "Uzanıyorum."
+    s "I reach."
+
+# game/scene6_altin_alev.rpy:350
+translate english sahne6_izin_5fdc9cfd:
+
+    # si "Elim alevin içinde. Acı yok. Daha kötüsü var: tanıdık."
+    si "My hand is inside the flame. No pain. Something worse: it's familiar."
+
+# game/scene6_altin_alev.rpy:352
+translate english sahne6_izin_06af1dbd:
+
+    # s "İplik parmağıma dolanıyor."
+    s "The thread winds around my finger."
+
+# game/scene6_altin_alev.rpy:354
+translate english sahne6_izin_1cbf2280:
+
+    # s "Bir ses. Kadın sesi."
+    s "A voice. A woman's voice."
+
+# game/scene6_altin_alev.rpy:356
+translate english sahne6_izin_6fed8ecd:
+
+    # s "Beni çağırıyor — ve çağırdığı şeyi duyamıyorum."
+    s "She's calling me — and I can't hear the thing she's calling."
+
+# game/scene6_altin_alev.rpy:358
+translate english sahne6_izin_142644da:
+
+    # s "Duymama gerek de yok. Bu ses bana hep böyle seslendi."
+    s "I don't need to hear it. This voice always called me that way."
+
+# game/scene6_altin_alev.rpy:362
+translate english sahne6_izin_6342dcc0:
+
+    # ko "Çek. Elini. Çek."
+    ko "Pull. Your hand. Pull it back."
+
+# game/scene6_altin_alev.rpy:364
+translate english sahne6_izin_00428c64:
+
+    # si "Koro'nun sesi ilk defa emir değil. Rica gibi."
+    si "For the first time the Choir's voice isn't an order. It's closer to asking."
+
+# game/scene6_altin_alev.rpy:370
+translate english sahne6_izin_717b6cde:
+
+    # s "Elimi çektim. İplik hâlâ orada."
+    s "I pulled my hand back. The thread is still there."
+
+# game/scene6_altin_alev.rpy:372
+translate english sahne6_izin_f8a0760c:
+
+    # s "Bende de bir yeri kaldı."
+    s "It kept a place in me too."
+
+# game/scene6_altin_alev.rpy:378
+translate english sahne6_izin_739be705:
+
+    # s "Bakma, diyorsun."
+    s "Don't look, you say."
+
+# game/scene6_altin_alev.rpy:380
+translate english sahne6_izin_020801cc:
+
+    # si "Sesin aceleci. Daha önce hiç aceleci olmamıştın."
+    si "Your voice is hurried. You have never been hurried before."
+
+# game/scene6_altin_alev.rpy:382
+translate english sahne6_izin_50467ce4:
+
+    # s "Peki."
+    s "All right."
+
+# game/scene6_altin_alev.rpy:384
+translate english sahne6_izin_b68652fc:
+
+    # si "Gözlerimi çeviriyorum. İplik sarkmaya devam ediyor. Sarkarken kalıyor."
+    si "I turn my eyes away. The thread goes on drooping. It stays there, drooping."
+
+# game/scene6_altin_alev.rpy:386
+translate english sahne6_izin_b8975517:
+
+    # s "Beni bir şeyden korudun galiba."
+    s "I think you protected me from something."
+
+# game/scene6_altin_alev.rpy:388
+translate english sahne6_izin_19861ef2:
+
+    # s "Neyden korudun bilmiyorum. Ama korkun gerçekti. Onu duydum."
+    s "I don't know from what. But your fear was real. That much I heard."
+
+# game/scene6_altin_alev.rpy:394
+translate english sahne6_izin_577d5aea:
+
+    # ko "Ses korktu."
+    ko "The voice was afraid."
+
+# game/scene6_altin_alev.rpy:396
+translate english sahne6_izin_20e8c730:
+
+    # ko "İlginç."
+    ko "Interesting."
+
+# game/scene6_altin_alev.rpy:401
+translate english sahne6_izin_da3c1268:
+
+    # s "Senin mi?"
+    s "Yours?"
+
+# game/scene6_altin_alev.rpy:403
+translate english sahne6_izin_53547200:
+
+    # si "Sesin değişti. İlk defa aç bir şey gibi çıktı."
+    si "Your voice changed. For the first time it came out like something hungry."
+
+# game/scene6_altin_alev.rpy:405
+translate english sahne6_izin_d4b6e212:
+
+    # s "Alevdeki bir ipliğe 'benim' dedin."
+    s "You called a thread in the flame 'mine'."
+
+# game/scene6_altin_alev.rpy:407
+translate english sahne6_izin_b936e283:
+
+    # s "Bunu nereden biliyorsun?"
+    s "How do you know that?"
+
+# game/scene6_altin_alev.rpy:411
+translate english sahne6_izin_6bbe5334:
+
+    # s "Bilmiyorsun. Ama istedin."
+    s "You don't know. But you wanted it."
+
+# game/scene6_altin_alev.rpy:413
+translate english sahne6_izin_eb0d5495:
+
+    # si "İçimde bir kapı kapandı. Ben kapatmadım."
+    si "A door closed inside me. I didn't close it."
+
+# game/scene6_altin_alev.rpy:417
+translate english sahne6_izin_78bad8ba:
+
+    # ko "Duydunuz mu? Ses sahip çıkıyor."
+    ko "Did you hear? The voice is laying claim."
+
+# game/scene6_altin_alev.rpy:419
+translate english sahne6_izin_b32cda58:
+
+    # ko "Sahip çıkan ses, teslim etmeyen sestir."
+    ko "A voice that lays claim is a voice that does not deliver."
+
+# game/scene6_altin_alev.rpy:421
+translate english sahne6_izin_dc51f70c:
+
+    # si "Koro'nun ilgisi ilk defa bana değil — içimdekine döndü."
+    si "For the first time the Choir's attention turned not to me — but to the you inside me."
+
+translate english strings:
+
+    # game/scene6_altin_alev.rpy:347
+    old "«Uzan.»"
+    new "«Reach.»"
+
+    # game/scene6_altin_alev.rpy:377
+    old "«Bakma.»"
+    new "«Don't look.»"
+
+    # game/scene6_altin_alev.rpy:400
+    old "«O benim.»"
+    new "«That's mine.»"
+

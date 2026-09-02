@@ -3,6 +3,10 @@
 
 translate english strings:
 
+    # About ekranı (options.rpy gui.about)
+    old "Hafızasını kaybetmiş bir şövalye karanlık bir odada uyanır. Oyuncu o değildir — oyuncu, onun zihnindeki sestir.\n\nYavuz Selim Şeremetli tarafından yapılmıştır.\n\nRen'Py ile geliştirildi.\n\nYazı tipi: VT323 — The VT323 Project Authors. SIL Open Font License 1.1 ile kullanılmıştır; lisansın tam metni game/fonts/OFL.txt dosyasındadır."
+    new "A knight who has lost his memory wakes in a dark room. The player is not him — the player is the voice inside his head.\n\nMade by Yavuz Selim Şeremetli.\n\nBuilt with Ren'Py.\n\nTypeface: VT323 — The VT323 Project Authors. Used under the SIL Open Font License 1.1; the full license text is in game/fonts/OFL.txt."
+
     # ── Karakter adları ──────────────────────────────────────────────────
     old "Fısıltı"
     new "Whisper"
@@ -338,6 +342,9 @@ translate english strings:
 
     old "içindeki koparılırken beden dayanamadı"
     new "the body could not bear the one inside being torn out"
+
+    old "alevin içine uzanmak"
+    new "reaching into the flame"
 
     old "altın parmak, kavurduğunu götürdü"
     new "the golden finger took what it scorched"

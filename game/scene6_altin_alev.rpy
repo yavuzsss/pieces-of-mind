@@ -1,4 +1,4 @@
-# scene6_altin_alev.rpy — Pieces of Mind
+﻿# scene6_altin_alev.rpy — Pieces of Mind
 # Sahne 6: Kulenin Tepesi — Altın Alev (Koro).
 # Koro: isimlerden örülü altın alev; fısıltıların bağlı olduğu üst varlık.
 # Şövalyeyle değil, Fısıltı'yla konuşur — oyuncuya dışarıdan seslenen ilk şey.
@@ -322,6 +322,103 @@ label sahne6_izin:
     s "İsimler. Binlerce isim, altın iplikler gibi yanıyor."
 
     s "Alev isimlerden yapılmış."
+
+    ################################################################
+    ## İKİNCİ YOL — alevdeki_ses (zarsız, bedelli)
+    ##
+    ## Direniş kolundaki doğal 20 tek erişim noktasıydı: oyunun tezi
+    ## koşuların %2-3'ünde görülüyordu. Burada şövalye zaten alevin
+    ## içine bakıyor — eksik olan uzanma iznin(iz)di.
+    ## Üç fısıltı, üç ayrı bedel; hiçbiri kaçış değil (İlke 3).
+    ################################################################
+
+    si "Ve ipliklerden biri ötekiler gibi durmuyor."
+
+    si "Ötekiler yukarı yanıyor. Bu sarkıyor."
+
+    s "Bana doğru sarkıyor."
+
+    ko "..."
+
+    menu:
+
+        "«Uzan.»":
+
+            # Bedel: uzanan el yanar + Koro uzanışı hisseder (iz kalır).
+            s "Uzanıyorum."
+
+            si "Elim alevin içinde. Acı yok. Daha kötüsü var: tanıdık."
+
+            s "İplik parmağıma dolanıyor."
+
+            s "Bir ses. Kadın sesi."
+
+            s "Beni çağırıyor — ve çağırdığı şeyi duyamıyorum."
+
+            s "Duymama gerek de yok. Bu ses bana hep böyle seslendi."
+
+            $ alevdeki_ses = True
+
+            ko "Çek. Elini. Çek."
+
+            si "Koro'nun sesi ilk defa emir değil. Rica gibi."
+
+            call can_hasar(3, "alevin içine uzanmak")
+
+            $ zihin_izi = True
+
+            s "Elimi çektim. İplik hâlâ orada."
+
+            s "Bende de bir yeri kaldı."
+
+        "«Bakma.»":
+
+            # Bedel: koruma gibi görünen kaçış. Şövalye korunduğunu sanır;
+            # oyuncu ne kaçırdığını ancak Armağan finalinde anlar (İlke 8).
+            s "Bakma, diyorsun."
+
+            si "Sesin aceleci. Daha önce hiç aceleci olmamıştın."
+
+            s "Peki."
+
+            si "Gözlerimi çeviriyorum. İplik sarkmaya devam ediyor. Sarkarken kalıyor."
+
+            s "Beni bir şeyden korudun galiba."
+
+            s "Neyden korudun bilmiyorum. Ama korkun gerçekti. Onu duydum."
+
+            $ guven_degistir(1)
+
+            $ stres_degistir(2)
+
+            ko "Ses korktu."
+
+            ko "İlginç."
+
+        "«O benim.»":
+
+            # Bedel: kalıntının açlığı ilk kez çıplak görünür; şövalye kapanır.
+            s "Senin mi?"
+
+            si "Sesin değişti. İlk defa aç bir şey gibi çıktı."
+
+            s "Alevdeki bir ipliğe 'benim' dedin."
+
+            s "Bunu nereden biliyorsun?"
+
+            $ fis("...")
+
+            s "Bilmiyorsun. Ama istedin."
+
+            si "İçimde bir kapı kapandı. Ben kapatmadım."
+
+            $ guven_degistir(-1)
+
+            ko "Duydunuz mu? Ses sahip çıkıyor."
+
+            ko "Sahip çıkan ses, teslim etmeyen sestir."
+
+            si "Koro'nun ilgisi ilk defa bana değil — içimdekine döndü."
 
     ko "Gördü. Beden gördü."
 
