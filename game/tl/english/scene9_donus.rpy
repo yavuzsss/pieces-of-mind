@@ -784,3 +784,17 @@ translate english sahne9_ucurum_95582537:
     # si "Ve o birinin kemeri benimkiyle aynı yeri kazımış."
     si "And that someone's buckle wore down the same spot as mine."
 
+# TODO: Translation updated at 2026-09-03 14:01
+
+# game/scene9_donus.rpy:504
+translate english sahne9_esik_6129895b:
+
+    # si "Ağzım yok. Senin ağzın yok. İkimizin de yok."
+    si "I have no mouth. You have no mouth. Neither of us does."
+
+# game/scene9_donus.rpy:506
+translate english sahne9_esik_e070e84c:
+
+    # si "Sonra — bir yerden — geri geliyor."
+    si "Then — from somewhere — it comes back."
+

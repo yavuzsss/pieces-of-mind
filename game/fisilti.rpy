@@ -54,6 +54,38 @@ default fis_reddi_acik = True
 default kurtarildi = 0
 
 
+################################################################################
+## KAÇAN KUTU — ritmin bilinçli kırılması (2026-09-03)
+################################################################################
+# Oyun 141 fısıltı kutusu boyunca oyuncuya HER SEFERİNDE söz hakkı veriyor.
+# Bu, etkileşimi dinamiksiz bırakıyor: konuşamadığın bir an hiç yok.
+#
+# fis_kacan(): kutu belirir, TIKLANIR — ama hiçbir şey olmaz. Sonra solar
+# ve gider. Oyuncu ne söylemek istediğini görür ve söyleyemez.
+#
+# Sahne 3'ün sonunda bu aynı zamanda bir ÇELİŞKİYİ de kapatıyor: orada
+# oyuncu fis("...") kutusuna tıklıyordu (yani konuşuyordu), ama şövalye
+# hemen ardından "İlk defa... sesin sustu" diyordu. Artık gerçekten susuyor.
+
+transform fis_kacis(sure=3.2):
+    alpha 1.0
+    pause sure * 0.40
+    linear sure * 0.60 alpha 0.0
+
+screen fis_kacan_ekran(kutular, sure):
+
+    style_prefix "choice"
+    zorder 100
+
+    vbox:
+        at fis_kacis(sure)
+        for k in kutular:
+            # NullAction: tıklanabilir görünür, tıklanır — ve hiçbir şey olmaz.
+            textbutton k action NullAction()
+
+    timer sure action Return(0)
+
+
 init -1 python:
 
     def fis_duymadi_mi():
@@ -87,6 +119,15 @@ init -1 python:
         except Exception:
             pass
         return secim
+
+    def fis_kacan(*metinler, **kw):
+        """Söylenemeyen fısıltı: kutu belirir, tıklanır, hiçbir şey olmaz, solar.
+
+        Geçmişe İŞLENMEZ — çünkü söylenmedi.
+        """
+        sure = kw.get("sure", 3.2)
+        kutular = ["«%s»" % __(m) for m in metinler]
+        renpy.call_screen("fis_kacan_ekran", kutular=kutular, sure=sure)
 
     def guven_degistir(delta):
         """Şövalyenin güvenini değiştirir (0-10 aralığına sıkıştırılır)."""

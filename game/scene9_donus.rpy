@@ -497,6 +497,14 @@ label sahne9_esik:
 
     si "Kafamın içinde son bir yer uyanık: sen."
 
+    # RİTİM KIRIĞI 3/3 — son sözden hemen ÖNCE söz elden alınır.
+    # Amaç: final menüsü bir hak gibi değil, geri VERİLMİŞ bir şey gibi gelsin.
+    $ fis_kacan("Bekle.", "Daha erken.", "Hazır değilim.", sure=3.6)
+
+    si "Ağzım yok. Senin ağzın yok. İkimizin de yok."
+
+    si "Sonra — bir yerden — geri geliyor."
+
     # ─── FİNAL AYRIMI — zarsız, telafisiz (İlke 7) ───
     # Oyuncunun fısıltısı üç kutu; dördüncü yol (Armağan) seçilmez, HAK EDİLİR.
     menu:

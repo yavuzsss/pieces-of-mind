@@ -420,8 +420,11 @@ label sahne3_son:
 
     si "Ve yaklaşıyor."
 
-    # Oyuncu susmayı seçer — fısıldayacak bir şey yoktur.
-    $ fis("...")
+    # RİTİM KIRIĞI 1/3 — KAÇAN KUTU (fisilti.rpy).
+    # Kutu belirir, tıklanır, hiçbir şey olmaz, solar. Oyuncu ilk kez
+    # söyleyemez. Eskiden burada fis("...") vardı: oyuncu KONUŞUYORDU ama
+    # şövalye "sesin sustu" diyordu — mekanik metni yalanlıyordu.
+    $ fis_kacan("Dur.", "Yaklaşma.", sure=3.4)
 
     s "İlk defa... sesin sustu."
 

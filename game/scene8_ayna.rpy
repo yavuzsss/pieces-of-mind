@@ -428,8 +428,13 @@ label sahne8_uzanis:
 
     si "Uğultu ağırlaşıyor. Uyku, sıcak bir el gibi enseme yerleşiyor."
 
-    # Fısıltı'nın tokadı — oyuncu tıklamak zorunda.
-    $ fis("Uyan.")
+    # RİTİM KIRIĞI 2/3 — uyku, sesi bedene ulaşmadan yutuyor.
+    $ fis_kacan("Uyan.", sure=2.8)
+
+    si "Bir şey söyledin. Sanırım. Uğultunun altında kaldı."
+
+    # Ve şimdi ulaşıyor — oyuncu ikinci kez, daha yüksek sesle.
+    $ fis("UYAN.")
 
     if guven <= 2:
 

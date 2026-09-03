@@ -1381,3 +1381,11 @@ translate english sahne8_cekis_f50d6200:
     # s "Yansıma taklit etmez. Yansıma {i}aynı anda{/i} olur."
     s "A reflection doesn't imitate. A reflection happens {i}at the same instant{/i}."
 
+# TODO: Translation updated at 2026-09-03 14:01
+
+# game/scene8_ayna.rpy:434
+translate english sahne8_uzanis_9a3a76db:
+
+    # si "Bir şey söyledin. Sanırım. Uğultunun altında kaldı."
+    si "You said something. I think. It stayed under the droning."
+

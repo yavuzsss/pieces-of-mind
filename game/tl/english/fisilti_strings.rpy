@@ -3,6 +3,22 @@
 
 translate english strings:
 
+    # Kaçan kutu (fis_kacan)
+    old "Dur."
+    new "Stop."
+
+    old "Yaklaşma."
+    new "Don't come closer."
+
+    old "Bekle."
+    new "Wait."
+
+    old "Daha erken."
+    new "Too early."
+
+    old "Hazır değilim."
+    new "I'm not ready."
+
     # Dövüş HUD (savas.rpy)
     old "ŞÖVALYE"
     new "KNIGHT"
