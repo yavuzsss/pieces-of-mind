@@ -48,6 +48,8 @@ init -1 python:
             k += 1      # "istemedim" — fısıltının onun hakkında bir iradesi var
         if persistent.olum_sayisi > 0:
             k += 1      # "Yeniden" kelimesi artık bir şey ifade ediyor
+        if kurtarildi > 0:
+            k += 1      # o ses onu ölümün kıyısından geri çekti — en somut kanıt
         return k
 
 # Kaç kanıt gerçeğe vardırır. zar_dc_sabit / stres_bolen ile aynı kalıp.

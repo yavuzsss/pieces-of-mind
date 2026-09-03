@@ -1032,3 +1032,53 @@ translate english strings:
     old "«O benim.»"
     new "«That's mine.»"
 
+# TODO: Translation updated at 2026-09-03 13:38
+
+# game/scene6_altin_alev.rpy:577
+translate english sahne6_direnis_krit_fiyasko_92ebe826:
+
+    # ko "..."
+    ko "..."
+
+# game/scene6_altin_alev.rpy:579
+translate english sahne6_direnis_krit_fiyasko_e0f806b4:
+
+    # ko "Kim konuştu?"
+    ko "Who spoke?"
+
+# game/scene6_altin_alev.rpy:581
+translate english sahne6_direnis_krit_fiyasko_a897ebff:
+
+    # si "Altın çekiliyor. Bir adım. Sadece bir adım."
+    si "The gold pulls back. One step. Only one step."
+
+# game/scene6_altin_alev.rpy:583
+translate english sahne6_direnis_krit_fiyasko_9472497b:
+
+    # si "Ama geçtiği her rafı yakarak çekiliyor."
+    si "But it burns every shelf it passes on the way out."
+
+# game/scene6_altin_alev.rpy:591
+translate english sahne6_direnis_krit_fiyasko_b6b3477f:
+
+    # centered "{color=#cc2222}HARF GİTTİ{/color}"
+    centered "{color=#cc2222}HARF GİTTİ{/color}"
+
+# game/scene6_altin_alev.rpy:593
+translate english sahne6_direnis_krit_fiyasko_6af96343:
+
+    # s "E. Elimde tek o vardı."
+    s "E. It was the only thing I had left."
+
+# game/scene6_altin_alev.rpy:599
+translate english sahne6_direnis_krit_fiyasko_be9b72b5:
+
+    # ko "Bir daha bakacağız, küçük fısıltı."
+    ko "We will look again, little whisper."
+
+# game/scene6_altin_alev.rpy:601
+translate english sahne6_direnis_krit_fiyasko_a1116624:
+
+    # ko "Ve bir daha bağıramayacaksın."
+    ko "And you will not be able to scream again."
+

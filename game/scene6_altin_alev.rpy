@@ -572,7 +572,35 @@ label sahne6_direnis_krit_fiyasko:
     # Fısıltı'nın son çığlığı — oyuncu tıklamak zorunda.
     $ fis("HAYIR. {b}ONU BANA BIRAK—{/b}")
 
-    call olum("zihnin altın alevde kavruldu")
+    # DOĞAL 1 ARTIK ÖLDÜRMEZ: Koro çığlığı duyar ve BİR AN duraklar.
+    # Bedel en ağırı: harf yanar, iz kalır, beden kavrulur.
+    ko "..."
+
+    ko "Kim konuştu?"
+
+    si "Altın çekiliyor. Bir adım. Sadece bir adım."
+
+    si "Ama geçtiği her rafı yakarak çekiliyor."
+
+    $ kurtarildi += 1
+
+    call can_hasar(10, "altın alev içeriden geçti")
+
+    if knight_name == "E───":
+
+        centered "{color=#cc2222}HARF GİTTİ{/color}"
+
+        s "E. Elimde tek o vardı."
+
+        $ knight_name = "???"
+
+    $ zihin_izi = True
+
+    ko "Bir daha bakacağız, küçük fısıltı."
+
+    ko "Ve bir daha bağıramayacaksın."
+
+    $ stres_degistir(3)
 
 
 ################################################################################

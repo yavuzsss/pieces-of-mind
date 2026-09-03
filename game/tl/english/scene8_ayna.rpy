@@ -1317,3 +1317,41 @@ translate english strings:
     # game/scene8_ayna.rpy:650
     old "«Sakla. Kimseye söyleme. Bana bile.»"
     new "«Keep it. Tell no one. Not even me.»"
+# TODO: Translation updated at 2026-09-03 13:38
+
+# game/scene8_ayna.rpy:573
+translate english sahne8_uzanis_krit_fiyasko_d8a72a8a:
+
+    # si "Gözkapağım açılıyor. Tek başına değil — biri kaldırdı."
+    si "My eyelid opens. Not on its own — something lifted it."
+
+# game/scene8_ayna.rpy:575
+translate english sahne8_uzanis_krit_fiyasko_150f653e:
+
+    # si "Avucum yumruğa dönüyor. İçinde ne varsa, orada kalıyor."
+    si "My palm closes into a fist. Whatever is inside stays inside."
+
+# game/scene8_ayna.rpy:577
+translate english sahne8_uzanis_krit_fiyasko_4dbf57d2:
+
+    # si "Ve altın ışık, aldığını sandığı şeyi bulamadan çekiliyor."
+    si "And the golden light withdraws without finding what it thought it had taken."
+
+# game/scene8_ayna.rpy:583
+translate english sahne8_uzanis_krit_fiyasko_f9719b24:
+
+    # s "Bağırdın."
+    s "You screamed."
+
+# game/scene8_ayna.rpy:585
+translate english sahne8_uzanis_krit_fiyasko_6bf5902c:
+
+    # s "Sen hep bağırıyorsun. Ben hep uyanıyorum."
+    s "You always scream. I always wake up."
+
+# game/scene8_ayna.rpy:587
+translate english sahne8_uzanis_krit_fiyasko_14c1595a:
+
+    # si "Bu cümlenin altında bir şey var. Bakmayacağım."
+    si "There is something underneath that sentence. I won't look at it."
+

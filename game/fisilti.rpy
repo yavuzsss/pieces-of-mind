@@ -42,6 +42,18 @@ define fis_reddi_egim = 0.09
 default fis_reddi_acik = True
 
 
+################################################################################
+## KURTARILDI — doğal 1'in yeni anlamı (2026-09-03)
+################################################################################
+# Doğal 1 artık öldürmüyor: Fısıltı'nın çığlığı bedeni geri çekiyor, bedel
+# ağır ve telafisiz kalıyor (bkz. sahne3/4/6/7/8'deki krit_fiyasko dalları).
+#
+# Bu sayaç yalnız bir denge kalemi değil, KANIT: şövalye kaç kez o sesin
+# onu bırakmadığına tanık oldu. Sahne 9'da gercege_kanit() bunu okur —
+# "lanetler beklemez" zincirinin en somut halkası.
+default kurtarildi = 0
+
+
 init -1 python:
 
     def fis_duymadi_mi():

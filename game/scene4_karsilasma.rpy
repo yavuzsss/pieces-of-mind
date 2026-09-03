@@ -1,4 +1,4 @@
-# scene4_karsilasma.rpy — Pieces of Mind
+﻿# scene4_karsilasma.rpy — Pieces of Mind
 # Sahne 4: Karşılaşma — Sönmüş Şövalye.
 # Fısıltısı gitmiş, alevi ölmek üzere olan eski bir taşıyıcı. Şövalyenin
 # olası geleceği. Lore: fısıltılar "yer" bekler; isim fısıltıya verilmemeli.
@@ -335,7 +335,24 @@ label sahne4_bogusma_olum:
     # Fısıltı'nın paniği — oyuncu kendi çığlığını tıklar.
     $ fis("Hayır. Hayır. HAYIR—")
 
-    call olum("sönmüş şövalye seni karanlığa çekti")
+    # DOĞAL 1 ARTIK ÖLDÜRMEZ: çığlık bileği çözer, ama beden bedelini öder.
+    si "Ve bilekler çözülüyor."
+
+    sk "..."
+
+    sk "Sesin. Sesin çok yüksek."
+
+    si "Geri sendeliyorum. Işığın çemberine düşüyorum, yüzükoyun."
+
+    $ kurtarildi += 1
+
+    call can_hasar(9, "sönmüş olanın parmakları")
+
+    sk "Seninki hâlâ bağırıyor. Benimki bağırmayı bırakalı çok oldu."
+
+    $ stres_degistir(2)
+
+    jump sahne4_son
 
 
 label sahne4_geri_krit_fiyasko:
@@ -382,7 +399,22 @@ label sahne4_geri_krit_fiyasko:
 
         call glitch_burst(0.7, 1.6)
 
-        call olum("içindeki koparılırken beden dayanamadı")
+        # DOĞAL 1 ARTIK ÖLDÜRMEZ: sahiplenme cümlesi eli durdurur.
+        si "Parmaklar duruyor."
+
+        sk "\"Benim\" dedi."
+
+        sk "Benimki bunu hiç demedi."
+
+        si "Ve el çekiliyor. Kafamın içinde bir şey yırtık kalıyor."
+
+        $ kurtarildi += 1
+
+        call can_hasar(9, "içindeki koparılırken")
+
+        $ stres_degistir(3)
+
+        jump sahne4_son
 
 
 ################################################################################

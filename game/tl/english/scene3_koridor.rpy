@@ -603,3 +603,47 @@ translate english strings:
     # game/scene3_koridor.rpy:174
     old "«Geri dön. Başka bir yol olmalı.»"
     new "«Turn back. There must be another way.»"
+# TODO: Translation updated at 2026-09-03 13:38
+
+# game/scene3_koridor.rpy:366
+translate english sahne3_gecis_krit_fiyasko_1302b98d:
+
+    # si "Ve kapatmıyorum."
+    si "And I don't close them."
+
+# game/scene3_koridor.rpy:368
+translate english sahne3_gecis_krit_fiyasko_8d7139e0:
+
+    # si "Bir kök. Bir çıkıntı. Bir şey — parmaklarım kendiliğinden kapanıyor."
+    si "A root. A ledge. Something — my fingers close on it by themselves."
+
+# game/scene3_koridor.rpy:370
+translate english sahne3_gecis_krit_fiyasko_ff451d9a:
+
+    # si "Omzum yerinden çıkacak gibi. Çıkmıyor. Sadece bağırıyor."
+    si "My shoulder feels like it will tear loose. It doesn't. It only screams."
+
+# game/scene3_koridor.rpy:376
+translate english sahne3_gecis_krit_fiyasko_7256d608:
+
+    # si "Yukarı tırmanıyorum. Tırnaklarımdan biri taşta kaldı."
+    si "I climb back up. One of my nails stays behind in the stone."
+
+# game/scene3_koridor.rpy:378
+translate english sahne3_gecis_krit_fiyasko_f4203fe7:
+
+    # si "Lambam düşerken kapağı açılmış. Alev artık bir parmak boyu."
+    si "The lamp's cap came open when it fell. The flame is a finger tall now."
+
+# game/scene3_koridor.rpy:382
+translate english sahne3_gecis_krit_fiyasko_f9977db8:
+
+    # s "Işık küçüldü."
+    s "The light got smaller."
+
+# game/scene3_koridor.rpy:384
+translate english sahne3_gecis_krit_fiyasko_56bcea82:
+
+    # s "Demek dünya da küçüldü."
+    s "So the world got smaller too."
+

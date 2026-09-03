@@ -624,10 +624,26 @@ label sahne7_dovus_krit_fiyasko:
     # Fısıltı'nın çığlığı — oyuncu tıklamak zorunda.
     $ fis("Onu ALAMAZSIN—")
 
-    # Barlar ölüm ekranına taşınmasın. Görsel kalır: sarılan o.
-    call savas_bitir(sonduren=False)
+    # DOĞAL 1 ARTIK ÖLDÜRMEZ: kollar gevşer, ama dövüş bitmez.
+    yr "Alamaz mıyım?"
 
-    call olum("yarım olan, senin yarınla tamamlandı")
+    yr "...Hayır. Alamıyorum."
+
+    yr "Seninki hâlâ sende. Sıkı tutuyor."
+
+    si "Kollar gevşiyor. Geri düşüyorum, ciğerlerim yanıyor."
+
+    $ kurtarildi += 1
+
+    call can_hasar(10, "yarım olanın kucağı")
+
+    si "Yarım geri çekiliyor. Gülümsemiyor artık."
+
+    yr "Bir gün gevşeyecek. Ben beklerim."
+
+    $ stres_degistir(2)
+
+    jump sahne7_dovus_tur
 
 
 ################################################################################

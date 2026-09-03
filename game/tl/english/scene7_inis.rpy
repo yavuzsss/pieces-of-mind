@@ -1174,3 +1174,41 @@ translate english sahne7_dovus_tur_73e5741f:
     # s "Bilmiyorum. Ama biliyor."
     s "I don't know. But it does."
 
+# TODO: Translation updated at 2026-09-03 13:38
+
+# game/scene7_inis.rpy:628
+translate english sahne7_dovus_krit_fiyasko_e1fcbb08:
+
+    # yr "Alamaz mıyım?"
+    yr "Can't I?"
+
+# game/scene7_inis.rpy:630
+translate english sahne7_dovus_krit_fiyasko_c1b102d9:
+
+    # yr "...Hayır. Alamıyorum."
+    yr "...No. I can't."
+
+# game/scene7_inis.rpy:632
+translate english sahne7_dovus_krit_fiyasko_049b9575:
+
+    # yr "Seninki hâlâ sende. Sıkı tutuyor."
+    yr "Yours is still yours. It holds on tight."
+
+# game/scene7_inis.rpy:634
+translate english sahne7_dovus_krit_fiyasko_0800865a:
+
+    # si "Kollar gevşiyor. Geri düşüyorum, ciğerlerim yanıyor."
+    si "The arms loosen. I fall back, my lungs burning."
+
+# game/scene7_inis.rpy:640
+translate english sahne7_dovus_krit_fiyasko_375c9c49:
+
+    # si "Yarım geri çekiliyor. Gülümsemiyor artık."
+    si "Half draws back. It isn't smiling any more."
+
+# game/scene7_inis.rpy:642
+translate english sahne7_dovus_krit_fiyasko_c8bd0d30:
+
+    # yr "Bir gün gevşeyecek. Ben beklerim."
+    yr "One day it will loosen its grip. I can wait."
+

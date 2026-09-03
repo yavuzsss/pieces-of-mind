@@ -835,3 +835,59 @@ translate english strings:
     # game/scene4_karsilasma.rpy:146
     old "«Önce sor: içindeki şey ne istiyor?»"
     new "«Ask him first: what does the thing inside want?»"
+# TODO: Translation updated at 2026-09-03 13:38
+
+# game/scene4_karsilasma.rpy:339
+translate english sahne4_bogusma_olum_9fa8c73d:
+
+    # si "Ve bilekler çözülüyor."
+    si "And the wrists come loose."
+
+# game/scene4_karsilasma.rpy:341
+translate english sahne4_bogusma_olum_639b733f:
+
+    # sk "..."
+    sk "..."
+
+# game/scene4_karsilasma.rpy:343
+translate english sahne4_bogusma_olum_774e9d03:
+
+    # sk "Sesin. Sesin çok yüksek."
+    sk "Your voice. Your voice is too loud."
+
+# game/scene4_karsilasma.rpy:345
+translate english sahne4_bogusma_olum_a6311b9d:
+
+    # si "Geri sendeliyorum. Işığın çemberine düşüyorum, yüzükoyun."
+    si "I stagger back. I fall into the circle of light, face down."
+
+# game/scene4_karsilasma.rpy:351
+translate english sahne4_bogusma_olum_1eeec9fd:
+
+    # sk "Seninki hâlâ bağırıyor. Benimki bağırmayı bırakalı çok oldu."
+    sk "Yours still screams. Mine stopped screaming a long time ago."
+
+# game/scene4_karsilasma.rpy:403
+translate english sahne4_geri_krit_fiyasko_e8bbdccb:
+
+    # si "Parmaklar duruyor."
+    si "The fingers stop."
+
+# game/scene4_karsilasma.rpy:405
+translate english sahne4_geri_krit_fiyasko_3d7789a0:
+
+    # sk "\"Benim\" dedi."
+    sk "\"Benim\" dedi."
+
+# game/scene4_karsilasma.rpy:407
+translate english sahne4_geri_krit_fiyasko_0eb51d16:
+
+    # sk "Benimki bunu hiç demedi."
+    sk "Mine never said that."
+
+# game/scene4_karsilasma.rpy:409
+translate english sahne4_geri_krit_fiyasko_5a301bcf:
+
+    # si "Ve el çekiliyor. Kafamın içinde bir şey yırtık kalıyor."
+    si "And the hand withdraws. Something stays torn inside my head."
+

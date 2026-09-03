@@ -1,8 +1,10 @@
-# scene3_koridor.rpy — Pieces of Mind
+﻿# scene3_koridor.rpy — Pieces of Mind
 # Sahne 3: Kapı ve Koridor.
 # Lambanın alınışı (lamba_bagi'ye duyarlı), geride kalan odanın yok oluşu,
 # ışık çemberinin dışındaki takipçi, ve ilk ölümcül engel: uçurum geçişi.
-# İlk GÜÇ zarı. İlk olası ölüm: yalnızca doğal 1 öldürür (call olum);
+# İlk GÜÇ zarı. Doğal 1 ARTIK ÖLDÜRMEZ (2026-09-03): Fısıltı'nın çığlığı
+# bedeni geri çeker, bedel ağır ve telafisiz kalır (CAN -8 + alev_kucuk).
+# Ölüm yalnızca CAN 0'dan gelir (stats.rpy can_hasar -> death.rpy);
 # normal başarısızlık bedel ödetir (CAN -4). Sonunda ilk yükselme.
 
 # Uçurum geçişinde lamba tek elde miydi? (başarısızlık metnini değiştirir)
@@ -359,7 +361,29 @@ label sahne3_gecis_krit_fiyasko:
     # Oyuncunun tıklamak zorunda olduğu merhamet fısıltısı.
     $ fis("Gözlerini kapat.")
 
-    call olum("karanlık seni yuttu")
+    # DOĞAL 1 ARTIK ÖLDÜRMEZ (2026-09-03). Çığlık işe yarar — ucundan.
+    # Bedel ağır ve TELAFİSİZ: ışık kalıcı olarak küçülür.
+    si "Ve kapatmıyorum."
+
+    si "Bir kök. Bir çıkıntı. Bir şey — parmaklarım kendiliğinden kapanıyor."
+
+    si "Omzum yerinden çıkacak gibi. Çıkmıyor. Sadece bağırıyor."
+
+    $ kurtarildi += 1
+
+    call can_hasar(10, "uçurum seni yarı yolda bıraktı")
+
+    si "Yukarı tırmanıyorum. Tırnaklarımdan biri taşta kaldı."
+
+    si "Lambam düşerken kapağı açılmış. Alev artık bir parmak boyu."
+
+    $ alev_kucuk = True
+
+    s "Işık küçüldü."
+
+    s "Demek dünya da küçüldü."
+
+    $ stres_degistir(2)
 
 
 ################################################################################

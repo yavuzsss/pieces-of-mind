@@ -569,7 +569,24 @@ label sahne8_uzanis_krit_fiyasko:
     # Fısıltı'nın çığlığı — oyuncu tıklamak zorunda.
     $ fis("UYAN. UYAN. UYA—")
 
-    call olum("uykuda ellerini açtın")
+    # DOĞAL 1 ARTIK ÖLDÜRMEZ: çığlık gözkapağını kaldırır.
+    si "Gözkapağım açılıyor. Tek başına değil — biri kaldırdı."
+
+    si "Avucum yumruğa dönüyor. İçinde ne varsa, orada kalıyor."
+
+    si "Ve altın ışık, aldığını sandığı şeyi bulamadan çekiliyor."
+
+    $ kurtarildi += 1
+
+    call can_hasar(9, "uyku ile uyanıklığın arasında")
+
+    s "Bağırdın."
+
+    s "Sen hep bağırıyorsun. Ben hep uyanıyorum."
+
+    si "Bu cümlenin altında bir şey var. Bakmayacağım."
+
+    $ stres_degistir(3)
 
 
 ################################################################################
