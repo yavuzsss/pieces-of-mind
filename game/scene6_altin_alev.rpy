@@ -170,7 +170,11 @@ label sahne6_pazarlik:
 
     s "Daha önce de mi? Benden önce... başkaları mı vardı?"
 
-    $ guven_degistir(-2)
+    # NOT: Bu anın guven bedeli (-2) buradan ALINDI ve arama seçiminden
+    # SONRAYA taşındı (sahne6_direnis / sahne6_izin başları). Sebep: burada
+    # tahsil edilince guven, sahne6_izin'in "guven <= 2" reddetme eşiğinin
+    # altına HER KOŞUDA düşüyordu — izin dalı hiçbir oyuncu için açılmıyordu
+    # (2026-09-03 elle testi). Ekonominin toplamı değişmedi, yalnız sıra.
 
     ko "Sor ona, beden."
 
@@ -276,6 +280,10 @@ label sahne6_izin:
         $ stres_degistir(1)
 
         jump sahne6_direnis
+
+    # Bedel eşik kontrolünden SONRA: reddetme, oyuncunun o ana kadar kurduğu
+    # bağa bakar — Koro'nun az önceki sözlerinin faturasına değil.
+    $ guven_degistir(-2)
 
     s "Bırakıyorum."
 
@@ -443,6 +451,11 @@ label sahne6_izin:
 ################################################################################
 
 label sahne6_direnis:
+
+    # Pazarlığın bedeli: seçim yapıldıktan SONRA tahsil edilir (bkz. yukarıdaki
+    # not). Buraya hem menüden hem de sahne6_izin'in reddetme dalından gelinir;
+    # izin kendi bedelini eşik kontrolünden sonra ödediği için çift tahsil yok.
+    $ guven_degistir(-2)
 
     s "Hayır."
 
