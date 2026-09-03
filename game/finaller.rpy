@@ -44,6 +44,10 @@ define gasp_sovalye = Character("Fısıltı", color="#cc2222", what_color="#cc22
 
 label final_teslim:
 
+    # Kapanışta oyuncunun sözü daima ulaşır: DUYMADI katmanı kapanır
+    # (fisilti.rpy). Final, bağın sonucudur — bağın gürültüsü değil.
+    $ fis_reddi_acik = False
+
     # «UYAN. Adı ver. Bitsin.» — oyuncunun tokadı ve hükmü.
 
     play music muzik_teslim fadeout 3.0 fadein 5.0
@@ -231,6 +235,10 @@ label final_teslim_epilog:
 ################################################################################
 
 label final_armagan:
+
+    # Kapanışta oyuncunun sözü daima ulaşır: DUYMADI katmanı kapanır
+    # (fisilti.rpy). Final, bağın sonucudur — bağın gürültüsü değil.
+    $ fis_reddi_acik = False
 
     # «...» — sessizlik. Ama bağ güçlü: şövalye kendi uyanır.
     # Çalmayı bekleyen oyuncu, hediyeyle utandırılır.
@@ -483,6 +491,10 @@ label final_armagan_epilog:
 
 label final_sonus:
 
+    # Kapanışta oyuncunun sözü daima ulaşır: DUYMADI katmanı kapanır
+    # (fisilti.rpy). Final, bağın sonucudur — bağın gürültüsü değil.
+    $ fis_reddi_acik = False
+
     # «UYAN. Adı değil — beni alacak.» — kalıntının fedası.
 
     play music muzik_sonus fadeout 3.0 fadein 5.0
@@ -670,6 +682,10 @@ label final_sonus_epilog:
 ################################################################################
 
 label final_gasp:
+
+    # Kapanışta oyuncunun sözü daima ulaşır: DUYMADI katmanı kapanır
+    # (fisilti.rpy). Final, bağın sonucudur — bağın gürültüsü değil.
+    $ fis_reddi_acik = False
 
     # «...» — sessizlik, ama bağ zayıf: şövalye uyanmıyor. Açlık konuşuyor.
 

@@ -12,21 +12,62 @@
 #    aynı seçim ekranından geçer, görünüm aynıdır.)
 
 # Şövalyenin Fısıltı'ya güveni (0-10, başlangıç 5). Senaryo eliyle değişir.
-# guven <= 2 iken, ÖNCEDEN YAZILMIŞ kilit anlarda (sahne başına en fazla 1)
-# şövalye fısıltıyı duyar ama reddeder — kontrol oyuncunun elinden kayar.
 default guven = 5
 
 
+################################################################################
+## DUYMADI — reddi sistem yapan katman (2026-09-03)
+################################################################################
+# Eskiden reddediş yalnız İKİ elle yazılmış anda yaşıyordu (sahne5_incele,
+# sahne6_izin); geri kalan 141 kutuda oyuncunun sözü tartışmasız geçiyordu.
+# Oysa oyunun tezi şu: şövalye seni duyuyor ama sana güvenmiyor.
+#
+# Artık güven düştükçe tıkladığın kutu bedene ULAŞMAYABİLİR. Kutu geri gelir;
+# tekrar söylemen gerekir. Arada tek bir boşluk satırı ("...") düşer.
+#
+# Neden bu biçim: senaryoya HİÇ dokunmaz (sahnelerin metni fısıltının
+# ulaştığını varsayar — sonunda ulaşıyor), ama kontrol kaybı METİNDE değil
+# OYUNCUNUN ELİNDE hissedilir. Açıklama yok, uyarı yok (İlke 8).
+#
+# En fazla BİR fazladan tıklama: bu bir duygu, angarya değil.
+
+# Bu güvenin altında başlar. 5 = başlangıç değeri, yani sağlam bağda hiç olmaz.
+define fis_reddi_esigi = 5
+
+# Eşiğin altındaki her puan bu kadar olasılık ekler.
+# guven 4 -> %9, guven 2 -> %27, guven 0 -> %45.
+define fis_reddi_egim = 0.09
+
+# Finaller bunu kapatır: kapanışta oyuncunun son sözü daima ulaşmalı.
+default fis_reddi_acik = True
+
+
 init -1 python:
+
+    def fis_duymadi_mi():
+        """Bu fısıltı bedene ulaşmayacak mı? (bkz. yukarıdaki DUYMADI notu)"""
+        if not store.fis_reddi_acik:
+            return False
+        if store.guven >= fis_reddi_esigi:
+            return False
+        pay = (fis_reddi_esigi - store.guven) * fis_reddi_egim
+        return renpy.random.random() < pay
 
     def fis(*metinler):
         """Fısıltı repliği: üstteki kutu(lar)dan seçilir. İndeks döner.
 
         Metinler __() ile çevrilir (dil desteği): kaynak dizgiler Türkçe,
         karşılıkları tl/english/fisilti_strings.rpy içinde yaşar.
+
+        Güven düşükse söz bedene ulaşmayabilir: kutu geri gelir (DUYMADI).
         """
         cevrili = [__(m) for m in metinler]
         secenekler = [("«%s»" % m, i) for i, m in enumerate(cevrili)]
+
+        if fis_duymadi_mi():
+            renpy.display_menu(secenekler)      # tıklandı — ve hiçbir şey olmadı
+            renpy.say(si, "...")                # boşluk: cevap gelmiyor
+
         secim = renpy.display_menu(secenekler)
         # Seçilen fısıltıyı geçmişe (history) Fısıltı satırı olarak işle.
         try:
