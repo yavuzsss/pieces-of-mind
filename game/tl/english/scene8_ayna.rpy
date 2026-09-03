@@ -1355,3 +1355,29 @@ translate english sahne8_uzanis_krit_fiyasko_14c1595a:
     # si "Bu cümlenin altında bir şey var. Bakmayacağım."
     si "There is something underneath that sentence. I won't look at it."
 
+# TODO: Translation updated at 2026-09-03 13:52
+
+# game/scene8_ayna.rpy:609
+translate english sahne8_cekis_820c789e:
+
+    # si "Başımı çeviriyorum. Aynadaki de çeviriyor."
+    si "I turn my head. The one in the mirror turns too."
+
+# game/scene8_ayna.rpy:611
+translate english sahne8_cekis_4e424385:
+
+    # si "Ama bir an geç. Çok az. Bir kirpik kadar."
+    si "But a moment late. Barely. The width of an eyelash."
+
+# game/scene8_ayna.rpy:613
+translate english sahne8_cekis_2cc77dee:
+
+    # s "Beni taklit ediyor."
+    s "It is imitating me."
+
+# game/scene8_ayna.rpy:615
+translate english sahne8_cekis_f50d6200:
+
+    # s "Yansıma taklit etmez. Yansıma {i}aynı anda{/i} olur."
+    s "A reflection doesn't imitate. A reflection happens {i}at the same instant{/i}."
+

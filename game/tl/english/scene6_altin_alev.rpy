@@ -1082,3 +1082,41 @@ translate english sahne6_direnis_krit_fiyasko_a1116624:
     # ko "Ve bir daha bağıramayacaksın."
     ko "And you will not be able to scream again."
 
+# TODO: Translation updated at 2026-09-03 13:52
+
+# game/scene6_altin_alev.rpy:169
+translate english sahne6_pazarlik_8a246e91:
+
+    # si "Sayı tutmuyor."
+    si "The number doesn't add up."
+
+# game/scene6_altin_alev.rpy:171
+translate english sahne6_pazarlik_d5ffd790:
+
+    # s "Beni saydığını söylüyorsun. Ama düşüşlerimi sayabilmen için..."
+    s "You say you counted me. But to count my falls..."
+
+# game/scene6_altin_alev.rpy:173
+translate english sahne6_pazarlik_c41362f7:
+
+    # s "...her seferinde burada olman gerekirdi."
+    s "...you would have had to be here every single time."
+
+# game/scene6_altin_alev.rpy:175
+translate english sahne6_pazarlik_92ebe826:
+
+    # ko "..."
+    ko "..."
+
+# game/scene6_altin_alev.rpy:177
+translate english sahne6_pazarlik_29a9dfc5:
+
+    # ko "Beden aritmetik yapıyor."
+    ko "The body is doing arithmetic."
+
+# game/scene6_altin_alev.rpy:179
+translate english sahne6_pazarlik_bdf6eae5:
+
+    # si "Cevap vermedi. İlk defa cevap vermedi."
+    si "It didn't answer. For the first time, it didn't answer."
+

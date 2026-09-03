@@ -1212,3 +1212,23 @@ translate english sahne7_dovus_krit_fiyasko_c8bd0d30:
     # yr "Bir gün gevşeyecek. Ben beklerim."
     yr "One day it will loosen its grip. I can wait."
 
+# TODO: Translation updated at 2026-09-03 13:52
+
+# game/scene7_inis.rpy:432
+translate english sahne7_dovus_5860008f:
+
+    # si "Ayaklarım kendiliğinden yerleşiyor. Sol omuz önde, ağırlık arkada."
+    si "My feet settle on their own. Left shoulder forward, weight back."
+
+# game/scene7_inis.rpy:434
+translate english sahne7_dovus_77bcdebf:
+
+    # s "Bunu kim öğretti bana?"
+    s "Who taught me this?"
+
+# game/scene7_inis.rpy:436
+translate english sahne7_dovus_540f612d:
+
+    # si "Kimse. Ya da o kadar çok kez öğretildi ki, öğreten unutuldu."
+    si "No one. Or it was taught so many times that the teacher was forgotten."
+

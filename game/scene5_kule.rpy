@@ -1,4 +1,4 @@
-# scene5_kule.rpy — Pieces of Mind
+﻿# scene5_kule.rpy — Pieces of Mind
 # Sahne 5: Kule — Lamba Salonu.
 # Merdiven (takipçi anı, kilic_var'a duyarlı), binlerce oyuklu salon
 # (alev_kucuk'e duyarlı), şövalyenin kendi oyuğu ve kazınmış isim levhası.
@@ -117,6 +117,17 @@ label sahne5_oyuk:
     si "Lambayı geri alıyorum. Hemen. Halka bırakmak istemiyor gibi."
 
     si "Oyuğun altında bir levha var. Üzerine bir isim kazınmıştı — bir zamanlar."
+
+    # ALGI: ZEKÂ — kazımanın altında daha eski bir kazıma.
+    if zeka_gorur(1):
+
+        si "Ve kazımanın altında bir kazıma daha var."
+
+        si "Daha eski. Daha derin. Aynı el değil."
+
+        s "Bu levha ilk kez kazınmıyor."
+
+        s "Kaç kere kazındı?"
 
     si "Şimdi üstü derin, kararlı çiziklerle örtülü. Okunmuyor."
 

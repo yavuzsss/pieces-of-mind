@@ -891,3 +891,29 @@ translate english sahne4_geri_krit_fiyasko_5a301bcf:
     # si "Ve el çekiliyor. Kafamın içinde bir şey yırtık kalıyor."
     si "And the hand withdraws. Something stays torn inside my head."
 
+# TODO: Translation updated at 2026-09-03 13:52
+
+# game/scene4_karsilasma.rpy:60
+translate english sahne4_karsilasma_40df2b5c:
+
+    # si "Eşi değil. {b}Aynısı.{/b}"
+    si "Not its twin. {b}The same one.{/b}"
+
+# game/scene4_karsilasma.rpy:62
+translate english sahne4_karsilasma_3e32b840:
+
+    # si "Kapağın sol kenarında bir çizik var. Benimkinde de var."
+    si "There's a scratch on the left edge of the cap. Mine has one too."
+
+# game/scene4_karsilasma.rpy:64
+translate english sahne4_karsilasma_7b95f0bc:
+
+    # si "Aynı yerde. Aynı uzunlukta."
+    si "Same place. Same length."
+
+# game/scene4_karsilasma.rpy:66
+translate english sahne4_karsilasma_59426332:
+
+    # s "İki lamba aynı kazayı nasıl yaşar?"
+    s "How do two lamps live through the same accident?"
+

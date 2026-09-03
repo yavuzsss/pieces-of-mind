@@ -603,6 +603,17 @@ label sahne8_cekis:
 
     si "Ve aynada yine bir adam var. Yorgun. Sakallı. Şakağında kurumuş kan."
 
+    # ALGI: ŞANS — olmaması gereken bir gecikme.
+    if sans_gorur(2):
+
+        si "Başımı çeviriyorum. Aynadaki de çeviriyor."
+
+        si "Ama bir an geç. Çok az. Bir kirpik kadar."
+
+        s "Beni taklit ediyor."
+
+        s "Yansıma taklit etmez. Yansıma {i}aynı anda{/i} olur."
+
     si "Avucum göğsümde. Kapalı."
 
     s "Açmama gerek yok."

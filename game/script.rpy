@@ -1,4 +1,4 @@
-# script.rpy — Pieces of Mind
+﻿# script.rpy — Pieces of Mind
 # Karakter tanımları + Sahne 1: Uyanış — siyah ekran, sadece metin.
 # Fısıltı'nın TÜM replikleri fis() kutularıyla oyuncu tarafından seçilir
 # (fisilti.rpy — Milk mekaniği). İlk ZEKÂ zarı burada atılır.

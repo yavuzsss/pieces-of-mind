@@ -163,6 +163,21 @@ label sahne6_pazarlik:
 
         ko "Biz her şeyi sayarız."
 
+        # ALGI: ZEKÂ — sayı tutmuyor.
+        if zeka_gorur(2):
+
+            si "Sayı tutmuyor."
+
+            s "Beni saydığını söylüyorsun. Ama düşüşlerimi sayabilmen için..."
+
+            s "...her seferinde burada olman gerekirdi."
+
+            ko "..."
+
+            ko "Beden aritmetik yapıyor."
+
+            si "Cevap vermedi. İlk defa cevap vermedi."
+
     # Oyuncu kendi itirafını tıklar.
     $ fis("Adı getireceğim. Hep getirdim.")
 

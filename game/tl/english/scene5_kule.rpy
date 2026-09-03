@@ -573,3 +573,29 @@ translate english strings:
     # game/scene5_kule.rpy:375
     old "«...»"
     new "«...»"
+# TODO: Translation updated at 2026-09-03 13:52
+
+# game/scene5_kule.rpy:124
+translate english sahne5_oyuk_28704e9a:
+
+    # si "Ve kazımanın altında bir kazıma daha var."
+    si "And beneath the scoring there is more scoring."
+
+# game/scene5_kule.rpy:126
+translate english sahne5_oyuk_e65771d7:
+
+    # si "Daha eski. Daha derin. Aynı el değil."
+    si "Older. Deeper. Not the same hand."
+
+# game/scene5_kule.rpy:128
+translate english sahne5_oyuk_96e167b4:
+
+    # s "Bu levha ilk kez kazınmıyor."
+    s "This plate is not being scratched out for the first time."
+
+# game/scene5_kule.rpy:130
+translate english sahne5_oyuk_51ba1f42:
+
+    # s "Kaç kere kazındı?"
+    s "How many times has it been scratched out?"
+

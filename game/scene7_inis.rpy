@@ -426,6 +426,15 @@ label sahne7_dovus:
 
         yr "Sözler. Hep sözler. Bedenler daha dürüst."
 
+        # ALGI: GÜÇ — beden aklın bilmediğini biliyor.
+        if guc_gorur(2):
+
+            si "Ayaklarım kendiliğinden yerleşiyor. Sol omuz önde, ağırlık arkada."
+
+            s "Bunu kim öğretti bana?"
+
+            si "Kimse. Ya da o kadar çok kez öğretildi ki, öğreten unutuldu."
+
         si "Üstüme geliyor."
 
     else:

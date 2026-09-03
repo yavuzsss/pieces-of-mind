@@ -752,3 +752,35 @@ translate english sahne9_sezgi_d2124e9a:
     # si "Hatırlamayacağımı ikimiz de biliyoruz."
     si "We both know I won't."
 
+# TODO: Translation updated at 2026-09-03 13:52
+
+# game/scene9_donus.rpy:130
+translate english sahne9_ucurum_bdda376f:
+
+    # si "Eğiliyorum. Kenardaki taşa bakıyorum."
+    si "I crouch. I look at the stone at the edge."
+
+# game/scene9_donus.rpy:132
+translate english sahne9_ucurum_a10ce96b:
+
+    # si "Çentikler. Tırnak değil — kemer tokası. Aynı yerde, üst üste."
+    si "Notches. Not fingernails — a belt buckle. Same spot, over and over."
+
+# game/scene9_donus.rpy:134
+translate english sahne9_ucurum_c19c4acb:
+
+    # s "İlk geçişimde de buradaydılar. Görmemiştim."
+    s "They were here on my first crossing too. I didn't see them."
+
+# game/scene9_donus.rpy:136
+translate english sahne9_ucurum_19bd0a5c:
+
+    # s "Biri burayı çok kez geçmiş."
+    s "Someone has crossed here many times."
+
+# game/scene9_donus.rpy:138
+translate english sahne9_ucurum_95582537:
+
+    # si "Ve o birinin kemeri benimkiyle aynı yeri kazımış."
+    si "And that someone's buckle wore down the same spot as mine."
+

@@ -50,6 +50,8 @@ init -1 python:
             k += 1      # "Yeniden" kelimesi artık bir şey ifade ediyor
         if kurtarildi > 0:
             k += 1      # o ses onu ölümün kıyısından geri çekti — en somut kanıt
+        if centikler_gorundu:
+            k += 1      # kendi kemerinin kazıdığı çentikleri gördü (sezgi.rpy)
         return k
 
 # Kaç kanıt gerçeğe vardırır. zar_dc_sabit / stres_bolen ile aynı kalıp.
@@ -118,6 +120,24 @@ label sahne9_ucurum:
     s "..."
 
     s "Kule düşmeme izin vermiyor."
+
+    # ALGI: ZEKÂ — çentikler (sezgi.rpy). Sahne 3'te olamazdı: orada her
+    # stat 0. Burada oyuncu dört yükselme yapmış olur.
+    # İSTİSNA: bu algı gercege_kanit()'e girer — gördüğü şey doğrudan
+    # "biri burayı defalarca geçti" kanıtıdır.
+    if zeka_gorur(2):
+
+        si "Eğiliyorum. Kenardaki taşa bakıyorum."
+
+        si "Çentikler. Tırnak değil — kemer tokası. Aynı yerde, üst üste."
+
+        s "İlk geçişimde de buradaydılar. Görmemiştim."
+
+        s "Biri burayı çok kez geçmiş."
+
+        si "Ve o birinin kemeri benimkiyle aynı yeri kazımış."
+
+        $ centikler_gorundu = True
 
     if kule_kani:
 

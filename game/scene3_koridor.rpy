@@ -150,6 +150,10 @@ label sahne3_ucurum:
 
     s "Işık her yere ulaşır. Buraya ulaşmıyor."
 
+    # NOT: burada stat-kapılı algı katmanı OLAMAZ — ilk yükselme sahne3_son'da,
+    # yani bu andan sonra. Sahne 1-3 boyunca her stat 0. Çentikler algısı
+    # Sahne 9'un ikinci geçişine taşındı (sezgi.rpy).
+
     si "Karşı kenar dört-beş adım ötede."
 
     si "Arada, duvar boyunca, bir karış genişliğinde bir çıkıntı."

@@ -54,6 +54,17 @@ label sahne4_karsilasma:
 
     si "Elinde bir lamba. Benimkinin eşi."
 
+    # ALGI: ŞANS — olmaması gereken denk geliş.
+    if sans_gorur(1):
+
+        si "Eşi değil. {b}Aynısı.{/b}"
+
+        si "Kapağın sol kenarında bir çizik var. Benimkinde de var."
+
+        si "Aynı yerde. Aynı uzunlukta."
+
+        s "İki lamba aynı kazayı nasıl yaşar?"
+
     s "Ama alevi... avuç içi kadar. Ölmek üzere."
 
     si "Yüzü kurumuş toprak gibi çatlamış. Gözleri iki kör kuyu."
