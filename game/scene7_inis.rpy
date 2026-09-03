@@ -1,4 +1,4 @@
-# scene7_inis.rpy — Pieces of Mind
+﻿# scene7_inis.rpy — Pieces of Mind
 # Sahne 7: İniş ve Yarım.
 # Kuleden iniş (ultimatomun ağırlığı), lamba salonundan ikinci geçiş
 # (Sönmüş'ün lambası — ihanet ödemesi zarsız), ve kapıda Yarım:
@@ -441,6 +441,9 @@ label sahne7_dovus:
     $ yarim_can = 10
     $ dovus_tur = 0
 
+    # Düşman görünür olur, iki can barı açılır (savas.rpy).
+    call savas_basla(_("Yarım"), 10, "yarim")
+
     jump sahne7_dovus_tur
 
 
@@ -482,6 +485,9 @@ label sahne7_dovus_tur:
 
         $ yarim_can -= sonuc.hasar
 
+        if sonuc.hasar > 0:
+            call dusman_vur(sonuc.hasar)
+
         if yarim_can <= 0:
             jump sahne7_dovus_basari
 
@@ -505,14 +511,35 @@ label sahne7_dovus_tur:
 
     else:
 
-        # Iska — Yarım'ın pençeleri bedelini alır: CAN -3.
+        # Iska — sıra Yarım'da. İKİ GİZLİ ZAR (savas.rpy, panelsiz):
+        #   1. ŞANS: beden kendini çekebildi mi?
+        #   2. Düşmanın hasarı — bizim mantığımızın aynısı, marj = hasar.
+        # Oyuncu zar attığını görmez; sonucu metinden okur (İlke 8).
         si "Hamlem boşa gidiyor. Ve pençe gibi parmaklar açığımı buluyor."
 
-        si "Et yırtılıyor. Sıcak bir çizgi, omzumdan dirseğime."
+        if kacabildi_mi():
 
-        call can_hasar(3, "yarım olanın pençeleri")
+            si "Bedenim benden önce davranıyor."
 
-        $ stres_degistir(1)
+            si "Omzum geriye kaçıyor — ben istemeden, o istemiş gibi."
+
+            si "Parmaklar havayı tırmalıyor. Bir tanesi yanağımı sıyırıyor, o kadar."
+
+            yr "Kıvraksın. Bu beden bunu nereden biliyor?"
+
+            s "Bilmiyorum. Ama biliyor."
+
+            $ stres_degistir(1)
+
+        else:
+
+            $ _vurus = dusman_hasari()
+
+            si "Et yırtılıyor. Sıcak bir çizgi, omzumdan dirseğime."
+
+            call can_hasar(_vurus, "yarım olanın pençeleri")
+
+            $ stres_degistir(1)
 
         jump sahne7_dovus_tur
 
@@ -531,6 +558,8 @@ label sahne7_dovus_krit_basari:
         si "İlk hamlesini yakalıyorum. Bileğini büküyorum, dizimi göğsüne."
 
     si "Yarım taşa yığılıyor."
+
+    call savas_bitir
 
     si "İçinden hiçbir şey dökülmüyor. İçi yok."
 
@@ -564,6 +593,8 @@ label sahne7_dovus_basari:
 
     si "Karanlık onu alıyor."
 
+    call savas_bitir
+
     s "\"Önceki yüzüm\"?"
 
     s "Ne demek istedi?"
@@ -592,6 +623,9 @@ label sahne7_dovus_krit_fiyasko:
 
     # Fısıltı'nın çığlığı — oyuncu tıklamak zorunda.
     $ fis("Onu ALAMAZSIN—")
+
+    # Barlar ölüm ekranına taşınmasın. Görsel kalır: sarılan o.
+    call savas_bitir(sonduren=False)
 
     call olum("yarım olan, senin yarınla tamamlandı")
 

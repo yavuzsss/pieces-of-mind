@@ -1142,3 +1142,35 @@ translate english sahne7_son_47ae881f:
     # s "Peki. Şimdilik peki."
     s "Fine. For now, fine."
 
+# TODO: Translation updated at 2026-09-03 12:50
+
+# game/scene7_inis.rpy:522
+translate english sahne7_dovus_tur_571a2b5b:
+
+    # si "Bedenim benden önce davranıyor."
+    si "My body moves before I do."
+
+# game/scene7_inis.rpy:524
+translate english sahne7_dovus_tur_f25285d4:
+
+    # si "Omzum geriye kaçıyor — ben istemeden, o istemiş gibi."
+    si "My shoulder pulls back — not because I wanted it to. Because it did."
+
+# game/scene7_inis.rpy:526
+translate english sahne7_dovus_tur_d8ed28e6:
+
+    # si "Parmaklar havayı tırmalıyor. Bir tanesi yanağımı sıyırıyor, o kadar."
+    si "The fingers rake the air. One grazes my cheek, and that is all."
+
+# game/scene7_inis.rpy:528
+translate english sahne7_dovus_tur_6d0b05fe:
+
+    # yr "Kıvraksın. Bu beden bunu nereden biliyor?"
+    yr "Nimble. Where did this body learn that?"
+
+# game/scene7_inis.rpy:530
+translate english sahne7_dovus_tur_73e5741f:
+
+    # s "Bilmiyorum. Ama biliyor."
+    s "I don't know. But it does."
+
