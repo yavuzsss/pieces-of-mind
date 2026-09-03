@@ -25,8 +25,14 @@ define kacma_dc = 13
 
 # Düşmanın vuruşu: bizim hasar mantığımızın AYNISI — DC'nin üstündeki
 # her puan hasardır (bkz. stats.rpy RollResult.hasar).
+#
+# hasar_dc 12 -> 10 (kullanıcı kararı 2026-09-03): ŞANS artık hasardan
+# DOĞRUDAN düşüldüğü için ham hasarın büyümesi gerekiyordu. 12'de ham
+# ortalama 3,2 idi; ŞANS'ı çıkarınca vuruşların çoğu taban 1'e yapışıyor
+# ve ŞANS'ın bir puanı ile üç puanı arasında fark kalmıyordu. 10'da ham
+# ortalama 4,3 (maks 12) — çıkarma anlamlı, ölüm eğrisi ŞANS'a duyarlı.
 define dusman_bonus = 2
-define dusman_hasar_dc = 12
+define dusman_hasar_dc = 10
 
 # Görsel
 define dusman_yeri_x = 0.70
@@ -55,9 +61,17 @@ init -1 python:
     def dusman_hasari():
         """Düşmanın gizli zarı. Bizim hasar mantığımızın aynısı:
         d20 + bonus, dusman_hasar_dc'nin üstündeki her puan = hasar.
-        En az 1 (değen vuruş hiç acıtmasın olmaz)."""
+
+        ŞANS puanı hasardan DOĞRUDAN düşülür (kullanıcı kararı 2026-09-03):
+        ŞANS 2 iken 8'lik bir vuruş 6 olur. Böylece ŞANS iki kez iş yapar —
+        kaçma ihtimali (kacabildi_mi) ve isabet ettiğinde zırh gibi.
+        Yükselme panelinde ŞANS artık gerçek bir yatırım.
+
+        Taban 1: değen vuruş hiç acıtmasın olmaz.
+        """
         zar = renpy.random.randint(1, 20)
-        return max(1, zar + dusman_bonus - dusman_hasar_dc)
+        ham = max(1, zar + dusman_bonus - dusman_hasar_dc)
+        return max(1, ham - player_stats.get("SANS"))
 
 
 ################################################################################
