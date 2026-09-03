@@ -72,6 +72,9 @@ label sahne6_koro:
 
     scene bg_altin_alev with sahne_gecis
 
+    show koro at koro_yeri
+    with karakter_belir
+
     si "Son basamak."
 
     si "Yuvarlak bir oda. Penceresiz. Tavansız — yukarısı sadece karanlık."
@@ -667,4 +670,7 @@ label sahne6_ultimatom:
     $ guven_degistir(1)
 
     # Sahne 7: İniş ve Yarım (scene7_inis.rpy)
+    hide koro
+    with karakter_soner
+
     jump sahne7_inis

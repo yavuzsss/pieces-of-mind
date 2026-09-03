@@ -50,6 +50,9 @@ label sahne4_karsilasma:
 
     si "Burası bir oda. Yuvarlak, taş. Zeminindeki lekeler eski ve kahverengi."
 
+    show sonmus at sonmus_yeri
+    with karakter_belir
+
     si "Bir adam. Zırhı paslı, kayışlarından dökülüyor."
 
     si "Elinde bir lamba. Benimkinin eşi."
@@ -391,6 +394,9 @@ label sahne4_geri_krit_fiyasko:
 
         si "Doğrulmuyor. Sürünerek, karanlığa."
 
+        hide sonmus
+        with karakter_soner
+
         sk "Verecektin."
 
         sk "Bir gün sen de vermek isteyeceksin. O zaman hatırla: verecektin."
@@ -528,6 +534,11 @@ label sahne4_hediye:
 ################################################################################
 
 label sahne4_son:
+
+    # Güvenlik: Sönmüş beş ayrı daldan buraya geliyor; biri onu narratif
+    # olarak zaten karanlığa çekiyor, diğerleri çekmiyor. Sahne 5'e
+    # taşınmasın diye burada kesin olarak gizlenir (zaten gizliyse zararsız).
+    hide sonmus
 
     scene bg_zindan_koridoru with sahne_gecis
 
