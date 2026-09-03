@@ -372,6 +372,25 @@ translate english strings:
     old "zihnin altın alevde kavruldu"
     new "your mind was scorched in the golden flame"
 
+    # Doğal 1'in bıraktığı izler (2026-09-03)
+    old "uçurum seni yarı yolda bıraktı"
+    new "the cliff let go of you halfway"
+
+    old "sönmüş olanın parmakları"
+    new "the fingers of the snuffed thing"
+
+    old "içindeki koparılırken"
+    new "while the one inside you was torn loose"
+
+    old "altın alev içeriden geçti"
+    new "the golden flame passed through you from inside"
+
+    old "yarım olanın kucağı"
+    new "the embrace of the half thing"
+
+    old "uyku ile uyanıklığın arasında"
+    new "between sleep and waking"
+
     old "yarım olanın pençeleri"
     new "the claws of the half thing"
 

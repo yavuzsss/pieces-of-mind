@@ -1062,7 +1062,7 @@ translate english sahne6_direnis_krit_fiyasko_9472497b:
 translate english sahne6_direnis_krit_fiyasko_b6b3477f:
 
     # centered "{color=#cc2222}HARF GİTTİ{/color}"
-    centered "{color=#cc2222}HARF GİTTİ{/color}"
+    centered "{color=#cc2222}THE LETTER IS GONE{/color}"
 
 # game/scene6_altin_alev.rpy:593
 translate english sahne6_direnis_krit_fiyasko_6af96343:
